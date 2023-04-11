@@ -17,7 +17,10 @@ public:
     ~MainWindow();
 
 private slots:
-    void on_tableWidget_itemClicked(QTableWidgetItem *item);
+
+    void on_tableWidget_cellClicked(int row, int column);
+
+    void on_checkBox_hasblock_clicked(bool checked);
 
 private:
     Ui::MainWindow *ui;
