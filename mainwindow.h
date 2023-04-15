@@ -22,6 +22,22 @@ private slots:
 
     void on_checkBox_hasblock_clicked(bool checked);
 
+    void on_type_comboBox_activated(int index);
+
+    void on_toward_comboBox_activated(int index);
+
+    void on_condition_comboBox_activated(int index);
+
+    void on_menu_save_clicked();
+
+    void on_menu_load_clicked();
+
+    void on_content_textEdit_textChanged();
+
+    void on_redstone_comboBox_activated(int index);
+
+    void on_notes_content_textEdit_textChanged();
+
 private:
     Ui::MainWindow *ui;
 };
