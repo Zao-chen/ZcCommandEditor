@@ -12,8 +12,9 @@
 int static global_row;
 int static global_column;
 int static map_size;
-int static author;
-int static in_version;
+QString static author = "null";
+QString static editor_version = "1.0";
+QString static load_version;
 
 struct save_map //保存东西的结构体
 {
@@ -211,6 +212,8 @@ void MainWindow::on_menu_save_clicked(void)
     QJsonObject rootObject;
     rootObject.insert("map_size", ui->size_lineEdit->text().toInt());
     rootObject.insert("command_block", likeArray);
+    rootObject.insert("version", editor_version);
+    rootObject.insert("author", author);
     /*写入*/
     QJsonDocument doc; //将object设置为本文档的主要对象
     doc.setObject(rootObject);
@@ -287,4 +290,10 @@ void MainWindow::on_menu_load_clicked(void)
             }
         }
     }
+}
+
+/*修改作者*/
+void MainWindow::on_size_lineEdit_2_textChanged(const QString &arg1)
+{
+    author = arg1;
 }
