@@ -442,7 +442,7 @@
      <string>未知</string>
     </property>
    </widget>
-   <widget class="QLabel" name="label_11">
+   <widget class="QLabel" name="label_in">
     <property name="geometry">
      <rect>
       <x>10</x>
@@ -460,7 +460,7 @@
      <string>导入的命令组json版本：</string>
     </property>
    </widget>
-   <widget class="QLabel" name="label_12">
+   <widget class="QLabel" name="label_now">
     <property name="geometry">
      <rect>
       <x>150</x>
