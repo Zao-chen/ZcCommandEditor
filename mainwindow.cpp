@@ -54,18 +54,18 @@ void show_reload(Ui::MainWindow *dis,int x,int y) //刷新当前格
         if(save_map_class[x][y].type == 1) //类型
         {
             /*条件*/
-            if(save_map_class[x][y].condition == 1) image = ":/image/mc-wtj.png";
+            if(save_map_class[x][y].condition == 1) image = ":/image/image/mc-wtj.png";
             else if(save_map_class[x][y].condition == 2) image = ":/image/mc-ytj.png";
         }
         else if (save_map_class[x][y].type == 2)
         {
-            if(save_map_class[x][y].condition == 1) image = ":/image/ls-wtj.png";
-            else if(save_map_class[x][y].condition == 2) image = ":/image/ls-ytj.png";
+            if(save_map_class[x][y].condition == 1) image = ":/image/image/ls-wtj.png";
+            else if(save_map_class[x][y].condition == 2) image = ":/image/image/ls-ytj.png";
         }
         else if (save_map_class[x][y].type == 3)
         {
-            if(save_map_class[x][y].condition == 1) image = ":/image/xh-wtj.png";
-            else if(save_map_class[x][y].condition == 2) image = ":/image/xh-ytj.png";
+            if(save_map_class[x][y].condition == 1) image = ":/image/image/xh-wtj.png";
+            else if(save_map_class[x][y].condition == 2) image = ":/image/image/xh-ytj.png";
         }
         /*设置朝向*/
         if(save_map_class[x][y].toward == 1) matrix.rotate(-90);

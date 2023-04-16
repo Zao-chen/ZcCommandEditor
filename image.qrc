@@ -1,10 +1,10 @@
 <RCC>
     <qresource prefix="/image">
-        <file>mc-wtj.png</file>
-        <file>ls-wtj.png</file>
-        <file>ls-ytj.png</file>
-        <file>mc-ytj.png</file>
-        <file>xh-wtj.png</file>
-        <file>xh-ytj.png</file>
+        <file>image/ls-wtj.png</file>
+        <file>image/ls-ytj.png</file>
+        <file>image/mc-wtj.png</file>
+        <file>image/mc-ytj.png</file>
+        <file>image/xh-wtj.png</file>
+        <file>image/xh-ytj.png</file>
     </qresource>
 </RCC>
