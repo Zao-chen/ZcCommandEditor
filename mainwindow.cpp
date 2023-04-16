@@ -78,9 +78,7 @@ void show_reload(Ui::MainWindow *dis,int x,int y) //刷新当前格
     }
     else
     {
-        QMatrix matrix;
-        QLabel *label = new QLabel("");
-        dis->tableWidget->setCellWidget(x,y,label);
+        dis->tableWidget->removeCellWidget(x,y);
     }
     dis->checkBox_hasblock->setChecked(save_map_class[x][y].has_block);
     dis->content_textEdit->setPlainText(save_map_class[x][y].content);
