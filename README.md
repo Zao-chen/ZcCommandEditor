@@ -27,3 +27,8 @@
  - [ ] 模拟指令执行过程
  - [ ] 更多方块层
  - [ ] 模拟指令输出
+
+# 相关项目
+|项目英文名|项目中文名|作者|介绍|平台|状态|
+|---|---|---|---|---|---|
+|ZcCommandEditor(ZcCommandEditor)|早晨命令组编辑器|Zao_chen(https://github.com/Zao-chen)|一个叫命令组的全新概念|Windows|开发中:
