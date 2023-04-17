@@ -5,13 +5,13 @@
 #include <QJsonArray> // [ ]
 #include <QJsonDocument> // 解析Json
 #include <QJsonValue> // int float double bool null { } [ ]
-#include <QJsonParseError>
-#include <QFile>
-#include <QMessageBox>
+#include <QJsonParseError> //Json错误
+#include <QFile> //文件
+#include <QMessageBox> //消息框
 
-int static global_row;
+int static global_row; //当前格
 int static global_column;
-QString static editor_version = "1.0";
+QString static editor_version = "1.1"; //json版本
 QString static load_version;
 
 struct save_map //保存东西的结构体
@@ -88,8 +88,7 @@ void show_reload(Ui::MainWindow *dis,int x,int y) //刷新当前格
     dis->condition_comboBox->setCurrentIndex(save_map_class[x][y].condition-1);
     dis->redstone_comboBox->setCurrentIndex(save_map_class[x][y].redstone-1);
 }
-
-void clear_map(Ui::MainWindow *dis)
+void clear_map(Ui::MainWindow *dis) //清空地图
 {
     for (int i=0;i!=10;i++) {
         for (int j=0;j!=10;j++) {
@@ -118,8 +117,8 @@ MainWindow::MainWindow(QWidget *parent)
 
     ui->tableWidget->setEditTriggers(QAbstractItemView::NoEditTriggers); //设置不可更改
 
-    ui->tableWidget->setColumnCount(10); //设置表格大小
-    ui->tableWidget->setRowCount(10);
+    ui->tableWidget->setColumnCount(1000); //设置表格大小
+    ui->tableWidget->setRowCount(1000);
 
     connect(ui->actionoutput,SIGNAL(triggered()),this,SLOT(on_menu_save_clicked())); //导出按钮信号绑定
     connect(ui->actioninput,SIGNAL(triggered()),this,SLOT(on_menu_load_clicked())); //导入按钮信号绑定
@@ -127,6 +126,8 @@ MainWindow::MainWindow(QWidget *parent)
     ui->file_lineEdit->setText(qApp->applicationDirPath()+"/json/Untitle.json");
 
     ui->label_now->setText("编辑器使用json版本："+editor_version);
+
+    ui->tableWidget->scrollToItem(ui->tableWidget->item(500,500));
 }
 
 MainWindow::~MainWindow()
@@ -210,7 +211,6 @@ void MainWindow::on_menu_save_clicked(void)
     }
     //添加到最外
     QJsonObject rootObject;
-    rootObject.insert("map_size", ui->size_lineEdit->text().toInt());
     rootObject.insert("command_block", likeArray);
     rootObject.insert("version", editor_version);
     rootObject.insert("author", ui->size_lineEdit_2->text());
@@ -291,16 +291,13 @@ void MainWindow::on_menu_load_clicked(void)
         }
     }
     ui->size_lineEdit_2->setText(rootObj.value("author").toString());
-    int sizeValue = rootObj.value("map_size").toInt();
-    ui->size_lineEdit->setText(QString::number(sizeValue));
-    ui->tableWidget->setColumnCount(rootObj.value("map_size").toInt()); //设置表格大小
-    ui->tableWidget->setRowCount(rootObj.value("map_size").toInt());
-    ui->label_in->setText("导入的命令组json版本："+rootObj.value("version").toString());
+    load_version = rootObj.value("version").toString();
+    ui->label_in->setText("导入的命令组json版本："+load_version);
+    if(load_version!=editor_version)
+    {
+        QMessageBox msgBox;
+        msgBox.setText("导入json版本与编辑器版本不同，可能出现bug，建议进行迁移");
+        msgBox.exec();
+    }
 }
 
-
-void MainWindow::on_size_lineEdit_textEdited(const QString &arg1)
-{
-    ui->tableWidget->setColumnCount(arg1.toInt()); //设置表格大小
-    ui->tableWidget->setRowCount(arg1.toInt());
-}

@@ -38,8 +38,6 @@ private slots:
 
     void on_notes_content_textEdit_textChanged();
 
-    void on_size_lineEdit_textEdited(const QString &arg1);
-
 private:
     Ui::MainWindow *ui;
 };
