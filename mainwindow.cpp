@@ -13,10 +13,11 @@ int static global_row; //当前格
 int static global_column;
 QString static editor_version = "1.1"; //json版本
 QString static load_version;
+QString static file_place = qApp->applicationDirPath()+"Untitle.json";
 
 struct save_map //保存东西的结构体
 {
-    bool has_block = false; //是否有方块
+    QString block = "air"; //当前方块东西
     int toward = 1;
     /*
      * 朝向
@@ -45,7 +46,7 @@ struct save_map //保存东西的结构体
 
 void show_reload(Ui::MainWindow *dis,int x,int y) //刷新当前格
 {
-    if(save_map_class[x][y].has_block) //设置图像
+    if(save_map_class[x][y].block == "command_block") //设置图像
     {
         QMatrix matrix;
         QLabel *label = new QLabel("");
@@ -80,7 +81,6 @@ void show_reload(Ui::MainWindow *dis,int x,int y) //刷新当前格
     {
         dis->tableWidget->removeCellWidget(x,y);
     }
-    dis->checkBox_hasblock->setChecked(save_map_class[x][y].has_block);
     dis->content_textEdit->setPlainText(save_map_class[x][y].content);
     dis->notes_content_textEdit->setPlainText(save_map_class[x][y].note);
     dis->toward_comboBox->setCurrentIndex(save_map_class[x][y].toward-1);
@@ -92,7 +92,7 @@ void clear_map(Ui::MainWindow *dis) //清空地图
 {
     for (int i=0;i!=10;i++) {
         for (int j=0;j!=10;j++) {
-            save_map_class[i][j].has_block = false; //是否有方块
+            save_map_class[i][j].block = "command_block"; //是否有方块
             save_map_class[i][j].toward = 1;
             save_map_class[i][j].type = 1;
             save_map_class[i][j].condition = 1;
@@ -123,7 +123,7 @@ MainWindow::MainWindow(QWidget *parent)
     connect(ui->actionoutput,SIGNAL(triggered()),this,SLOT(on_menu_save_clicked())); //导出按钮信号绑定
     connect(ui->actioninput,SIGNAL(triggered()),this,SLOT(on_menu_load_clicked())); //导入按钮信号绑定
 
-    ui->file_lineEdit->setText(qApp->applicationDirPath()+"/json/Untitle.json");
+    setWindowTitle("ZcCommandEditor");
 
     ui->label_now->setText("编辑器使用json版本："+editor_version);
 
@@ -143,12 +143,7 @@ void MainWindow::on_tableWidget_cellClicked(int row, int column)
     ui->label_location->setText("选中方块：( " + QString::number(row+1) + " , " + QString::number(column+1)+" )");
     show_reload(ui,global_row,global_column);
 }
-/*点击是否有*/
-void MainWindow::on_checkBox_hasblock_clicked(bool checked)
-{
-    save_map_class[global_row][global_column].has_block = checked;
-    show_reload(ui,global_row,global_column);
-}
+
 /*方块类型*/
 void MainWindow::on_type_comboBox_activated(int index)
 {
@@ -194,10 +189,11 @@ void MainWindow::on_menu_save_clicked(void)
     {
         for (int y = 0;y != ui->tableWidget->rowCount(); y++)
         {
-            if(save_map_class[x][y].has_block)
+            if(save_map_class[x][y].block != "air")
             {
                 likeObject.insert("x", x);
                 likeObject.insert("y", y);
+                likeObject.insert("block",save_map_class[x][y].block);
                 likeObject.insert("toward",save_map_class[x][y].toward);
                 likeObject.insert("type",save_map_class[x][y].type);
                 likeObject.insert("condition",save_map_class[x][y].condition);
@@ -211,13 +207,13 @@ void MainWindow::on_menu_save_clicked(void)
     }
     //添加到最外
     QJsonObject rootObject;
-    rootObject.insert("command_block", likeArray);
+    rootObject.insert("block", likeArray);
     rootObject.insert("version", editor_version);
     rootObject.insert("author", ui->size_lineEdit_2->text());
     /*写入*/
     QJsonDocument doc; //将object设置为本文档的主要对象
     doc.setObject(rootObject);
-    QFile file(ui->file_lineEdit->text());
+    QFile file(file_place);
     if(!file.open(QIODevice::WriteOnly))
     {
         QMessageBox msgBox;
@@ -232,7 +228,7 @@ void MainWindow::on_menu_save_clicked(void)
 /*导入json*/
 void MainWindow::on_menu_load_clicked(void)
 {
-    QFile file(ui->file_lineEdit->text());
+    QFile file(file_place);
     if (!file.open(QFile::ReadOnly | QFile::Text)) {
         qDebug() << "can't open error!";
         return;
@@ -255,7 +251,7 @@ void MainWindow::on_menu_load_clicked(void)
     QJsonObject rootObj = doc.object();
 
     // 根键获取值
-    QJsonValue likeValue = rootObj.value("command_block");
+    QJsonValue likeValue = rootObj.value("block");
     // 判断类型是否是数组类型
     if (likeValue.type() == QJsonValue::Array) {
         // 转换成数组类型
@@ -283,7 +279,8 @@ void MainWindow::on_menu_load_clicked(void)
                 save_map_class[x.toInt()][y.toInt()].toward = toward.toInt();
                 QJsonValue type = likeObj.value("type");
                 save_map_class[x.toInt()][y.toInt()].type = type.toInt();
-                save_map_class[x.toInt()][y.toInt()].has_block = true;
+                QJsonValue block = likeObj.value("block");
+                save_map_class[x.toInt()][y.toInt()].block = block.toString();
                 global_row = x.toInt();
                 global_column = y.toInt();
                 show_reload(ui,global_row,global_column);
@@ -301,3 +298,10 @@ void MainWindow::on_menu_load_clicked(void)
     }
 }
 
+
+void MainWindow::on_block_comboBox_activated(int index)
+{
+    if(index==0) save_map_class[global_row][global_column].block = "air";
+    else if(index==1) save_map_class[global_row][global_column].block = "command_block";
+    show_reload(ui,global_row,global_column);
+}

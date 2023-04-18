@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1210</width>
+    <width>1099</width>
     <height>623</height>
    </rect>
   </property>
@@ -163,10 +163,10 @@ QCheckBox::indicator::checked:hover {
    <widget class="QLabel" name="label">
     <property name="geometry">
      <rect>
-      <x>520</x>
-      <y>50</y>
+      <x>620</x>
+      <y>40</y>
       <width>171</width>
-      <height>41</height>
+      <height>31</height>
      </rect>
     </property>
     <property name="font">
@@ -185,9 +185,9 @@ QCheckBox::indicator::checked:hover {
     </property>
     <property name="geometry">
      <rect>
-      <x>10</x>
-      <y>50</y>
-      <width>500</width>
+      <x>100</x>
+      <y>40</y>
+      <width>511</width>
       <height>500</height>
      </rect>
     </property>
@@ -198,9 +198,9 @@ QCheckBox::indicator::checked:hover {
    <widget class="QLabel" name="label_location">
     <property name="geometry">
      <rect>
-      <x>520</x>
-      <y>90</y>
-      <width>271</width>
+      <x>10</x>
+      <y>0</y>
+      <width>211</width>
       <height>31</height>
      </rect>
     </property>
@@ -213,31 +213,11 @@ QCheckBox::indicator::checked:hover {
      <string>选中方块：（未选中）</string>
     </property>
    </widget>
-   <widget class="QCheckBox" name="checkBox_hasblock">
-    <property name="geometry">
-     <rect>
-      <x>660</x>
-      <y>130</y>
-      <width>51</width>
-      <height>31</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <pointsize>-1</pointsize>
-      <weight>75</weight>
-      <bold>true</bold>
-     </font>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
-   </widget>
    <widget class="QComboBox" name="toward_comboBox">
     <property name="geometry">
      <rect>
-      <x>680</x>
-      <y>170</y>
+      <x>430</x>
+      <y>0</y>
       <width>101</width>
       <height>31</height>
      </rect>
@@ -266,9 +246,9 @@ QCheckBox::indicator::checked:hover {
    <widget class="QLabel" name="label_2">
     <property name="geometry">
      <rect>
-      <x>520</x>
-      <y>170</y>
-      <width>151</width>
+      <x>390</x>
+      <y>0</y>
+      <width>41</width>
       <height>31</height>
      </rect>
     </property>
@@ -278,15 +258,15 @@ QCheckBox::indicator::checked:hover {
      </font>
     </property>
     <property name="text">
-     <string>方块朝向</string>
+     <string>朝向</string>
     </property>
    </widget>
    <widget class="QLabel" name="label_3">
     <property name="geometry">
      <rect>
-      <x>520</x>
-      <y>130</y>
-      <width>151</width>
+      <x>230</x>
+      <y>0</y>
+      <width>41</width>
       <height>31</height>
      </rect>
     </property>
@@ -296,15 +276,15 @@ QCheckBox::indicator::checked:hover {
      </font>
     </property>
     <property name="text">
-     <string>是否有方块</string>
+     <string>方块</string>
     </property>
    </widget>
    <widget class="QLabel" name="label_4">
     <property name="geometry">
      <rect>
-      <x>520</x>
-      <y>210</y>
-      <width>171</width>
+      <x>540</x>
+      <y>0</y>
+      <width>71</width>
       <height>31</height>
      </rect>
     </property>
@@ -314,15 +294,15 @@ QCheckBox::indicator::checked:hover {
      </font>
     </property>
     <property name="text">
-     <string>方块类型</string>
+     <string>类型</string>
     </property>
    </widget>
    <widget class="QComboBox" name="type_comboBox">
     <property name="geometry">
      <rect>
-      <x>680</x>
-      <y>210</y>
-      <width>101</width>
+      <x>580</x>
+      <y>0</y>
+      <width>71</width>
       <height>31</height>
      </rect>
     </property>
@@ -345,9 +325,9 @@ QCheckBox::indicator::checked:hover {
    <widget class="QLabel" name="label_5">
     <property name="geometry">
      <rect>
-      <x>520</x>
-      <y>250</y>
-      <width>171</width>
+      <x>660</x>
+      <y>0</y>
+      <width>41</width>
       <height>31</height>
      </rect>
     </property>
@@ -357,15 +337,15 @@ QCheckBox::indicator::checked:hover {
      </font>
     </property>
     <property name="text">
-     <string>执行条件</string>
+     <string>条件</string>
     </property>
    </widget>
    <widget class="QComboBox" name="condition_comboBox">
     <property name="geometry">
      <rect>
-      <x>680</x>
-      <y>250</y>
-      <width>101</width>
+      <x>700</x>
+      <y>0</y>
+      <width>81</width>
       <height>31</height>
      </rect>
     </property>
@@ -383,8 +363,8 @@ QCheckBox::indicator::checked:hover {
    <widget class="QLabel" name="label_6">
     <property name="geometry">
      <rect>
-      <x>810</x>
-      <y>90</y>
+      <x>620</x>
+      <y>160</y>
       <width>51</width>
       <height>31</height>
      </rect>
@@ -401,18 +381,18 @@ QCheckBox::indicator::checked:hover {
    <widget class="QTextEdit" name="content_textEdit">
     <property name="geometry">
      <rect>
-      <x>810</x>
-      <y>130</y>
-      <width>381</width>
-      <height>191</height>
+      <x>620</x>
+      <y>200</y>
+      <width>471</width>
+      <height>81</height>
      </rect>
     </property>
    </widget>
    <widget class="QComboBox" name="redstone_comboBox">
     <property name="geometry">
      <rect>
-      <x>680</x>
-      <y>290</y>
+      <x>870</x>
+      <y>0</y>
       <width>101</width>
       <height>31</height>
      </rect>
@@ -431,9 +411,9 @@ QCheckBox::indicator::checked:hover {
    <widget class="QLabel" name="label_7">
     <property name="geometry">
      <rect>
-      <x>520</x>
-      <y>290</y>
-      <width>151</width>
+      <x>790</x>
+      <y>0</y>
+      <width>81</width>
       <height>31</height>
      </rect>
     </property>
@@ -449,37 +429,19 @@ QCheckBox::indicator::checked:hover {
    <widget class="QTextEdit" name="notes_content_textEdit">
     <property name="geometry">
      <rect>
-      <x>520</x>
-      <y>390</y>
-      <width>261</width>
-      <height>161</height>
+      <x>620</x>
+      <y>110</y>
+      <width>471</width>
+      <height>41</height>
      </rect>
-    </property>
-   </widget>
-   <widget class="QLabel" name="label_8">
-    <property name="geometry">
-     <rect>
-      <x>520</x>
-      <y>350</y>
-      <width>171</width>
-      <height>31</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <pointsize>14</pointsize>
-     </font>
-    </property>
-    <property name="text">
-     <string>备注</string>
     </property>
    </widget>
    <widget class="QPushButton" name="copy_pushButton">
     <property name="geometry">
      <rect>
-      <x>1080</x>
-      <y>90</y>
-      <width>111</width>
+      <x>920</x>
+      <y>160</y>
+      <width>121</width>
       <height>34</height>
      </rect>
     </property>
@@ -490,9 +452,9 @@ QCheckBox::indicator::checked:hover {
    <widget class="QPushButton" name="delet_pushButton">
     <property name="geometry">
      <rect>
-      <x>970</x>
-      <y>90</y>
-      <width>111</width>
+      <x>800</x>
+      <y>160</y>
+      <width>121</width>
       <height>34</height>
      </rect>
     </property>
@@ -503,9 +465,9 @@ QCheckBox::indicator::checked:hover {
    <widget class="QPushButton" name="check_delet_pushButton">
     <property name="geometry">
      <rect>
-      <x>860</x>
-      <y>90</y>
-      <width>111</width>
+      <x>680</x>
+      <y>160</y>
+      <width>121</width>
       <height>34</height>
      </rect>
     </property>
@@ -513,50 +475,46 @@ QCheckBox::indicator::checked:hover {
      <string>语法检查</string>
     </property>
    </widget>
-   <widget class="QLineEdit" name="file_lineEdit">
-    <property name="geometry">
-     <rect>
-      <x>10</x>
-      <y>10</y>
-      <width>501</width>
-      <height>31</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <pointsize>-1</pointsize>
-     </font>
-    </property>
-   </widget>
    <widget class="QLabel" name="label_10">
     <property name="geometry">
      <rect>
-      <x>520</x>
-      <y>10</y>
-      <width>61</width>
+      <x>980</x>
+      <y>0</y>
+      <width>41</width>
       <height>31</height>
      </rect>
     </property>
     <property name="font">
      <font>
-      <pointsize>10</pointsize>
+      <family>微软雅黑</family>
+      <pointsize>12</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
      </font>
     </property>
     <property name="text">
-     <string>命令组作者</string>
+     <string>作者</string>
     </property>
    </widget>
    <widget class="QLineEdit" name="size_lineEdit_2">
     <property name="geometry">
      <rect>
-      <x>600</x>
-      <y>10</y>
-      <width>200</width>
+      <x>1020</x>
+      <y>0</y>
+      <width>71</width>
       <height>31</height>
      </rect>
     </property>
+    <property name="font">
+     <font>
+      <family>微软雅黑</family>
+      <pointsize>-1</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
     <property name="text">
-     <string>未知</string>
+     <string/>
     </property>
    </widget>
    <widget class="QLabel" name="label_in">
@@ -602,8 +560,8 @@ QCheckBox::indicator::checked:hover {
    <widget class="QLabel" name="label_13">
     <property name="geometry">
      <rect>
-      <x>930</x>
-      <y>550</y>
+      <x>850</x>
+      <y>540</y>
       <width>261</width>
       <height>20</height>
      </rect>
@@ -617,13 +575,192 @@ QCheckBox::indicator::checked:hover {
      <string>编译器版本：0.1   mady by Zao_chen with &lt;3 and bug</string>
     </property>
    </widget>
+   <widget class="QComboBox" name="block_comboBox">
+    <property name="geometry">
+     <rect>
+      <x>280</x>
+      <y>0</y>
+      <width>101</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <item>
+     <property name="text">
+      <string>无</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>命令方块</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>普通方块</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>中续器</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>比较器</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>红石块</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>红石火把</string>
+     </property>
+    </item>
+   </widget>
+   <widget class="QLabel" name="label_8">
+    <property name="geometry">
+     <rect>
+      <x>620</x>
+      <y>80</y>
+      <width>51</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>14</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>备注</string>
+    </property>
+   </widget>
+   <widget class="QScrollArea" name="scrollArea">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>40</y>
+      <width>91</width>
+      <height>501</height>
+     </rect>
+    </property>
+    <property name="widgetResizable">
+     <bool>true</bool>
+    </property>
+    <widget class="QWidget" name="scrollAreaWidgetContents">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>0</y>
+       <width>89</width>
+       <height>499</height>
+      </rect>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QComboBox" name="comboBox">
+    <property name="geometry">
+     <rect>
+      <x>620</x>
+      <y>290</y>
+      <width>81</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <item>
+     <property name="text">
+      <string>指令</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>方块</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>物品</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>实体</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>粒子</string>
+     </property>
+    </item>
+   </widget>
+   <widget class="QLineEdit" name="lineEdit">
+    <property name="geometry">
+     <rect>
+      <x>620</x>
+      <y>330</y>
+      <width>81</width>
+      <height>31</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QListWidget" name="listWidget">
+    <property name="geometry">
+     <rect>
+      <x>710</x>
+      <y>290</y>
+      <width>381</width>
+      <height>71</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QComboBox" name="comboBox_2">
+    <property name="geometry">
+     <rect>
+      <x>620</x>
+      <y>400</y>
+      <width>81</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <item>
+     <property name="text">
+      <string>插件</string>
+     </property>
+    </item>
+   </widget>
+   <widget class="QPushButton" name="pushButton">
+    <property name="geometry">
+     <rect>
+      <x>710</x>
+      <y>400</y>
+      <width>81</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>导入</string>
+    </property>
+   </widget>
+   <widget class="QWidget" name="widget" native="true">
+    <property name="geometry">
+     <rect>
+      <x>620</x>
+      <y>430</y>
+      <width>471</width>
+      <height>111</height>
+     </rect>
+    </property>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1210</width>
+     <width>1099</width>
      <height>27</height>
     </rect>
    </property>

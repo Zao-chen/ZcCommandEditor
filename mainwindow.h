@@ -20,8 +20,6 @@ private slots:
 
     void on_tableWidget_cellClicked(int row, int column);
 
-    void on_checkBox_hasblock_clicked(bool checked);
-
     void on_type_comboBox_activated(int index);
 
     void on_toward_comboBox_activated(int index);
@@ -37,6 +35,8 @@ private slots:
     void on_redstone_comboBox_activated(int index);
 
     void on_notes_content_textEdit_textChanged();
+
+    void on_block_comboBox_activated(int index);
 
 private:
     Ui::MainWindow *ui;
