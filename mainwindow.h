@@ -38,6 +38,15 @@ private slots:
 
     void on_block_comboBox_activated(int index);
 
+    void on_delay_lineEdit_3_textChanged(const QString &arg1);
+
+
+    void on_checkBox_clicked(bool checked);
+
+    void on_name_lineEdit_textChanged(const QString &arg1);
+
+    void on_pushButton_updata_clicked();
+
 private:
     Ui::MainWindow *ui;
 };

@@ -8,6 +8,13 @@
 #include <QJsonParseError> //Json错误
 #include <QFile> //文件
 #include <QMessageBox> //消息框
+#include <QString>
+
+#include <update_ui.h>
+
+#include <QCoreApplication>
+#include <QtNetwork/QNetworkAccessManager>
+#include <QtNetwork/QNetworkReply>
 
 int static global_row; //当前格
 int static global_column;
@@ -39,9 +46,10 @@ struct save_map //保存东西的结构体
      * 1=红石控制 2=保持开启
     */
     int delay = 0; //延迟
-    QString content = ""; //内容
+    bool execute = false;
     QString note = ""; //备注
-}static save_map_class[1000][1000];
+    QString content = ""; //内容
+}static save_map_class[100][100];
 
 
 void show_reload(Ui::MainWindow *dis,int x,int y) //刷新当前格
@@ -87,12 +95,14 @@ void show_reload(Ui::MainWindow *dis,int x,int y) //刷新当前格
     dis->type_comboBox->setCurrentIndex(save_map_class[x][y].type-1);
     dis->condition_comboBox->setCurrentIndex(save_map_class[x][y].condition-1);
     dis->redstone_comboBox->setCurrentIndex(save_map_class[x][y].redstone-1);
+    dis->delay_lineEdit_3->setText(QString::number(save_map_class[x][y].delay));
+    dis->checkBox->setChecked(save_map_class[x][y].execute);
 }
 void clear_map(Ui::MainWindow *dis) //清空地图
 {
-    for (int i=0;i!=10;i++) {
-        for (int j=0;j!=10;j++) {
-            save_map_class[i][j].block = "command_block"; //是否有方块
+    for (int i=0;i!=100;i++) {
+        for (int j=0;j!=100;j++) {
+            save_map_class[i][j].block = "air"; //是否有方块
             save_map_class[i][j].toward = 1;
             save_map_class[i][j].type = 1;
             save_map_class[i][j].condition = 1;
@@ -112,13 +122,15 @@ MainWindow::MainWindow(QWidget *parent)
     /*初始化*/
     ui->setupUi(this);
 
+
+
     ui->tableWidget->horizontalHeader()->setDefaultSectionSize(40); //设置默认大小
     ui->tableWidget->verticalHeader()->setDefaultSectionSize(40);
 
     ui->tableWidget->setEditTriggers(QAbstractItemView::NoEditTriggers); //设置不可更改
 
-    ui->tableWidget->setColumnCount(1000); //设置表格大小
-    ui->tableWidget->setRowCount(1000);
+    ui->tableWidget->setColumnCount(100); //设置表格大小
+    ui->tableWidget->setRowCount(100);
 
     connect(ui->actionoutput,SIGNAL(triggered()),this,SLOT(on_menu_save_clicked())); //导出按钮信号绑定
     connect(ui->actioninput,SIGNAL(triggered()),this,SLOT(on_menu_load_clicked())); //导入按钮信号绑定
@@ -127,7 +139,20 @@ MainWindow::MainWindow(QWidget *parent)
 
     ui->label_now->setText("编辑器使用json版本："+editor_version);
 
-    ui->tableWidget->scrollToItem(ui->tableWidget->item(500,500));
+    QStringList headers;
+    for (int i = -50; i <= 50; i++) {
+        headers << QString::number(i);
+    }
+
+    ui->tableWidget->setRowCount(101);
+    ui->tableWidget->setColumnCount(101);
+    ui->tableWidget->setVerticalHeaderLabels(headers);
+    ui->tableWidget->setHorizontalHeaderLabels(headers);
+
+    QTableWidgetItem *item = new QTableWidgetItem("0");
+    ui->tableWidget->setItem(50, 50, item);
+    ui->tableWidget->scrollToItem(item, QAbstractItemView::PositionAtCenter); //滚动视图到指定单元格
+
 }
 
 MainWindow::~MainWindow()
@@ -140,7 +165,7 @@ void MainWindow::on_tableWidget_cellClicked(int row, int column)
 {
     global_row = row;
     global_column = column;
-    ui->label_location->setText("选中方块：( " + QString::number(row+1) + " , " + QString::number(column+1)+" )");
+    ui->label_location->setText("选中方块 ( " + QString::number(row+1) + " , " + QString::number(column+1)+" )");
     show_reload(ui,global_row,global_column);
 }
 
@@ -193,6 +218,7 @@ void MainWindow::on_menu_save_clicked(void)
             {
                 likeObject.insert("x", x);
                 likeObject.insert("y", y);
+                likeObject.insert("z", 0);
                 likeObject.insert("block",save_map_class[x][y].block);
                 likeObject.insert("toward",save_map_class[x][y].toward);
                 likeObject.insert("type",save_map_class[x][y].type);
@@ -200,6 +226,8 @@ void MainWindow::on_menu_save_clicked(void)
                 likeObject.insert("redstone",save_map_class[x][y].redstone);
                 likeObject.insert("content",save_map_class[x][y].content);
                 likeObject.insert("note",save_map_class[x][y].note);
+                likeObject.insert("delay",save_map_class[x][y].delay);
+                likeObject.insert("execute",save_map_class[x][y].execute);
                 likeArray.append(likeObject);
             }
         }
@@ -208,8 +236,9 @@ void MainWindow::on_menu_save_clicked(void)
     //添加到最外
     QJsonObject rootObject;
     rootObject.insert("block", likeArray);
-    rootObject.insert("version", editor_version);
-    rootObject.insert("author", ui->size_lineEdit_2->text());
+    rootObject.insert("jsonversion", editor_version);
+    rootObject.insert("mcversion", ui->vv_lineEdit->text());
+    rootObject.insert("author", ui->auth_lineEdit->text());
     /*写入*/
     QJsonDocument doc; //将object设置为本文档的主要对象
     doc.setObject(rootObject);
@@ -281,15 +310,22 @@ void MainWindow::on_menu_load_clicked(void)
                 save_map_class[x.toInt()][y.toInt()].type = type.toInt();
                 QJsonValue block = likeObj.value("block");
                 save_map_class[x.toInt()][y.toInt()].block = block.toString();
+                QJsonValue delay = likeObj.value("delay");
+                save_map_class[x.toInt()][y.toInt()].delay = delay.toInt();
+                QJsonValue execute = likeObj.value("execute");
+                save_map_class[x.toInt()][y.toInt()].execute = execute.toBool();
+                QJsonValue con = likeObj.value("condition");
+                save_map_class[x.toInt()][y.toInt()].condition = con.toInt();
                 global_row = x.toInt();
                 global_column = y.toInt();
                 show_reload(ui,global_row,global_column);
             }
         }
     }
-    ui->size_lineEdit_2->setText(rootObj.value("author").toString());
-    load_version = rootObj.value("version").toString();
+    ui->auth_lineEdit->setText(rootObj.value("author").toString());
+    load_version = rootObj.value("jsonversion").toString();
     ui->label_in->setText("导入的命令组json版本："+load_version);
+    ui->vv_lineEdit->setText(rootObj.value("mcversion").toString());
     if(load_version!=editor_version)
     {
         QMessageBox msgBox;
@@ -298,10 +334,32 @@ void MainWindow::on_menu_load_clicked(void)
     }
 }
 
-
+/*修改方块*/
 void MainWindow::on_block_comboBox_activated(int index)
 {
     if(index==0) save_map_class[global_row][global_column].block = "air";
     else if(index==1) save_map_class[global_row][global_column].block = "command_block";
     show_reload(ui,global_row,global_column);
+}
+
+/*修改延迟*/
+void MainWindow::on_delay_lineEdit_3_textChanged(const QString &arg1)
+{
+    save_map_class[global_row][global_column].delay = arg1.toInt();
+}
+
+void MainWindow::on_checkBox_clicked(bool checked)
+{
+    save_map_class[global_row][global_column].execute = checked;
+}
+
+void MainWindow::on_name_lineEdit_textChanged(const QString &arg1)
+{
+    file_place = qApp->applicationDirPath()+"\\"+arg1;
+}
+
+void MainWindow::on_pushButton_updata_clicked()
+{
+    update_ui upwindows;
+    upwindows.exec();
 }
