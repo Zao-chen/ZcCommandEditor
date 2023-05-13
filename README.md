@@ -5,7 +5,7 @@
 - 编辑器：可以打开编辑命令组格式的程序。
 
 概念图：
-![概念图](https://user-images.githubusercontent.com/77674075/232503283-e568624d-48ff-4a56-9670-d24a7263607e.png)
+![image](https://github.com/Zao-chen/ZcCommandEditor/assets/77674075/23de99d6-b06c-4ff7-a5b2-1e75dffaa45a)
 ## 它能干什么？
 相比于在游戏内编写，它有几大优势优势：
 - 更方便的操作：你可以更快捷的编辑、注解，还可以直接打开、移动、旋转、复制、删除、命令方块。
