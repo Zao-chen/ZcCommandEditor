@@ -6,5 +6,6 @@
         <file>image/mc-ytj.png</file>
         <file>image/xh-wtj.png</file>
         <file>image/xh-ytj.png</file>
+        <file>image/block.png</file>
     </qresource>
 </RCC>

@@ -7,16 +7,14 @@
     <x>0</x>
     <y>0</y>
     <width>1456</width>
-    <height>703</height>
+    <height>688</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>ZcCommandEditor</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">
-
-* {
+   <string notr="true">* {
     background-color: #FFFEF9;
 }
 
@@ -75,24 +73,15 @@ QTextEdit {
 }
 
 QTableView {
-    border: 2px solid #f7931e;
-    border-radius:  3px;
     background-color: #FFFCF3;
 }
-
-QTableView::item {
-    padding: 5px;
-    font-size: 16px;
-}
-
-
 
 QPushButton {
     background-color: #FFBC33;
     color: #ffffff;
     border: none;
-    border-radius: 20px;
-    padding: 8px 20px;
+    border-radius: 2px;
+    padding: 2px 2px;
     font-size: 16px;
     font-weight: bold;
 }
@@ -191,9 +180,61 @@ QCheckBox::indicator::checked:hover {
       <height>550</height>
      </rect>
     </property>
+    <property name="minimumSize">
+     <size>
+      <width>550</width>
+      <height>0</height>
+     </size>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QTableWidget::item {
+	padding: 0px;
+	border: 0;
+}</string>
+    </property>
     <property name="dragEnabled">
      <bool>false</bool>
     </property>
+    <row>
+     <property name="text">
+      <string>新建行</string>
+     </property>
+    </row>
+    <row>
+     <property name="text">
+      <string>新建行</string>
+     </property>
+    </row>
+    <column>
+     <property name="text">
+      <string>新建列</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>新建列</string>
+     </property>
+    </column>
+    <item row="0" column="0">
+     <property name="text">
+      <string>1</string>
+     </property>
+    </item>
+    <item row="0" column="1">
+     <property name="text">
+      <string>2</string>
+     </property>
+    </item>
+    <item row="1" column="0">
+     <property name="text">
+      <string>1</string>
+     </property>
+    </item>
+    <item row="1" column="1">
+     <property name="text">
+      <string>1</string>
+     </property>
+    </item>
    </widget>
    <widget class="QLabel" name="label_location">
     <property name="geometry">
@@ -488,7 +529,6 @@ QCheckBox::indicator::checked:hover {
      <font>
       <family>微软雅黑</family>
       <pointsize>12</pointsize>
-      <weight>75</weight>
       <bold>true</bold>
      </font>
     </property>
@@ -527,7 +567,6 @@ QCheckBox::indicator::checked:hover {
      <font>
       <family>微软雅黑</family>
       <pointsize>6</pointsize>
-      <weight>50</weight>
       <italic>false</italic>
       <bold>false</bold>
      </font>
@@ -554,13 +593,13 @@ QCheckBox::indicator::checked:hover {
      <string>编辑器使用json版本：</string>
     </property>
    </widget>
-   <widget class="QLabel" name="label_13">
+   <widget class="QLabel" name="label_ver">
     <property name="geometry">
      <rect>
-      <x>1220</x>
+      <x>1210</x>
       <y>630</y>
-      <width>261</width>
-      <height>20</height>
+      <width>211</width>
+      <height>16</height>
      </rect>
     </property>
     <property name="font">
@@ -847,7 +886,6 @@ QCheckBox::indicator::checked:hover {
      <font>
       <family>微软雅黑</family>
       <pointsize>12</pointsize>
-      <weight>75</weight>
       <bold>true</bold>
      </font>
     </property>
@@ -886,7 +924,6 @@ QCheckBox::indicator::checked:hover {
      <font>
       <family>微软雅黑</family>
       <pointsize>12</pointsize>
-      <weight>75</weight>
       <bold>true</bold>
      </font>
     </property>
@@ -912,60 +949,6 @@ QCheckBox::indicator::checked:hover {
      <string>Untitle.json</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_updata">
-    <property name="geometry">
-     <rect>
-      <x>800</x>
-      <y>630</y>
-      <width>88</width>
-      <height>16</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>updta</string>
-    </property>
-   </widget>
-   <zorder>pushButton_updata</zorder>
-   <zorder>label</zorder>
-   <zorder>tableWidget</zorder>
-   <zorder>label_location</zorder>
-   <zorder>toward_comboBox</zorder>
-   <zorder>label_2</zorder>
-   <zorder>label_3</zorder>
-   <zorder>label_4</zorder>
-   <zorder>type_comboBox</zorder>
-   <zorder>label_5</zorder>
-   <zorder>condition_comboBox</zorder>
-   <zorder>label_6</zorder>
-   <zorder>content_textEdit</zorder>
-   <zorder>redstone_comboBox</zorder>
-   <zorder>label_7</zorder>
-   <zorder>notes_content_textEdit</zorder>
-   <zorder>copy_pushButton</zorder>
-   <zorder>delet_pushButton</zorder>
-   <zorder>check_delet_pushButton</zorder>
-   <zorder>label_10</zorder>
-   <zorder>auth_lineEdit</zorder>
-   <zorder>label_in</zorder>
-   <zorder>label_now</zorder>
-   <zorder>label_13</zorder>
-   <zorder>block_comboBox</zorder>
-   <zorder>label_8</zorder>
-   <zorder>scrollArea</zorder>
-   <zorder>comboBox</zorder>
-   <zorder>lineEdit</zorder>
-   <zorder>listWidget</zorder>
-   <zorder>comboBox_2</zorder>
-   <zorder>pushButton</zorder>
-   <zorder>widget</zorder>
-   <zorder>label_11</zorder>
-   <zorder>delay_lineEdit_3</zorder>
-   <zorder>label_12</zorder>
-   <zorder>checkBox</zorder>
-   <zorder>label_14</zorder>
-   <zorder>vv_lineEdit</zorder>
-   <zorder>label_15</zorder>
-   <zorder>name_lineEdit</zorder>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
@@ -973,7 +956,7 @@ QCheckBox::indicator::checked:hover {
      <x>0</x>
      <y>0</y>
      <width>1456</width>
-     <height>31</height>
+     <height>26</height>
     </rect>
    </property>
    <widget class="QMenu" name="menu">
@@ -987,15 +970,23 @@ QCheckBox::indicator::checked:hover {
     <property name="title">
      <string>帮助</string>
     </property>
+    <addaction name="action_help"/>
    </widget>
    <widget class="QMenu" name="menu_3">
     <property name="title">
      <string>插件</string>
     </property>
    </widget>
+   <widget class="QMenu" name="menu_4">
+    <property name="title">
+     <string>关于</string>
+    </property>
+    <addaction name="action_open"/>
+   </widget>
    <addaction name="menu"/>
    <addaction name="menu_3"/>
    <addaction name="menu_2"/>
+   <addaction name="menu_4"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
   <action name="actioninput">
@@ -1006,6 +997,16 @@ QCheckBox::indicator::checked:hover {
   <action name="actionoutput">
    <property name="text">
     <string>导出</string>
+   </property>
+  </action>
+  <action name="action_help">
+   <property name="text">
+    <string>快捷键</string>
+   </property>
+  </action>
+  <action name="action_open">
+   <property name="text">
+    <string>github</string>
    </property>
   </action>
  </widget>

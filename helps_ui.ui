@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>helps_ui</class>
+ <widget class="QMainWindow" name="helps_ui">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>433</width>
+    <height>386</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <widget class="QTableWidget" name="tableWidget">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>10</y>
+      <width>411</width>
+      <height>331</height>
+     </rect>
+    </property>
+    <row>
+     <property name="text">
+      <string>放置空气</string>
+     </property>
+    </row>
+    <row>
+     <property name="text">
+      <string>放置命令方块</string>
+     </property>
+    </row>
+    <row>
+     <property name="text">
+      <string>放置普通方块</string>
+     </property>
+    </row>
+    <column>
+     <property name="text">
+      <string>按键</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>说明</string>
+     </property>
+    </column>
+    <item row="0" column="0">
+     <property name="text">
+      <string>a</string>
+     </property>
+    </item>
+    <item row="0" column="1">
+     <property name="text">
+      <string>air</string>
+     </property>
+    </item>
+    <item row="1" column="0">
+     <property name="text">
+      <string>c</string>
+     </property>
+    </item>
+    <item row="1" column="1">
+     <property name="text">
+      <string>command_block</string>
+     </property>
+    </item>
+    <item row="2" column="0">
+     <property name="text">
+      <string>b</string>
+     </property>
+    </item>
+    <item row="2" column="1">
+     <property name="text">
+      <string>block</string>
+     </property>
+    </item>
+   </widget>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>433</width>
+     <height>21</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

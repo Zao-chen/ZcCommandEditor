@@ -36,7 +36,6 @@ update_ui::update_ui(QWidget *parent) :
 
    // 读取文件的全部内容
    QTextStream stream(response);
-   stream.setCodec("UTF-8");		// 设置读取编码是UTF8
    QString str = stream.readAll();
    // QJsonParseError类用于在JSON解析期间报告错误。
    QJsonParseError jsonError;

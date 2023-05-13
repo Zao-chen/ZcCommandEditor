@@ -1,24 +1,29 @@
+/*头文件相关*/
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
+/*调试相关*/
 #include <QDebug>
+#include <QtDebug>
+/*json相关*/
 #include <QJsonObject> // { }
 #include <QJsonArray> // [ ]
 #include <QJsonDocument> // 解析Json
 #include <QJsonValue> // int float double bool null { } [ ]
 #include <QJsonParseError> //Json错误
+/*其他*/
 #include <QFile> //文件
 #include <QMessageBox> //消息框
 #include <QString>
-
+#include <QDesktopServices>
+#include <QUrl>
+/*其他窗口*/
 #include <update_ui.h>
-
-#include <QCoreApplication>
-#include <QtNetwork/QNetworkAccessManager>
-#include <QtNetwork/QNetworkReply>
+#include <helps_ui.h>
 
 int static global_row; //当前格
 int static global_column;
-QString static editor_version = "1.1"; //json版本
+QString static json_version = "1.2"; //json版本
+QString static editor_version = "0.2-beta"; //编译器版本
 QString static load_version;
 QString static file_place = qApp->applicationDirPath()+"Untitle.json";
 
@@ -49,14 +54,14 @@ struct save_map //保存东西的结构体
     bool execute = false;
     QString note = ""; //备注
     QString content = ""; //内容
-}static save_map_class[100][100];
+}static save_map_class[101][101];
 
 
 void show_reload(Ui::MainWindow *dis,int x,int y) //刷新当前格
 {
     if(save_map_class[x][y].block == "command_block") //设置图像
     {
-        QMatrix matrix;
+        QTransform matrix;
         QLabel *label = new QLabel("");
         QString image;
         /*设置图像*/
@@ -84,6 +89,16 @@ void show_reload(Ui::MainWindow *dis,int x,int y) //刷新当前格
 
         label->setPixmap(QPixmap(image).scaled(40,40).transformed(matrix, Qt::SmoothTransformation));
         dis->tableWidget->setCellWidget(x,y,label);
+
+    }
+    else if(save_map_class[x][y].block == "block")
+    {
+        QTransform matrix;
+        QLabel *label = new QLabel("");
+        QString image;
+        image = ":/image/image/block.png";
+        label->setPixmap(QPixmap(image).scaled(40,40).transformed(matrix, Qt::SmoothTransformation));
+        dis->tableWidget->setCellWidget(x,y,label);
     }
     else
     {
@@ -97,22 +112,8 @@ void show_reload(Ui::MainWindow *dis,int x,int y) //刷新当前格
     dis->redstone_comboBox->setCurrentIndex(save_map_class[x][y].redstone-1);
     dis->delay_lineEdit_3->setText(QString::number(save_map_class[x][y].delay));
     dis->checkBox->setChecked(save_map_class[x][y].execute);
-}
-void clear_map(Ui::MainWindow *dis) //清空地图
-{
-    for (int i=0;i!=100;i++) {
-        for (int j=0;j!=100;j++) {
-            save_map_class[i][j].block = "air"; //是否有方块
-            save_map_class[i][j].toward = 1;
-            save_map_class[i][j].type = 1;
-            save_map_class[i][j].condition = 1;
-            save_map_class[i][j].redstone = 1;
-            save_map_class[i][j].delay = 0; //延迟
-            QString content = ""; //内容
-            QString note = ""; //备注
-            show_reload(dis,i,j);
-        }
-    }
+    if(save_map_class[x][y].block == "air"){ dis->block_comboBox->setCurrentIndex(0); }
+    else if(save_map_class[x][y].block == "command_block"){ dis->block_comboBox->setCurrentIndex(1); }
 }
 
 MainWindow::MainWindow(QWidget *parent)
@@ -121,38 +122,35 @@ MainWindow::MainWindow(QWidget *parent)
 {
     /*初始化*/
     ui->setupUi(this);
+    setWindowTitle("ZcCommandEditor");
+    ui->label_now->setText("编辑器使用json版本："+json_version);
 
-
-
+    /*表格初始化*/
     ui->tableWidget->horizontalHeader()->setDefaultSectionSize(40); //设置默认大小
     ui->tableWidget->verticalHeader()->setDefaultSectionSize(40);
-
     ui->tableWidget->setEditTriggers(QAbstractItemView::NoEditTriggers); //设置不可更改
-
     ui->tableWidget->setColumnCount(100); //设置表格大小
     ui->tableWidget->setRowCount(100);
-
-    connect(ui->actionoutput,SIGNAL(triggered()),this,SLOT(on_menu_save_clicked())); //导出按钮信号绑定
-    connect(ui->actioninput,SIGNAL(triggered()),this,SLOT(on_menu_load_clicked())); //导入按钮信号绑定
-
-    setWindowTitle("ZcCommandEditor");
-
-    ui->label_now->setText("编辑器使用json版本："+editor_version);
-
     QStringList headers;
     for (int i = -50; i <= 50; i++) {
         headers << QString::number(i);
     }
-
     ui->tableWidget->setRowCount(101);
     ui->tableWidget->setColumnCount(101);
     ui->tableWidget->setVerticalHeaderLabels(headers);
     ui->tableWidget->setHorizontalHeaderLabels(headers);
-
     QTableWidgetItem *item = new QTableWidgetItem("0");
     ui->tableWidget->setItem(50, 50, item);
     ui->tableWidget->scrollToItem(item, QAbstractItemView::PositionAtCenter); //滚动视图到指定单元格
+    ui->tableWidget->setFocusPolicy(Qt::NoFocus);
 
+    /*信号初始化*/
+    connect(ui->actionoutput,SIGNAL(triggered()),this,SLOT(on_menu_save_clicked())); //导出按钮信号绑定
+    connect(ui->actioninput,SIGNAL(triggered()),this,SLOT(on_menu_load_clicked())); //导入按钮信号绑定
+    connect(ui->action_help,SIGNAL(triggered()),this,SLOT(on_menu_help_clicked())); //导入按钮信号绑定
+    connect(ui->action_open,SIGNAL(triggered()),this,SLOT(on_menu_github_clicked())); //导入按钮信号绑定
+
+    ui->label_ver->setText("编译器版本："+editor_version+"   mady by Zao_chen with <3 and bug");
 }
 
 MainWindow::~MainWindow()
@@ -165,10 +163,9 @@ void MainWindow::on_tableWidget_cellClicked(int row, int column)
 {
     global_row = row;
     global_column = column;
-    ui->label_location->setText("选中方块 ( " + QString::number(row+1) + " , " + QString::number(column+1)+" )");
+    ui->label_location->setText("选中方块 ( " + QString::number(global_row-50) + " , " + QString::number(global_column-50)+" )");
     show_reload(ui,global_row,global_column);
 }
-
 /*方块类型*/
 void MainWindow::on_type_comboBox_activated(int index)
 {
@@ -203,7 +200,6 @@ void MainWindow::on_redstone_comboBox_activated(int index)
     save_map_class[global_row][global_column].redstone = index+1;
     show_reload(ui,global_row,global_column);
 }
-
 /*导出json*/
 void MainWindow::on_menu_save_clicked(void)
 {
@@ -216,8 +212,8 @@ void MainWindow::on_menu_save_clicked(void)
         {
             if(save_map_class[x][y].block != "air")
             {
-                likeObject.insert("x", x);
-                likeObject.insert("y", y);
+                likeObject.insert("x", x-50);
+                likeObject.insert("y", y-50);
                 likeObject.insert("z", 0);
                 likeObject.insert("block",save_map_class[x][y].block);
                 likeObject.insert("toward",save_map_class[x][y].toward);
@@ -236,7 +232,7 @@ void MainWindow::on_menu_save_clicked(void)
     //添加到最外
     QJsonObject rootObject;
     rootObject.insert("block", likeArray);
-    rootObject.insert("jsonversion", editor_version);
+    rootObject.insert("jsonversion", json_version);
     rootObject.insert("mcversion", ui->vv_lineEdit->text());
     rootObject.insert("author", ui->auth_lineEdit->text());
     /*写入*/
@@ -250,7 +246,7 @@ void MainWindow::on_menu_save_clicked(void)
         msgBox.exec();
     }
     QTextStream stream(&file);
-    stream.setCodec("UTF-8"); //设置写入编码是UTF8
+    //stream.setCodec("UTF-8"); //设置写入编码是UTF8
     stream << doc.toJson(); //写入文件
     file.close();
 }
@@ -264,7 +260,7 @@ void MainWindow::on_menu_load_clicked(void)
     }
     // 读取文件的全部内容
     QTextStream stream(&file);
-    stream.setCodec("UTF-8");		// 设置读取编码是UTF8
+    //stream.setCodec("UTF-8");		// 设置读取编码是UTF8
     QString str = stream.readAll();
     file.close();
     // QJsonParseError类用于在JSON解析期间报告错误。
@@ -284,7 +280,22 @@ void MainWindow::on_menu_load_clicked(void)
     // 判断类型是否是数组类型
     if (likeValue.type() == QJsonValue::Array) {
         // 转换成数组类型
-        clear_map(ui);
+
+        QStringList headers;
+        for (int i = -50; i <= 50; i++) {
+            headers << QString::number(i);
+        }
+
+        //重置表格
+        ui->tableWidget->clear();
+        ui->tableWidget->setRowCount(101);
+        ui->tableWidget->setColumnCount(101);
+        ui->tableWidget->setVerticalHeaderLabels(headers);
+        ui->tableWidget->setHorizontalHeaderLabels(headers);
+        QTableWidgetItem *item = new QTableWidgetItem("0");
+        ui->tableWidget->setItem(50, 50, item);
+        ui->tableWidget->scrollToItem(item, QAbstractItemView::PositionAtCenter); //滚动视图到指定单元格
+
         QJsonArray likeArray = likeValue.toArray();
         // 遍历数组
         for (int i = 0; i < likeArray.count(); i++) {
@@ -297,27 +308,29 @@ void MainWindow::on_menu_load_clicked(void)
                 // 最后通过value函数就可以获取到值了，解析成功！
                 QJsonValue x = likeObj.value("x");
                 QJsonValue y = likeObj.value("y");
+                int int_x = x.toInt()+50;
+                int int_y = y.toInt()+50;
                 QJsonValue condition = likeObj.value("condition");
                 QJsonValue content = likeObj.value("content");
-                save_map_class[x.toInt()][y.toInt()].content = content.toString();
+                save_map_class[int_x][int_y].content = content.toString();
                 QJsonValue note = likeObj.value("note");
-                save_map_class[x.toInt()][y.toInt()].note = note.toString();
+                save_map_class[int_x][int_y].note = note.toString();
                 QJsonValue redstone = likeObj.value("redstone");
-                save_map_class[x.toInt()][y.toInt()].redstone = redstone.toInt();
+                save_map_class[int_x][int_y].redstone = redstone.toInt();
                 QJsonValue toward = likeObj.value("toward");
-                save_map_class[x.toInt()][y.toInt()].toward = toward.toInt();
+                save_map_class[int_x][int_y].toward = toward.toInt();
                 QJsonValue type = likeObj.value("type");
-                save_map_class[x.toInt()][y.toInt()].type = type.toInt();
+                save_map_class[int_x][int_y].type = type.toInt();
                 QJsonValue block = likeObj.value("block");
-                save_map_class[x.toInt()][y.toInt()].block = block.toString();
+                save_map_class[int_x][int_y].block = block.toString();
                 QJsonValue delay = likeObj.value("delay");
-                save_map_class[x.toInt()][y.toInt()].delay = delay.toInt();
+                save_map_class[int_x][int_y].delay = delay.toInt();
                 QJsonValue execute = likeObj.value("execute");
-                save_map_class[x.toInt()][y.toInt()].execute = execute.toBool();
+                save_map_class[int_x][int_y].execute = execute.toBool();
                 QJsonValue con = likeObj.value("condition");
-                save_map_class[x.toInt()][y.toInt()].condition = con.toInt();
-                global_row = x.toInt();
-                global_column = y.toInt();
+                save_map_class[int_x][int_y].condition = con.toInt();
+                global_row = int_x;
+                global_column = int_y;
                 show_reload(ui,global_row,global_column);
             }
         }
@@ -326,40 +339,72 @@ void MainWindow::on_menu_load_clicked(void)
     load_version = rootObj.value("jsonversion").toString();
     ui->label_in->setText("导入的命令组json版本："+load_version);
     ui->vv_lineEdit->setText(rootObj.value("mcversion").toString());
-    if(load_version!=editor_version)
+    if(load_version!=json_version)
     {
         QMessageBox msgBox;
         msgBox.setText("导入json版本与编辑器版本不同，可能出现bug，建议进行迁移");
         msgBox.exec();
     }
 }
-
 /*修改方块*/
 void MainWindow::on_block_comboBox_activated(int index)
 {
     if(index==0) save_map_class[global_row][global_column].block = "air";
     else if(index==1) save_map_class[global_row][global_column].block = "command_block";
+    else if(index==2) save_map_class[global_row][global_column].block = "block";
     show_reload(ui,global_row,global_column);
 }
-
 /*修改延迟*/
 void MainWindow::on_delay_lineEdit_3_textChanged(const QString &arg1)
 {
     save_map_class[global_row][global_column].delay = arg1.toInt();
 }
-
+/*执行一个已知项*/
 void MainWindow::on_checkBox_clicked(bool checked)
 {
     save_map_class[global_row][global_column].execute = checked;
 }
-
+/*文件位置*/
 void MainWindow::on_name_lineEdit_textChanged(const QString &arg1)
 {
     file_place = qApp->applicationDirPath()+"\\"+arg1;
 }
-
+/*更新*/
 void MainWindow::on_pushButton_updata_clicked()
 {
     update_ui upwindows;
-    upwindows.exec();
+    upwindows.show();
+}
+
+
+
+// 键盘按下事件
+void MainWindow::keyPressEvent(QKeyEvent * event)
+{
+    // 普通键
+    switch (event->key())
+    {
+    // ESC键
+    case Qt::Key_C:
+        save_map_class[global_row][global_column].block = "command_block";
+        show_reload(ui,global_row,global_column);
+    break;
+    case Qt::Key_B:
+        save_map_class[global_row][global_column].block = "block";
+        show_reload(ui,global_row,global_column);
+    break;
+    case Qt::Key_A:
+        save_map_class[global_row][global_column].block = "air";
+        show_reload(ui,global_row,global_column);
+    break;
+    }
+}
+/*打开帮助*/
+void MainWindow::on_menu_help_clicked(void){
+    helps_ui *hpwindows = new helps_ui;
+    hpwindows->show();
+}
+/*打开github*/
+void MainWindow::on_menu_github_clicked(void){
+    QDesktopServices::openUrl(QUrl("https://github.com/Zao-chen/ZcCommandEditor", QUrl::TolerantMode));
 }
