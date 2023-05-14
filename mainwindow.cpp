@@ -26,7 +26,7 @@ int static global_row; //当前格
 int static global_column;
 QString json_version = "1.2"; //json版本
 QString editor_version = "0.2-beta"; //编译器版本
-QString load_version;
+QString load_version; //加载版本
 QString file_place = qApp->applicationDirPath()+"Untitle.json";
 
 struct save_map //保存东西的结构体
