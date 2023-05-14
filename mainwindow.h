@@ -28,12 +28,10 @@ private slots:
     void on_condition_comboBox_activated(int index);
 
     void on_menu_save_clicked();
-
     void on_menu_load_clicked();
-
     void on_menu_help_clicked();
-
     void on_menu_github_clicked();
+    void on_menu_cmd_plugin_clicked();
 
     void on_content_textEdit_textChanged();
 
