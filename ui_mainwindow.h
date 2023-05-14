@@ -1,13 +1,11 @@
+#pragma once
 /********************************************************************************
-** Form generated from reading UI file 'mainwindow.ui'
+** Form generated from reading UI file ''
 **
 ** Created by: Qt User Interface Compiler version 6.5.0
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
-
-#ifndef UI_MAINWINDOW_H
-#define UI_MAINWINDOW_H
 
 #include <QtCore/QVariant>
 #include <QtGui/QAction>
@@ -37,6 +35,8 @@ public:
     QAction *actionoutput;
     QAction *action_help;
     QAction *action_open;
+    QAction *action1;
+    QAction *plugin_cmd_action;
     QWidget *centralwidget;
     QLabel *label;
     QTableWidget *tableWidget;
@@ -66,9 +66,9 @@ public:
     QScrollArea *scrollArea;
     QWidget *scrollAreaWidgetContents;
     QLabel *label_9;
-    QComboBox *comboBox;
-    QLineEdit *lineEdit;
-    QListWidget *listWidget;
+    QComboBox *cmd_comboBox;
+    QLineEdit *cmd_lineEdit;
+    QListWidget *tip_listWidget;
     QComboBox *comboBox_2;
     QPushButton *pushButton;
     QWidget *widget;
@@ -235,6 +235,10 @@ public:
         action_help->setObjectName("action_help");
         action_open = new QAction(MainWindow);
         action_open->setObjectName("action_open");
+        action1 = new QAction(MainWindow);
+        action1->setObjectName("action1");
+        plugin_cmd_action = new QAction(MainWindow);
+        plugin_cmd_action->setObjectName("action2");
         centralwidget = new QWidget(MainWindow);
         centralwidget->setObjectName("centralwidget");
         label = new QLabel(centralwidget);
@@ -399,20 +403,21 @@ public:
         label_9->setObjectName("label_9");
         label_9->setGeometry(QRect(20, 80, 54, 251));
         scrollArea->setWidget(scrollAreaWidgetContents);
-        comboBox = new QComboBox(centralwidget);
-        comboBox->addItem(QString());
-        comboBox->addItem(QString());
-        comboBox->addItem(QString());
-        comboBox->addItem(QString());
-        comboBox->addItem(QString());
-        comboBox->setObjectName("comboBox");
-        comboBox->setGeometry(QRect(670, 270, 81, 31));
-        lineEdit = new QLineEdit(centralwidget);
-        lineEdit->setObjectName("lineEdit");
-        lineEdit->setGeometry(QRect(760, 270, 331, 31));
-        listWidget = new QListWidget(centralwidget);
-        listWidget->setObjectName("listWidget");
-        listWidget->setGeometry(QRect(670, 310, 421, 321));
+        cmd_comboBox = new QComboBox(centralwidget);
+        cmd_comboBox->addItem(QString());
+        cmd_comboBox->addItem(QString());
+        cmd_comboBox->addItem(QString());
+        cmd_comboBox->addItem(QString());
+        cmd_comboBox->addItem(QString());
+        cmd_comboBox->addItem(QString());
+        cmd_comboBox->setObjectName("cmd_comboBox");
+        cmd_comboBox->setGeometry(QRect(670, 270, 81, 31));
+        cmd_lineEdit = new QLineEdit(centralwidget);
+        cmd_lineEdit->setObjectName("cmd_lineEdit");
+        cmd_lineEdit->setGeometry(QRect(760, 270, 331, 31));
+        tip_listWidget = new QListWidget(centralwidget);
+        tip_listWidget->setObjectName("tip_listWidget");
+        tip_listWidget->setGeometry(QRect(670, 310, 421, 321));
         comboBox_2 = new QComboBox(centralwidget);
         comboBox_2->addItem(QString());
         comboBox_2->setObjectName("comboBox_2");
@@ -478,6 +483,8 @@ public:
         menu->addAction(actioninput);
         menu->addAction(actionoutput);
         menu_2->addAction(action_help);
+        menu_3->addAction(action1);
+        menu_3->addAction(plugin_cmd_action);
         menu_4->addAction(action_open);
 
         retranslateUi(MainWindow);
@@ -492,6 +499,8 @@ public:
         actionoutput->setText(QCoreApplication::translate("MainWindow", "\345\257\274\345\207\272", nullptr));
         action_help->setText(QCoreApplication::translate("MainWindow", "\345\277\253\346\215\267\351\224\256", nullptr));
         action_open->setText(QCoreApplication::translate("MainWindow", "github", nullptr));
+        action1->setText(QCoreApplication::translate("MainWindow", "\345\257\274\345\205\245\346\217\222\344\273\266", nullptr));
+        plugin_cmd_action->setText(QCoreApplication::translate("MainWindow", "\345\257\274\345\205\245\346\214\207\344\273\244\345\214\205", nullptr));
         label->setText(QCoreApplication::translate("MainWindow", "\345\205\267\344\275\223\350\257\246\346\203\205", nullptr));
         QTableWidgetItem *___qtablewidgetitem = tableWidget->horizontalHeaderItem(0);
         ___qtablewidgetitem->setText(QCoreApplication::translate("MainWindow", "\346\226\260\345\273\272\345\210\227", nullptr));
@@ -554,13 +563,14 @@ public:
 
         label_8->setText(QCoreApplication::translate("MainWindow", "\345\244\207\346\263\250", nullptr));
         label_9->setText(QCoreApplication::translate("MainWindow", "<html><head/><body><p>\345\267\245</p><p>\345\205\267</p><p>\346\240\217</p><p>\345\274\200</p><p>\345\217\221</p><p>\344\270\255</p></body></html>", nullptr));
-        comboBox->setItemText(0, QCoreApplication::translate("MainWindow", "\346\214\207\344\273\244", nullptr));
-        comboBox->setItemText(1, QCoreApplication::translate("MainWindow", "\346\226\271\345\235\227", nullptr));
-        comboBox->setItemText(2, QCoreApplication::translate("MainWindow", "\347\211\251\345\223\201", nullptr));
-        comboBox->setItemText(3, QCoreApplication::translate("MainWindow", "\345\256\236\344\275\223", nullptr));
-        comboBox->setItemText(4, QCoreApplication::translate("MainWindow", "\347\262\222\345\255\220", nullptr));
+        cmd_comboBox->setItemText(0, QCoreApplication::translate("MainWindow", "\346\214\207\344\273\244", nullptr));
+        cmd_comboBox->setItemText(1, QCoreApplication::translate("MainWindow", "\347\261\273\345\236\213", nullptr));
+        cmd_comboBox->setItemText(2, QCoreApplication::translate("MainWindow", "\346\226\271\345\235\227", nullptr));
+        cmd_comboBox->setItemText(3, QCoreApplication::translate("MainWindow", "\347\211\251\345\223\201", nullptr));
+        cmd_comboBox->setItemText(4, QCoreApplication::translate("MainWindow", "\345\256\236\344\275\223", nullptr));
+        cmd_comboBox->setItemText(5, QCoreApplication::translate("MainWindow", "\347\262\222\345\255\220", nullptr));
 
-        lineEdit->setPlaceholderText(QCoreApplication::translate("MainWindow", "\346\220\234\347\264\242\342\200\246\342\200\246", nullptr));
+        cmd_lineEdit->setPlaceholderText(QCoreApplication::translate("MainWindow", "\346\220\234\347\264\242\342\200\246\342\200\246", nullptr));
         comboBox_2->setItemText(0, QCoreApplication::translate("MainWindow", "\346\217\222\344\273\266", nullptr));
 
         pushButton->setText(QCoreApplication::translate("MainWindow", "\345\257\274\345\205\245", nullptr));
@@ -586,4 +596,3 @@ namespace Ui {
 
 QT_END_NAMESPACE
 
-#endif // UI_MAINWINDOW_H

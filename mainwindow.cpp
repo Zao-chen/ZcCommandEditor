@@ -12,20 +12,22 @@
 #include <QJsonParseError> //Json错误
 /*其他*/
 #include <QFile> //文件
-#include <QMessageBox> //消息框
 #include <QString>
 #include <QDesktopServices>
 #include <QUrl>
+#include <QList>
 /*其他窗口*/
 #include <update_ui.h>
 #include <helps_ui.h>
+#include <QFileDialog> //文件框
+#include <QMessageBox> //消息框
 
 int static global_row; //当前格
 int static global_column;
-QString static json_version = "1.2"; //json版本
-QString static editor_version = "0.2-beta"; //编译器版本
-QString static load_version;
-QString static file_place = qApp->applicationDirPath()+"Untitle.json";
+QString json_version = "1.2"; //json版本
+QString editor_version = "0.2-beta"; //编译器版本
+QString load_version;
+QString file_place = qApp->applicationDirPath()+"Untitle.json";
 
 struct save_map //保存东西的结构体
 {
@@ -55,6 +57,12 @@ struct save_map //保存东西的结构体
     QString note = ""; //备注
     QString content = ""; //内容
 }static save_map_class[101][101];
+
+struct cmd_tips //提示
+{
+    QString cmd = "test";
+    QString explain = "测试指令";
+}static cmd_tips_class[100];
 
 
 void show_reload(Ui::MainWindow *dis,int x,int y) //刷新当前格
@@ -149,6 +157,7 @@ MainWindow::MainWindow(QWidget *parent)
     connect(ui->actioninput,SIGNAL(triggered()),this,SLOT(on_menu_load_clicked())); //导入按钮信号绑定
     connect(ui->action_help,SIGNAL(triggered()),this,SLOT(on_menu_help_clicked())); //导入按钮信号绑定
     connect(ui->action_open,SIGNAL(triggered()),this,SLOT(on_menu_github_clicked())); //导入按钮信号绑定
+    connect(ui->plugin_cmd_action,SIGNAL(triggered()),this,SLOT(on_menu_cmd_plugin_clicked())); //导入按钮信号绑定
 
     ui->label_ver->setText("编译器版本："+editor_version+"   mady by Zao_chen with <3 and bug");
 }
@@ -166,28 +175,45 @@ void MainWindow::on_tableWidget_cellClicked(int row, int column)
     ui->label_location->setText("选中方块 ( " + QString::number(global_row-50) + " , " + QString::number(global_column-50)+" )");
     show_reload(ui,global_row,global_column);
 }
-/*方块类型*/
+/*修改方块类型*/
 void MainWindow::on_type_comboBox_activated(int index)
 {
     save_map_class[global_row][global_column].type = index+1;
     show_reload(ui,global_row,global_column);
 }
-/*切换方向*/
+/*修改方向*/
 void MainWindow::on_toward_comboBox_activated(int index)
 {
     save_map_class[global_row][global_column].toward = index+1;
     show_reload(ui,global_row,global_column);
 }
-/*方块条件*/
+/*修改方块条件*/
 void MainWindow::on_condition_comboBox_activated(int index)
 {
     save_map_class[global_row][global_column].condition = index+1;
     show_reload(ui,global_row,global_column);
 }
-/*修改文本*/
+/*修改指令*/
 void MainWindow::on_content_textEdit_textChanged()
 {
     save_map_class[global_row][global_column].content = ui->content_textEdit->toPlainText();
+
+    /*提示文本*/
+    QStringList input_cmd_List = ui->content_textEdit->toPlainText().split(" ");
+    if(input_cmd_List.length()==1) //如果在输主指令
+    {
+        qDebug()<<input_cmd_List.length();
+        ui->cmd_lineEdit->setText(input_cmd_List[0]); //修改查询对象
+        ui->tip_listWidget->clear(); //清空列表
+        for(int i=0;i!=100;i++) //查询指令
+        {
+            //qDebug()<<cmd_tips_class[i].cmd;
+            if (cmd_tips_class[i].cmd.split(" ")[0]==input_cmd_List[0]) //如果发现了，就添加进去
+            {
+                ui->tip_listWidget->addItem(cmd_tips_class[i].cmd+"\n "+cmd_tips_class[i].explain); //添加选项
+            }
+        }
+    }
 }
 /*修改备注*/
 void MainWindow::on_notes_content_textEdit_textChanged()
@@ -204,34 +230,34 @@ void MainWindow::on_redstone_comboBox_activated(int index)
 void MainWindow::on_menu_save_clicked(void)
 {
     /*遍历元素*/
-    QJsonObject likeObject;
-    QJsonArray likeArray;
+    QJsonObject blockObject;
+    QJsonArray blockArray;
     for (int x = 0;x != ui->tableWidget->columnCount(); x++)
     {
         for (int y = 0;y != ui->tableWidget->rowCount(); y++)
         {
             if(save_map_class[x][y].block != "air")
             {
-                likeObject.insert("x", x-50);
-                likeObject.insert("y", y-50);
-                likeObject.insert("z", 0);
-                likeObject.insert("block",save_map_class[x][y].block);
-                likeObject.insert("toward",save_map_class[x][y].toward);
-                likeObject.insert("type",save_map_class[x][y].type);
-                likeObject.insert("condition",save_map_class[x][y].condition);
-                likeObject.insert("redstone",save_map_class[x][y].redstone);
-                likeObject.insert("content",save_map_class[x][y].content);
-                likeObject.insert("note",save_map_class[x][y].note);
-                likeObject.insert("delay",save_map_class[x][y].delay);
-                likeObject.insert("execute",save_map_class[x][y].execute);
-                likeArray.append(likeObject);
+                blockObject.insert("x", x-50);
+                blockObject.insert("y", y-50);
+                blockObject.insert("z", 0);
+                blockObject.insert("block",save_map_class[x][y].block);
+                blockObject.insert("toward",save_map_class[x][y].toward);
+                blockObject.insert("type",save_map_class[x][y].type);
+                blockObject.insert("condition",save_map_class[x][y].condition);
+                blockObject.insert("redstone",save_map_class[x][y].redstone);
+                blockObject.insert("content",save_map_class[x][y].content);
+                blockObject.insert("note",save_map_class[x][y].note);
+                blockObject.insert("delay",save_map_class[x][y].delay);
+                blockObject.insert("execute",save_map_class[x][y].execute);
+                blockArray.append(blockObject);
             }
         }
         ;
     }
     //添加到最外
     QJsonObject rootObject;
-    rootObject.insert("block", likeArray);
+    rootObject.insert("block", blockArray);
     rootObject.insert("jsonversion", json_version);
     rootObject.insert("mcversion", ui->vv_lineEdit->text());
     rootObject.insert("author", ui->auth_lineEdit->text());
@@ -246,7 +272,6 @@ void MainWindow::on_menu_save_clicked(void)
         msgBox.exec();
     }
     QTextStream stream(&file);
-    //stream.setCodec("UTF-8"); //设置写入编码是UTF8
     stream << doc.toJson(); //写入文件
     file.close();
 }
@@ -255,12 +280,13 @@ void MainWindow::on_menu_load_clicked(void)
 {
     QFile file(file_place);
     if (!file.open(QFile::ReadOnly | QFile::Text)) {
-        qDebug() << "can't open error!";
+        QMessageBox msgBox;
+        msgBox.setText("打开失败，请检查路径以及读写权限");
+        msgBox.exec();
         return;
     }
     // 读取文件的全部内容
     QTextStream stream(&file);
-    //stream.setCodec("UTF-8");		// 设置读取编码是UTF8
     QString str = stream.readAll();
     file.close();
     // QJsonParseError类用于在JSON解析期间报告错误。
@@ -270,22 +296,21 @@ void MainWindow::on_menu_load_clicked(void)
     QJsonDocument doc = QJsonDocument::fromJson(str.toUtf8(), &jsonError);
     // 判断是否解析失败
     if (jsonError.error != QJsonParseError::NoError && !doc.isNull()) {
-        qDebug() << "Json格式错误！" << jsonError.error;
+        QMessageBox msgBox;
+        msgBox.setText("json格式错误");
+        msgBox.exec();
         return;
     }
     QJsonObject rootObj = doc.object();
-
     // 根键获取值
-    QJsonValue likeValue = rootObj.value("block");
+    QJsonValue blockValue = rootObj.value("block");
     // 判断类型是否是数组类型
-    if (likeValue.type() == QJsonValue::Array) {
+    if (blockValue.type() == QJsonValue::Array) {
         // 转换成数组类型
-
         QStringList headers;
         for (int i = -50; i <= 50; i++) {
             headers << QString::number(i);
         }
-
         //重置表格
         ui->tableWidget->clear();
         ui->tableWidget->setRowCount(101);
@@ -295,39 +320,38 @@ void MainWindow::on_menu_load_clicked(void)
         QTableWidgetItem *item = new QTableWidgetItem("0");
         ui->tableWidget->setItem(50, 50, item);
         ui->tableWidget->scrollToItem(item, QAbstractItemView::PositionAtCenter); //滚动视图到指定单元格
-
-        QJsonArray likeArray = likeValue.toArray();
+        QJsonArray blockArray = blockValue.toArray();
         // 遍历数组
-        for (int i = 0; i < likeArray.count(); i++) {
+        for (int i = 0; i < blockArray.count(); i++) {
             // 获取数组的第一个元素，类型是QJsonValue
-            QJsonValue likeValueChild = likeArray.at(i);
+            QJsonValue blockValueChild = blockArray.at(i);
             // 判断是不是对象类型
-            if (likeValueChild.type() == QJsonValue::Object) {
+            if (blockValueChild.type() == QJsonValue::Object) {
                 // 转换成对象类型
-                QJsonObject likeObj = likeValueChild.toObject();
+                QJsonObject blockObj = blockValueChild.toObject();
                 // 最后通过value函数就可以获取到值了，解析成功！
-                QJsonValue x = likeObj.value("x");
-                QJsonValue y = likeObj.value("y");
+                QJsonValue x = blockObj.value("x");
+                QJsonValue y = blockObj.value("y");
                 int int_x = x.toInt()+50;
                 int int_y = y.toInt()+50;
-                QJsonValue condition = likeObj.value("condition");
-                QJsonValue content = likeObj.value("content");
+                QJsonValue condition = blockObj.value("condition");
+                QJsonValue content = blockObj.value("content");
                 save_map_class[int_x][int_y].content = content.toString();
-                QJsonValue note = likeObj.value("note");
+                QJsonValue note = blockObj.value("note");
                 save_map_class[int_x][int_y].note = note.toString();
-                QJsonValue redstone = likeObj.value("redstone");
+                QJsonValue redstone = blockObj.value("redstone");
                 save_map_class[int_x][int_y].redstone = redstone.toInt();
-                QJsonValue toward = likeObj.value("toward");
+                QJsonValue toward = blockObj.value("toward");
                 save_map_class[int_x][int_y].toward = toward.toInt();
-                QJsonValue type = likeObj.value("type");
+                QJsonValue type = blockObj.value("type");
                 save_map_class[int_x][int_y].type = type.toInt();
-                QJsonValue block = likeObj.value("block");
+                QJsonValue block = blockObj.value("block");
                 save_map_class[int_x][int_y].block = block.toString();
-                QJsonValue delay = likeObj.value("delay");
+                QJsonValue delay = blockObj.value("delay");
                 save_map_class[int_x][int_y].delay = delay.toInt();
-                QJsonValue execute = likeObj.value("execute");
+                QJsonValue execute = blockObj.value("execute");
                 save_map_class[int_x][int_y].execute = execute.toBool();
-                QJsonValue con = likeObj.value("condition");
+                QJsonValue con = blockObj.value("condition");
                 save_map_class[int_x][int_y].condition = con.toInt();
                 global_row = int_x;
                 global_column = int_y;
@@ -375,10 +399,58 @@ void MainWindow::on_pushButton_updata_clicked()
     update_ui upwindows;
     upwindows.show();
 }
+/*导入数据包*/
+void MainWindow::on_menu_cmd_plugin_clicked(void)
+{
+    QString Filename = QFileDialog::getOpenFileName(this,"选择数据包",qApp->applicationDirPath(),"*.json");
+    QFile currenFile(Filename);
+    currenFile.copy(qApp->applicationDirPath()+"/expand/cmd.json");//copy函数不能直接创建文件夹,所有需要先把文件夹创建出来再进行拷贝
 
-
-
-// 键盘按下事件
+    QFile file(qApp->applicationDirPath()+"/expand/cmd.json");
+    if (!file.open(QFile::ReadOnly | QFile::Text)) {
+        qDebug() << "can't open error!";
+        return;
+    }
+    // 读取文件的全部内容
+    QTextStream stream(&file);
+    QString str = stream.readAll();
+    file.close();
+    // QJsonParseError类用于在JSON解析期间报告错误。
+    QJsonParseError jsonError;
+    // 将json解析为UTF-8编码的json文档，并从中创建一个QJsonDocument。
+    // 如果解析成功，返回QJsonDocument对象，否则返回null
+    QJsonDocument doc = QJsonDocument::fromJson(str.toUtf8(), &jsonError);
+    // 判断是否解析失败
+    if (jsonError.error != QJsonParseError::NoError && !doc.isNull()) {
+        qDebug() << "Json格式错误！" << jsonError.error;
+            return;
+    }
+    QJsonObject rootObj = doc.object();
+    // 根键获取值
+    QJsonValue cmdValue = rootObj.value("cmd");
+    // 判断类型是否是数组类型
+    int now_input = 0; //当前添加数量
+    if (cmdValue.type() == QJsonValue::Array) {
+        // 转换成数组类型
+        QJsonArray cmdArray = cmdValue.toArray();
+        // 遍历数组
+        for (int i = 0; i < cmdArray.count(); i++) {
+            // 获取数组的第一个元素，类型是QJsonValue
+        QJsonValue cmdValueChild = cmdArray.at(i);
+            // 判断是不是对象类型
+            if (cmdValueChild.type() == QJsonValue::Object) {
+                // 转换成对象类型
+                QJsonObject cmdObj = cmdValueChild.toObject();
+                // 最后通过value函数就可以获取到值了，解析成功！
+                cmd_tips_class[now_input].cmd = cmdObj.value("cmd").toString();
+                cmd_tips_class[now_input].explain = cmdObj.value("explain").toString();
+                qDebug()<<cmd_tips_class[now_input].cmd;
+                now_input++;
+            }
+        }
+    }
+}
+/*键盘按下事件*/
 void MainWindow::keyPressEvent(QKeyEvent * event)
 {
     // 普通键

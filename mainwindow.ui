@@ -710,7 +710,7 @@ QCheckBox::indicator::checked:hover {
      </widget>
     </widget>
    </widget>
-   <widget class="QComboBox" name="comboBox">
+   <widget class="QComboBox" name="cmd_comboBox">
     <property name="geometry">
      <rect>
       <x>670</x>
@@ -722,6 +722,11 @@ QCheckBox::indicator::checked:hover {
     <item>
      <property name="text">
       <string>指令</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>类型</string>
      </property>
     </item>
     <item>
@@ -745,7 +750,7 @@ QCheckBox::indicator::checked:hover {
      </property>
     </item>
    </widget>
-   <widget class="QLineEdit" name="lineEdit">
+   <widget class="QLineEdit" name="cmd_lineEdit">
     <property name="geometry">
      <rect>
       <x>760</x>
@@ -758,7 +763,7 @@ QCheckBox::indicator::checked:hover {
      <string>搜索……</string>
     </property>
    </widget>
-   <widget class="QListWidget" name="listWidget">
+   <widget class="QListWidget" name="tip_listWidget">
     <property name="geometry">
      <rect>
       <x>670</x>
@@ -976,6 +981,8 @@ QCheckBox::indicator::checked:hover {
     <property name="title">
      <string>插件</string>
     </property>
+    <addaction name="action1"/>
+    <addaction name="plugin_cmd_action"/>
    </widget>
    <widget class="QMenu" name="menu_4">
     <property name="title">
@@ -1007,6 +1014,16 @@ QCheckBox::indicator::checked:hover {
   <action name="action_open">
    <property name="text">
     <string>github</string>
+   </property>
+  </action>
+  <action name="action1">
+   <property name="text">
+    <string>导入插件</string>
+   </property>
+  </action>
+  <action name="plugin_cmd_action">
+   <property name="text">
+    <string>导入指令包</string>
    </property>
   </action>
  </widget>
