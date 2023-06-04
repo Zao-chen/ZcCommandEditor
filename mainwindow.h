@@ -17,6 +17,10 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
+    QString code; //网页源代码
+    QByteArray InitGetRequest(QString url, QString obj);
+    QStringList strl;
+
 private slots:
 
     void on_tableWidget_cellClicked(int row, int column);
@@ -48,6 +52,9 @@ private slots:
     void on_name_lineEdit_textChanged(const QString &arg1);
 
     void on_pushButton_updata_clicked();
+
+    void on_tip_listWidget_doubleClicked(const QModelIndex &index);
+
 
 protected:
     void keyPressEvent(QKeyEvent *event); //键盘按下事件

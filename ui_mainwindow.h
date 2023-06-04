@@ -1,11 +1,13 @@
-#pragma once
 /********************************************************************************
-** Form generated from reading UI file ''
+** Form generated from reading UI file 'mainwindow.ui'
 **
 ** Created by: Qt User Interface Compiler version 6.5.0
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
+
+#ifndef UI_MAINWINDOW_H
+#define UI_MAINWINDOW_H
 
 #include <QtCore/QVariant>
 #include <QtGui/QAction>
@@ -69,9 +71,6 @@ public:
     QComboBox *cmd_comboBox;
     QLineEdit *cmd_lineEdit;
     QListWidget *tip_listWidget;
-    QComboBox *comboBox_2;
-    QPushButton *pushButton;
-    QWidget *widget;
     QLabel *label_11;
     QLineEdit *delay_lineEdit_3;
     QLabel *label_12;
@@ -80,6 +79,12 @@ public:
     QLineEdit *vv_lineEdit;
     QLabel *label_15;
     QLineEdit *name_lineEdit;
+    QWidget *widget;
+    QLabel *label_13;
+    QLabel *label_command;
+    QLabel *label_des;
+    QLabel *label_des_2;
+    QLabel *label_des_3;
     QMenuBar *menubar;
     QMenu *menu;
     QMenu *menu_2;
@@ -238,7 +243,7 @@ public:
         action1 = new QAction(MainWindow);
         action1->setObjectName("action1");
         plugin_cmd_action = new QAction(MainWindow);
-        plugin_cmd_action->setObjectName("action2");
+        plugin_cmd_action->setObjectName("plugin_cmd_action");
         centralwidget = new QWidget(MainWindow);
         centralwidget->setObjectName("centralwidget");
         label = new QLabel(centralwidget);
@@ -418,16 +423,6 @@ public:
         tip_listWidget = new QListWidget(centralwidget);
         tip_listWidget->setObjectName("tip_listWidget");
         tip_listWidget->setGeometry(QRect(670, 310, 421, 321));
-        comboBox_2 = new QComboBox(centralwidget);
-        comboBox_2->addItem(QString());
-        comboBox_2->setObjectName("comboBox_2");
-        comboBox_2->setGeometry(QRect(1120, 120, 81, 31));
-        pushButton = new QPushButton(centralwidget);
-        pushButton->setObjectName("pushButton");
-        pushButton->setGeometry(QRect(1210, 120, 81, 31));
-        widget = new QWidget(centralwidget);
-        widget->setObjectName("widget");
-        widget->setGeometry(QRect(1120, 150, 331, 461));
         label_11 = new QLabel(centralwidget);
         label_11->setObjectName("label_11");
         label_11->setGeometry(QRect(550, 0, 51, 31));
@@ -459,6 +454,38 @@ public:
         name_lineEdit->setObjectName("name_lineEdit");
         name_lineEdit->setGeometry(QRect(1340, 0, 111, 31));
         name_lineEdit->setFont(font3);
+        widget = new QWidget(centralwidget);
+        widget->setObjectName("widget");
+        widget->setGeometry(QRect(1110, 120, 330, 511));
+        label_13 = new QLabel(widget);
+        label_13->setObjectName("label_13");
+        label_13->setGeometry(QRect(10, 10, 191, 21));
+        QFont font6;
+        font6.setPointSize(15);
+        label_13->setFont(font6);
+        label_command = new QLabel(widget);
+        label_command->setObjectName("label_command");
+        label_command->setGeometry(QRect(10, 40, 191, 21));
+        QFont font7;
+        font7.setPointSize(12);
+        label_command->setFont(font7);
+        label_des = new QLabel(widget);
+        label_des->setObjectName("label_des");
+        label_des->setGeometry(QRect(10, 70, 311, 61));
+        QFont font8;
+        font8.setPointSize(10);
+        label_des->setFont(font8);
+        label_des->setWordWrap(true);
+        label_des_2 = new QLabel(widget);
+        label_des_2->setObjectName("label_des_2");
+        label_des_2->setGeometry(QRect(10, 140, 311, 61));
+        label_des_2->setFont(font8);
+        label_des_2->setWordWrap(true);
+        label_des_3 = new QLabel(widget);
+        label_des_3->setObjectName("label_des_3");
+        label_des_3->setGeometry(QRect(10, 220, 311, 281));
+        label_des_3->setFont(font8);
+        label_des_3->setWordWrap(true);
         MainWindow->setCentralWidget(centralwidget);
         menubar = new QMenuBar(MainWindow);
         menubar->setObjectName("menubar");
@@ -571,9 +598,6 @@ public:
         cmd_comboBox->setItemText(5, QCoreApplication::translate("MainWindow", "\347\262\222\345\255\220", nullptr));
 
         cmd_lineEdit->setPlaceholderText(QCoreApplication::translate("MainWindow", "\346\220\234\347\264\242\342\200\246\342\200\246", nullptr));
-        comboBox_2->setItemText(0, QCoreApplication::translate("MainWindow", "\346\217\222\344\273\266", nullptr));
-
-        pushButton->setText(QCoreApplication::translate("MainWindow", "\345\257\274\345\205\245", nullptr));
         label_11->setText(QCoreApplication::translate("MainWindow", "\345\273\266\350\277\237", nullptr));
         delay_lineEdit_3->setText(QCoreApplication::translate("MainWindow", "0", nullptr));
         label_12->setText(QCoreApplication::translate("MainWindow", "\346\211\247\350\241\214", nullptr));
@@ -582,6 +606,11 @@ public:
         vv_lineEdit->setText(QString());
         label_15->setText(QCoreApplication::translate("MainWindow", "\345\220\215\347\247\260", nullptr));
         name_lineEdit->setText(QCoreApplication::translate("MainWindow", "Untitle.json", nullptr));
+        label_13->setText(QCoreApplication::translate("MainWindow", "\350\257\246\347\273\206\344\277\241\346\201\257\357\274\210\347\210\254\350\207\252wiki\357\274\211", nullptr));
+        label_command->setText(QCoreApplication::translate("MainWindow", "\342\200\246\342\200\246", nullptr));
+        label_des->setText(QCoreApplication::translate("MainWindow", "\342\200\246\342\200\246", nullptr));
+        label_des_2->setText(QString());
+        label_des_3->setText(QString());
         menu->setTitle(QCoreApplication::translate("MainWindow", "\346\226\207\344\273\266", nullptr));
         menu_2->setTitle(QCoreApplication::translate("MainWindow", "\345\270\256\345\212\251", nullptr));
         menu_3->setTitle(QCoreApplication::translate("MainWindow", "\346\217\222\344\273\266", nullptr));
@@ -596,3 +625,4 @@ namespace Ui {
 
 QT_END_NAMESPACE
 
+#endif // UI_MAINWINDOW_H
