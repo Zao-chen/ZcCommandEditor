@@ -21,6 +21,7 @@ public:
     QByteArray InitGetRequest(QString url, QString obj);
     QStringList strl;
 
+
 private slots:
 
     void on_tableWidget_cellClicked(int row, int column);
@@ -35,7 +36,6 @@ private slots:
     void on_menu_load_clicked();
     void on_menu_help_clicked();
     void on_menu_github_clicked();
-    void on_menu_cmd_plugin_clicked();
 
     void on_content_textEdit_textChanged();
 
@@ -53,8 +53,7 @@ private slots:
 
     void on_pushButton_updata_clicked();
 
-    void on_tip_listWidget_doubleClicked(const QModelIndex &index);
-
+    void on_pushButton_search_clicked();
 
 protected:
     void keyPressEvent(QKeyEvent *event); //键盘按下事件

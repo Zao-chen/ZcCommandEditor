@@ -167,53 +167,9 @@ MainWindow::MainWindow(QWidget *parent)
     connect(ui->actioninput,SIGNAL(triggered()),this,SLOT(on_menu_load_clicked())); //导入按钮信号绑定
     connect(ui->action_help,SIGNAL(triggered()),this,SLOT(on_menu_help_clicked())); //导入按钮信号绑定
     connect(ui->action_open,SIGNAL(triggered()),this,SLOT(on_menu_github_clicked())); //导入按钮信号绑定
-    connect(ui->plugin_cmd_action,SIGNAL(triggered()),this,SLOT(on_menu_cmd_plugin_clicked())); //导入按钮信号绑定
 
     /*提示初始化*/
     ui->label_ver->setText("编译器版本："+editor_version+"   mady by Zao_chen with <3 and bug");
-
-
-    /*读取指令包*/;
-    QString currDir = qApp->applicationDirPath()+"/cmd_expand";
-    QDir Dir(currDir); //查看工作路径是否存在
-    Dir.setFilter(QDir::Files); //设置过滤器只查看文件
-    QStringList list = Dir.entryList(QDir::Files); //获取所有文件
-    now_input = 0; //清空已添加
-    for(const QString &now_file : list)
-    {
-        QFile file(qApp->applicationDirPath()+ "/cmd_expand/" + now_file); // 读取文件的全部内容
-        if (!file.open(QFile::ReadOnly | QFile::Text)) {
-            qDebug() << "can't open error!";
-            return;
-        }
-        QTextStream stream(&file);
-        QString str = stream.readAll();
-        file.close(); // QJsonParseError类用于在JSON解析期间报告错误。
-        QJsonParseError jsonError; // 将json解析为UTF-8编码的json文档，并从中创建一个QJsonDocument。 // 如果解析成功，返回QJsonDocument对象，否则返回null
-        QJsonDocument doc = QJsonDocument::fromJson(str.toUtf8(), &jsonError);
-        QJsonObject rootObj = doc.object(); // 根键获取值
-        QJsonValue cmdValue = rootObj.value("cmd"); // 判断类型是否是数组类型
-        if (cmdValue.type() == QJsonValue::Array) {
-                // 转换成数组类型
-                QJsonArray cmdArray = cmdValue.toArray();
-                // 遍历数组
-                for (int i = 0; i < cmdArray.count(); i++) {
-                    // 获取数组的第一个元素，类型是QJsonValue
-                    QJsonValue cmdValueChild = cmdArray.at(i);
-                    // 判断是不是对象类型
-                    if (cmdValueChild.type() == QJsonValue::Object) {
-                        // 转换成对象类型
-                        QJsonObject cmdObj = cmdValueChild.toObject();
-                        // 最后通过value函数就可以获取到值了，解析成功！
-                        cmd_tips_class[now_input].cmd = cmdObj.value("cmd").toString();
-                        cmd_tips_class[now_input].explain = cmdObj.value("explain").toString();
-                        now_input++;
-                    }
-                }
-        }
-    }
-
-
 
 
 
@@ -253,22 +209,11 @@ void MainWindow::on_condition_comboBox_activated(int index)
 void MainWindow::on_content_textEdit_textChanged()
 {
     save_map_class[global_row][global_column].content = ui->content_textEdit->toPlainText();
-
     /*提示文本*/
     QStringList input_cmd_List = ui->content_textEdit->toPlainText().split(" ");
     if(input_cmd_List.length()==1) //如果在输主指令
     {
-        qDebug()<<input_cmd_List.length();
         ui->cmd_lineEdit->setText(input_cmd_List[0]); //修改查询对象
-        ui->tip_listWidget->clear(); //清空列表
-        for(int i=0;i!=100;i++) //查询指令
-        {
-            //qDebug()<<cmd_tips_class[i].cmd;
-            if (cmd_tips_class[i].cmd.split(" ")[0]==input_cmd_List[0]) //如果发现了，就添加进去
-            {
-                ui->tip_listWidget->addItem(cmd_tips_class[i].cmd+"\n "+cmd_tips_class[i].explain); //添加选项
-            }
-        }
     }
 }
 /*修改备注*/
@@ -455,42 +400,6 @@ void MainWindow::on_pushButton_updata_clicked()
     update_ui upwindows;
     upwindows.show();
 }
-/*导入数据包*/
-void MainWindow::on_menu_cmd_plugin_clicked(void)
-{
-    QString Filename = QFileDialog::getOpenFileName(this,"选择数据包",qApp->applicationDirPath(),"*.json");
-    QFile currenFile(Filename);
-    currenFile.copy(qApp->applicationDirPath()+"/cmd_expand/"+Filename.split("/").at(Filename.split("/").length()-1));//copy函数不能直接创建文件夹,所有需要先把文件夹创建出来再进行拷贝
-    QFile file(qApp->applicationDirPath()+"/cmd_expand/"+Filename.split("/").at(Filename.split("/").length()-1));
-    if (!file.open(QFile::ReadOnly | QFile::Text)) {
-        qDebug() << "can't open error!";
-        return;
-    }
-    // 读取文件的全部内容
-    QTextStream stream(&file);
-    QString str = stream.readAll();
-    file.close(); // QJsonParseError类用于在JSON解析期间报告错误。
-    QJsonParseError jsonError; // 将json解析为UTF-8编码的json文档，并从中创建一个QJsonDocument。
-    QJsonDocument doc = QJsonDocument::fromJson(str.toUtf8(), &jsonError); // 判断是否解析失败
-    if (jsonError.error != QJsonParseError::NoError && !doc.isNull()) {
-        qDebug() << "Json格式错误！" << jsonError.error;
-            return;
-    }
-    QJsonObject rootObj = doc.object(); // 根键获取值
-    QJsonValue cmdValue = rootObj.value("cmd"); // 判断类型是否是数组类型
-    if (cmdValue.type() == QJsonValue::Array) { // 转换成数组类型
-        QJsonArray cmdArray = cmdValue.toArray(); // 遍历数组
-        for (int i = 0; i < cmdArray.count(); i++) { // 获取数组的第一个元素，类型是QJsonValue
-        QJsonValue cmdValueChild = cmdArray.at(i); // 判断是不是对象类型
-            if (cmdValueChild.type() == QJsonValue::Object) { // 转换成对象类型
-                QJsonObject cmdObj = cmdValueChild.toObject(); // 最后通过value函数就可以获取到值了，解析成功！
-                cmd_tips_class[now_input].cmd = cmdObj.value("cmd").toString();
-                cmd_tips_class[now_input].explain = cmdObj.value("explain").toString();
-                now_input++;
-            }
-        }
-    }
-}
 /*键盘按下事件*/
 void MainWindow::keyPressEvent(QKeyEvent * event)
 {
@@ -522,11 +431,10 @@ void MainWindow::on_menu_github_clicked(void){
     QDesktopServices::openUrl(QUrl("https://github.com/Zao-chen/ZcCommandEditor", QUrl::TolerantMode));
 }
 
-/*获取摘要消息（爬虫）*/
-void MainWindow::on_tip_listWidget_doubleClicked(const QModelIndex &index)
+
+
+void MainWindow::on_pushButton_search_clicked()
 {
-    ui->label_des_2->clear();
-    ui->label_des_3->clear();
     //网页地址
     const QString URLSTR = "https://minecraft.fandom.com/zh/wiki/%E5%91%BD%E4%BB%A4/"+ui->cmd_lineEdit->text();
     //储存网页代码的文件
@@ -534,7 +442,6 @@ void MainWindow::on_tip_listWidget_doubleClicked(const QModelIndex &index)
     QUrl url(URLSTR);
     QNetworkAccessManager manager;
     QEventLoop loop;
-    qDebug() << "Reading code form " << URLSTR;
     //发出请求
     QNetworkReply *reply = manager.get(QNetworkRequest(url));
     //请求结束并下载完成后，退出子事件循环
@@ -543,26 +450,14 @@ void MainWindow::on_tip_listWidget_doubleClicked(const QModelIndex &index)
     loop.exec();
     //将读到的信息写入文件
     code = reply->readAll();
-    QRegularExpression re("<meta name=\"description\" content=\"(.)*/>");
-    QRegularExpressionMatch match=re.match(code);
+    QRegularExpression re1("<meta name=\"description\" content=\"(.)*/>");
+    QRegularExpressionMatch match=re1.match(code);
     QString matched = match.captured(0).replace("<meta name=\"description\" content=\"","").replace("/>","");
     ui->label_command->setText(ui->cmd_lineEdit->text());
     QList<QString> matched_list = matched.split(" ");
     ui->label_des->setText(matched_list[0]);
-    bool des_end = false;
-    /*进行分隔*/
-    for (int i=1;i!=matched_list.length();i++)
-    {
-        if(matched_list[i]!="Java版"&&!des_end)
-        {
-            ui->label_des_2->setText(ui->label_des_2->text()+matched_list[i]);
-        }
-        else
-        {
-            ui->label_des_3->setText(ui->label_des_3->text()+matched_list[i]);
-            des_end = true;
-        }
-    }
-    qDebug()<<matched;
+    QRegularExpression re2("<h2><span id=\".E8.AF.AD.E6.B3.95\">([\\s\\S]*)</dd></dl>");
+    match=re2.match(code);
+    ui->textBrowser_des->setText("<style type=\"text/css\">body {zoom:0.5;}</style>"+match.captured());
 }
 

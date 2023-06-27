@@ -17,7 +17,6 @@
 #include <QtWidgets/QHeaderView>
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QLineEdit>
-#include <QtWidgets/QListWidget>
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QMenu>
 #include <QtWidgets/QMenuBar>
@@ -25,6 +24,7 @@
 #include <QtWidgets/QScrollArea>
 #include <QtWidgets/QStatusBar>
 #include <QtWidgets/QTableWidget>
+#include <QtWidgets/QTextBrowser>
 #include <QtWidgets/QTextEdit>
 #include <QtWidgets/QWidget>
 
@@ -38,7 +38,6 @@ public:
     QAction *action_help;
     QAction *action_open;
     QAction *action1;
-    QAction *plugin_cmd_action;
     QWidget *centralwidget;
     QLabel *label;
     QTableWidget *tableWidget;
@@ -70,7 +69,6 @@ public:
     QLabel *label_9;
     QComboBox *cmd_comboBox;
     QLineEdit *cmd_lineEdit;
-    QListWidget *tip_listWidget;
     QLabel *label_11;
     QLineEdit *delay_lineEdit_3;
     QLabel *label_12;
@@ -83,8 +81,8 @@ public:
     QLabel *label_13;
     QLabel *label_command;
     QLabel *label_des;
-    QLabel *label_des_2;
-    QLabel *label_des_3;
+    QTextBrowser *textBrowser_des;
+    QPushButton *pushButton_search;
     QMenuBar *menubar;
     QMenu *menu;
     QMenu *menu_2;
@@ -242,8 +240,6 @@ public:
         action_open->setObjectName("action_open");
         action1 = new QAction(MainWindow);
         action1->setObjectName("action1");
-        plugin_cmd_action = new QAction(MainWindow);
-        plugin_cmd_action->setObjectName("plugin_cmd_action");
         centralwidget = new QWidget(MainWindow);
         centralwidget->setObjectName("centralwidget");
         label = new QLabel(centralwidget);
@@ -329,7 +325,7 @@ public:
         label_6->setFont(font1);
         content_textEdit = new QTextEdit(centralwidget);
         content_textEdit->setObjectName("content_textEdit");
-        content_textEdit->setGeometry(QRect(670, 160, 421, 91));
+        content_textEdit->setGeometry(QRect(670, 160, 361, 91));
         redstone_comboBox = new QComboBox(centralwidget);
         redstone_comboBox->addItem(QString());
         redstone_comboBox->addItem(QString());
@@ -341,16 +337,16 @@ public:
         label_7->setFont(font1);
         notes_content_textEdit = new QTextEdit(centralwidget);
         notes_content_textEdit->setObjectName("notes_content_textEdit");
-        notes_content_textEdit->setGeometry(QRect(670, 30, 421, 41));
+        notes_content_textEdit->setGeometry(QRect(670, 30, 391, 41));
         copy_pushButton = new QPushButton(centralwidget);
         copy_pushButton->setObjectName("copy_pushButton");
-        copy_pushButton->setGeometry(QRect(970, 120, 121, 34));
+        copy_pushButton->setGeometry(QRect(930, 120, 101, 34));
         delet_pushButton = new QPushButton(centralwidget);
         delet_pushButton->setObjectName("delet_pushButton");
-        delet_pushButton->setGeometry(QRect(850, 120, 121, 34));
+        delet_pushButton->setGeometry(QRect(830, 120, 101, 34));
         check_delet_pushButton = new QPushButton(centralwidget);
         check_delet_pushButton->setObjectName("check_delet_pushButton");
-        check_delet_pushButton->setGeometry(QRect(730, 120, 121, 34));
+        check_delet_pushButton->setGeometry(QRect(730, 120, 101, 34));
         label_10 = new QLabel(centralwidget);
         label_10->setObjectName("label_10");
         label_10->setGeometry(QRect(1290, 30, 41, 31));
@@ -419,10 +415,7 @@ public:
         cmd_comboBox->setGeometry(QRect(670, 270, 81, 31));
         cmd_lineEdit = new QLineEdit(centralwidget);
         cmd_lineEdit->setObjectName("cmd_lineEdit");
-        cmd_lineEdit->setGeometry(QRect(760, 270, 331, 31));
-        tip_listWidget = new QListWidget(centralwidget);
-        tip_listWidget->setObjectName("tip_listWidget");
-        tip_listWidget->setGeometry(QRect(670, 310, 421, 321));
+        cmd_lineEdit->setGeometry(QRect(760, 270, 211, 31));
         label_11 = new QLabel(centralwidget);
         label_11->setObjectName("label_11");
         label_11->setGeometry(QRect(550, 0, 51, 31));
@@ -456,7 +449,7 @@ public:
         name_lineEdit->setFont(font3);
         widget = new QWidget(centralwidget);
         widget->setObjectName("widget");
-        widget->setGeometry(QRect(1110, 120, 330, 511));
+        widget->setGeometry(QRect(1040, 110, 401, 191));
         label_13 = new QLabel(widget);
         label_13->setObjectName("label_13");
         label_13->setGeometry(QRect(10, 10, 191, 21));
@@ -471,21 +464,21 @@ public:
         label_command->setFont(font7);
         label_des = new QLabel(widget);
         label_des->setObjectName("label_des");
-        label_des->setGeometry(QRect(10, 70, 311, 61));
+        label_des->setGeometry(QRect(10, 70, 381, 61));
         QFont font8;
         font8.setPointSize(10);
         label_des->setFont(font8);
         label_des->setWordWrap(true);
-        label_des_2 = new QLabel(widget);
-        label_des_2->setObjectName("label_des_2");
-        label_des_2->setGeometry(QRect(10, 140, 311, 61));
-        label_des_2->setFont(font8);
-        label_des_2->setWordWrap(true);
-        label_des_3 = new QLabel(widget);
-        label_des_3->setObjectName("label_des_3");
-        label_des_3->setGeometry(QRect(10, 220, 311, 281));
-        label_des_3->setFont(font8);
-        label_des_3->setWordWrap(true);
+        textBrowser_des = new QTextBrowser(centralwidget);
+        textBrowser_des->setObjectName("textBrowser_des");
+        textBrowser_des->setGeometry(QRect(670, 310, 771, 311));
+        QFont font9;
+        font9.setBold(false);
+        font9.setStrikeOut(false);
+        textBrowser_des->setFont(font9);
+        pushButton_search = new QPushButton(centralwidget);
+        pushButton_search->setObjectName("pushButton_search");
+        pushButton_search->setGeometry(QRect(980, 270, 51, 31));
         MainWindow->setCentralWidget(centralwidget);
         menubar = new QMenuBar(MainWindow);
         menubar->setObjectName("menubar");
@@ -511,7 +504,6 @@ public:
         menu->addAction(actionoutput);
         menu_2->addAction(action_help);
         menu_3->addAction(action1);
-        menu_3->addAction(plugin_cmd_action);
         menu_4->addAction(action_open);
 
         retranslateUi(MainWindow);
@@ -527,7 +519,6 @@ public:
         action_help->setText(QCoreApplication::translate("MainWindow", "\345\277\253\346\215\267\351\224\256", nullptr));
         action_open->setText(QCoreApplication::translate("MainWindow", "github", nullptr));
         action1->setText(QCoreApplication::translate("MainWindow", "\345\257\274\345\205\245\346\217\222\344\273\266", nullptr));
-        plugin_cmd_action->setText(QCoreApplication::translate("MainWindow", "\345\257\274\345\205\245\346\214\207\344\273\244\345\214\205", nullptr));
         label->setText(QCoreApplication::translate("MainWindow", "\345\205\267\344\275\223\350\257\246\346\203\205", nullptr));
         QTableWidgetItem *___qtablewidgetitem = tableWidget->horizontalHeaderItem(0);
         ___qtablewidgetitem->setText(QCoreApplication::translate("MainWindow", "\346\226\260\345\273\272\345\210\227", nullptr));
@@ -609,8 +600,15 @@ public:
         label_13->setText(QCoreApplication::translate("MainWindow", "\350\257\246\347\273\206\344\277\241\346\201\257\357\274\210\347\210\254\350\207\252wiki\357\274\211", nullptr));
         label_command->setText(QCoreApplication::translate("MainWindow", "\342\200\246\342\200\246", nullptr));
         label_des->setText(QCoreApplication::translate("MainWindow", "\342\200\246\342\200\246", nullptr));
-        label_des_2->setText(QString());
-        label_des_3->setText(QString());
+        textBrowser_des->setHtml(QCoreApplication::translate("MainWindow", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
+"<html><head><meta name=\"qrichtext\" content=\"1\" /><meta charset=\"utf-8\" /><style type=\"text/css\">\n"
+"p, li { white-space: pre-wrap; }\n"
+"hr { height: 1px; border-width: 0; }\n"
+"li.unchecked::marker { content: \"\\2610\"; }\n"
+"li.checked::marker { content: \"\\2612\"; }\n"
+"</style></head><body style=\" font-family:'Microsoft YaHei UI'; font-size:16px; font-weight:400; font-style:normal;\">\n"
+"<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><br /></p></body></html>", nullptr));
+        pushButton_search->setText(QCoreApplication::translate("MainWindow", "\346\220\234\347\264\242", nullptr));
         menu->setTitle(QCoreApplication::translate("MainWindow", "\346\226\207\344\273\266", nullptr));
         menu_2->setTitle(QCoreApplication::translate("MainWindow", "\345\270\256\345\212\251", nullptr));
         menu_3->setTitle(QCoreApplication::translate("MainWindow", "\346\217\222\344\273\266", nullptr));

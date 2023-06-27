@@ -424,7 +424,7 @@ QCheckBox::indicator::checked:hover {
      <rect>
       <x>670</x>
       <y>160</y>
-      <width>421</width>
+      <width>361</width>
       <height>91</height>
      </rect>
     </property>
@@ -472,7 +472,7 @@ QCheckBox::indicator::checked:hover {
      <rect>
       <x>670</x>
       <y>30</y>
-      <width>421</width>
+      <width>391</width>
       <height>41</height>
      </rect>
     </property>
@@ -480,9 +480,9 @@ QCheckBox::indicator::checked:hover {
    <widget class="QPushButton" name="copy_pushButton">
     <property name="geometry">
      <rect>
-      <x>970</x>
+      <x>930</x>
       <y>120</y>
-      <width>121</width>
+      <width>101</width>
       <height>34</height>
      </rect>
     </property>
@@ -493,9 +493,9 @@ QCheckBox::indicator::checked:hover {
    <widget class="QPushButton" name="delet_pushButton">
     <property name="geometry">
      <rect>
-      <x>850</x>
+      <x>830</x>
       <y>120</y>
-      <width>121</width>
+      <width>101</width>
       <height>34</height>
      </rect>
     </property>
@@ -508,7 +508,7 @@ QCheckBox::indicator::checked:hover {
      <rect>
       <x>730</x>
       <y>120</y>
-      <width>121</width>
+      <width>101</width>
       <height>34</height>
      </rect>
     </property>
@@ -755,22 +755,12 @@ QCheckBox::indicator::checked:hover {
      <rect>
       <x>760</x>
       <y>270</y>
-      <width>331</width>
+      <width>211</width>
       <height>31</height>
      </rect>
     </property>
     <property name="placeholderText">
      <string>搜索……</string>
-    </property>
-   </widget>
-   <widget class="QListWidget" name="tip_listWidget">
-    <property name="geometry">
-     <rect>
-      <x>670</x>
-      <y>310</y>
-      <width>421</width>
-      <height>321</height>
-     </rect>
     </property>
    </widget>
    <widget class="QLabel" name="label_11">
@@ -919,10 +909,10 @@ QCheckBox::indicator::checked:hover {
    <widget class="QWidget" name="widget" native="true">
     <property name="geometry">
      <rect>
-      <x>1110</x>
-      <y>120</y>
-      <width>330</width>
-      <height>511</height>
+      <x>1040</x>
+      <y>110</y>
+      <width>401</width>
+      <height>191</height>
      </rect>
     </property>
     <widget class="QLabel" name="label_13">
@@ -966,7 +956,7 @@ QCheckBox::indicator::checked:hover {
       <rect>
        <x>10</x>
        <y>70</y>
-       <width>311</width>
+       <width>381</width>
        <height>61</height>
       </rect>
      </property>
@@ -982,48 +972,46 @@ QCheckBox::indicator::checked:hover {
       <bool>true</bool>
      </property>
     </widget>
-    <widget class="QLabel" name="label_des_2">
-     <property name="geometry">
-      <rect>
-       <x>10</x>
-       <y>140</y>
-       <width>311</width>
-       <height>61</height>
-      </rect>
-     </property>
-     <property name="font">
-      <font>
-       <pointsize>10</pointsize>
-      </font>
-     </property>
-     <property name="text">
-      <string/>
-     </property>
-     <property name="wordWrap">
-      <bool>true</bool>
-     </property>
-    </widget>
-    <widget class="QLabel" name="label_des_3">
-     <property name="geometry">
-      <rect>
-       <x>10</x>
-       <y>220</y>
-       <width>311</width>
-       <height>281</height>
-      </rect>
-     </property>
-     <property name="font">
-      <font>
-       <pointsize>10</pointsize>
-      </font>
-     </property>
-     <property name="text">
-      <string/>
-     </property>
-     <property name="wordWrap">
-      <bool>true</bool>
-     </property>
-    </widget>
+   </widget>
+   <widget class="QTextBrowser" name="textBrowser_des">
+    <property name="geometry">
+     <rect>
+      <x>670</x>
+      <y>310</y>
+      <width>771</width>
+      <height>311</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>-1</pointsize>
+      <bold>false</bold>
+      <strikeout>false</strikeout>
+     </font>
+    </property>
+    <property name="html">
+     <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta charset=&quot;utf-8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+hr { height: 1px; border-width: 0; }
+li.unchecked::marker { content: &quot;\2610&quot;; }
+li.checked::marker { content: &quot;\2612&quot;; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Microsoft YaHei UI'; font-size:16px; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pushButton_search">
+    <property name="geometry">
+     <rect>
+      <x>980</x>
+      <y>270</y>
+      <width>51</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>搜索</string>
+    </property>
    </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
@@ -1053,7 +1041,6 @@ QCheckBox::indicator::checked:hover {
      <string>插件</string>
     </property>
     <addaction name="action1"/>
-    <addaction name="plugin_cmd_action"/>
    </widget>
    <widget class="QMenu" name="menu_4">
     <property name="title">
@@ -1090,11 +1077,6 @@ QCheckBox::indicator::checked:hover {
   <action name="action1">
    <property name="text">
     <string>导入插件</string>
-   </property>
-  </action>
-  <action name="plugin_cmd_action">
-   <property name="text">
-    <string>导入指令包</string>
    </property>
   </action>
  </widget>
