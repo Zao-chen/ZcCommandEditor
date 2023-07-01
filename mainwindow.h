@@ -36,6 +36,7 @@ private slots:
     void on_menu_load_clicked();
     void on_menu_help_clicked();
     void on_menu_github_clicked();
+    void on_menu_updata_clicked();
 
     void on_content_textEdit_textChanged();
 
@@ -51,9 +52,14 @@ private slots:
 
     void on_name_lineEdit_textChanged(const QString &arg1);
 
-    void on_pushButton_updata_clicked();
 
     void on_pushButton_search_clicked();
+
+    void on_delet_pushButton_clicked();
+
+    void on_copy_pushButton_clicked();
+
+    void on_openminiwin_pushButton_clicked();
 
 protected:
     void keyPressEvent(QKeyEvent *event); //键盘按下事件

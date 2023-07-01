@@ -20,6 +20,7 @@
 /*其他窗口*/
 #include <update_ui.h>
 #include <helps_ui.h>
+#include <miniwindows.h>
 #include <QFileDialog> //文件框
 #include <QMessageBox> //消息框
 #include <QWebEngineView> //网页框
@@ -27,15 +28,16 @@
 #include <QNetworkReply>
 #include <QNetworkRequest>
 #include <QNetworkAccessManager>
+#include <QClipboard> //剪贴板
 
 
 int static global_row; //当前格
 int static global_column;
 QString json_version = "1.3"; //json版本
-QString editor_version = "0.3-Alpha"; //编译器版本
+QString editor_version = "0.5-Alpha"; //编译器版本
 QString load_version; //加载版本
 int now_input = 0; //当前添加数量
-QString file_place = qApp->applicationDirPath()+"Untitle.json";
+QString file_name = "Untitle";
 
 struct save_map //保存东西的结构体
 {
@@ -65,13 +67,6 @@ struct save_map //保存东西的结构体
     QString note = ""; //备注
     QString content = ""; //内容
 }static save_map_class[101][101];
-
-struct cmd_tips //提示
-{
-    QString cmd = "test";
-    QString explain = "测试指令";
-}static cmd_tips_class[100];
-
 
 void show_reload(Ui::MainWindow *dis,int x,int y) //刷新当前格
 {
@@ -166,7 +161,8 @@ MainWindow::MainWindow(QWidget *parent)
     connect(ui->actionoutput,SIGNAL(triggered()),this,SLOT(on_menu_save_clicked())); //导出按钮信号绑定
     connect(ui->actioninput,SIGNAL(triggered()),this,SLOT(on_menu_load_clicked())); //导入按钮信号绑定
     connect(ui->action_help,SIGNAL(triggered()),this,SLOT(on_menu_help_clicked())); //导入按钮信号绑定
-    connect(ui->action_open,SIGNAL(triggered()),this,SLOT(on_menu_github_clicked())); //导入按钮信号绑定
+    connect(ui->action_open,SIGNAL(triggered()),this,SLOT(on_menu_github_clicked())); //github信号绑定
+    connect(ui->action_updata,SIGNAL(triggered()),this,SLOT(on_menu_updata_clicked())); //检查更新信号绑定
 
     /*提示初始化*/
     ui->label_ver->setText("编译器版本："+editor_version+"   mady by Zao_chen with <3 and bug");
@@ -174,6 +170,7 @@ MainWindow::MainWindow(QWidget *parent)
 
 
 }
+
 MainWindow::~MainWindow()
 {
     delete ui;
@@ -265,7 +262,9 @@ void MainWindow::on_menu_save_clicked(void)
     /*写入*/
     QJsonDocument doc; //将object设置为本文档的主要对象
     doc.setObject(rootObject);
-    QFile file(file_place);
+    /*文件对话框*/
+    QString Filename = QFileDialog::getSaveFileName(this,"导出到",qApp->applicationDirPath()+"/"+file_name+".json","*.json");
+    QFile file(Filename);
     if(!file.open(QIODevice::WriteOnly))
     {
         QMessageBox msgBox;
@@ -279,13 +278,16 @@ void MainWindow::on_menu_save_clicked(void)
 /*导入json*/
 void MainWindow::on_menu_load_clicked(void)
 {
-    QFile file(file_place);
+    /*文件对话框*/
+    QString Filename = QFileDialog::getOpenFileName(this,"选择这里组",qApp->applicationDirPath(),"*.json");
+    QFile file(Filename);
     if (!file.open(QFile::ReadOnly | QFile::Text)) {
         QMessageBox msgBox;
         msgBox.setText("打开失败，请检查路径以及读写权限");
         msgBox.exec();
         return;
     }
+    ui->name_lineEdit->setText(Filename.split("/")[Filename.split("/").length()-1].replace(".json",""));
     // 读取文件的全部内容
     QTextStream stream(&file);
     QString str = stream.readAll();
@@ -392,13 +394,7 @@ void MainWindow::on_checkBox_clicked(bool checked)
 /*文件位置*/
 void MainWindow::on_name_lineEdit_textChanged(const QString &arg1)
 {
-    file_place = qApp->applicationDirPath()+"\\"+arg1;
-}
-/*更新*/
-void MainWindow::on_pushButton_updata_clicked()
-{
-    update_ui upwindows;
-    upwindows.show();
+    file_name = qApp->applicationDirPath()+"\\"+arg1;
 }
 /*键盘按下事件*/
 void MainWindow::keyPressEvent(QKeyEvent * event)
@@ -430,34 +426,129 @@ void MainWindow::on_menu_help_clicked(void){
 void MainWindow::on_menu_github_clicked(void){
     QDesktopServices::openUrl(QUrl("https://github.com/Zao-chen/ZcCommandEditor", QUrl::TolerantMode));
 }
-
-
-
+/*检查更新*/
+void MainWindow::on_menu_updata_clicked(void)
+{
+    update_ui *upwindows = new update_ui;
+    upwindows->show();
+}
+/*百科搜索*/
 void MainWindow::on_pushButton_search_clicked()
 {
-    //网页地址
-    const QString URLSTR = "https://minecraft.fandom.com/zh/wiki/%E5%91%BD%E4%BB%A4/"+ui->cmd_lineEdit->text();
-    //储存网页代码的文件
-    const QString FILE_NAME = "test.text";
-    QUrl url(URLSTR);
-    QNetworkAccessManager manager;
-    QEventLoop loop;
-    //发出请求
-    QNetworkReply *reply = manager.get(QNetworkRequest(url));
-    //请求结束并下载完成后，退出子事件循环
-    QObject::connect(reply, SIGNAL(finished()), &loop, SLOT(quit()));
-    //开启子事件循环
-    loop.exec();
-    //将读到的信息写入文件
-    code = reply->readAll();
-    QRegularExpression re1("<meta name=\"description\" content=\"(.)*/>");
-    QRegularExpressionMatch match=re1.match(code);
-    QString matched = match.captured(0).replace("<meta name=\"description\" content=\"","").replace("/>","");
-    ui->label_command->setText(ui->cmd_lineEdit->text());
-    QList<QString> matched_list = matched.split(" ");
-    ui->label_des->setText(matched_list[0]);
-    QRegularExpression re2("<h2><span id=\".E8.AF.AD.E6.B3.95\">([\\s\\S]*)</dd></dl>");
-    match=re2.match(code);
-    ui->textBrowser_des->setText("<style type=\"text/css\">body {zoom:0.5;}</style>"+match.captured());
+    //获取搜索内容
+    QString URLSTR;
+    if(ui->cmd_comboBox->currentIndex()==0)
+    {
+        URLSTR = "https://minecraft.fandom.com/zh/wiki/%E5%91%BD%E4%BB%A4/"+ui->cmd_lineEdit->text();
+        //储存网页代码的文件
+        const QString FILE_NAME = "test.text";
+        QUrl url(URLSTR);
+        QNetworkAccessManager manager;
+        QEventLoop loop;
+        //发出请求
+        QNetworkReply *reply = manager.get(QNetworkRequest(url));
+        //请求结束并下载完成后，退出子事件循环
+        QObject::connect(reply, SIGNAL(finished()), &loop, SLOT(quit()));
+        //开启子事件循环
+        loop.exec();
+        //将读到的信息写入文件
+        code = reply->readAll();
+        QRegularExpression re1("<meta name=\"description\" content=\"(.)*/>");
+        QRegularExpressionMatch match=re1.match(code);
+        QString matched = match.captured(0).replace("<meta name=\"description\" content=\"","").replace("/>","");
+        ui->label_command->setText(ui->cmd_lineEdit->text());
+        QList<QString> matched_list = matched.split(" ");
+        ui->label_des->setText(matched_list[0]);
+        QRegularExpression re2("<h2><span id=\".E8.AF.AD.E6.B3.95\">([\\s\\S]*)</dd></dl>");
+        match=re2.match(code);
+        ui->textBrowser_des->setText("<style type=\"text/css\">body {zoom:0.5;}</style>"+match.captured());
+    }
+    else if(ui->cmd_comboBox->currentIndex()==1) //issue#待修复
+    {
+        URLSTR = "https://minecraft.fandom.com/zh/wiki/%E5%91%BD%E4%BB%A4/"+ui->cmd_lineEdit->text();
+        //储存网页代码的文件
+        const QString FILE_NAME = "test.text";
+        QUrl url(URLSTR);
+        QNetworkAccessManager manager;
+        QEventLoop loop;
+        //发出请求
+        QNetworkReply *reply = manager.get(QNetworkRequest(url));
+        //请求结束并下载完成后，退出子事件循环
+        QObject::connect(reply, SIGNAL(finished()), &loop, SLOT(quit()));
+        //开启子事件循环
+        loop.exec();
+        //将读到的信息写入文件
+        code = reply->readAll();
+        QRegularExpression re1("<meta name=\"description\" content=\"(.)*/>");
+        QRegularExpressionMatch match=re1.match(code);
+        QString matched = match.captured(0).replace("<meta name=\"description\" content=\"","").replace("/>","");
+        ui->label_command->setText(ui->cmd_lineEdit->text());
+        ui->label_des->setText(matched);
+    }
+}
+
+/*一键清空*/
+void MainWindow::on_delet_pushButton_clicked()
+{
+    ui->content_textEdit->clear();
+}
+/*一键复制*/
+void MainWindow::on_copy_pushButton_clicked()
+{
+    QClipboard* clip = QApplication::clipboard();
+    clip->setText(ui->content_textEdit->toPlainText());
+}
+/*打开迷你窗口*/
+void MainWindow::on_openminiwin_pushButton_clicked()
+{
+    /*遍历元素*/
+    QJsonObject blockObject;
+    QJsonArray blockArray;
+    for (int x = 0;x != ui->tableWidget->columnCount(); x++)
+    {
+        for (int y = 0;y != ui->tableWidget->rowCount(); y++)
+        {
+            if(save_map_class[x][y].block != "air")
+            {
+                blockObject.insert("x", x-50);
+                blockObject.insert("y", y-50);
+                blockObject.insert("z", 0);
+                blockObject.insert("block",save_map_class[x][y].block);
+                blockObject.insert("toward",save_map_class[x][y].toward);
+                blockObject.insert("type",save_map_class[x][y].type);
+                blockObject.insert("condition",save_map_class[x][y].condition);
+                blockObject.insert("redstone",save_map_class[x][y].redstone);
+                blockObject.insert("content",save_map_class[x][y].content);
+                blockObject.insert("note",save_map_class[x][y].note);
+                blockObject.insert("delay",save_map_class[x][y].delay);
+                blockObject.insert("execute",save_map_class[x][y].execute);
+                blockArray.append(blockObject);
+            }
+        }
+        ;
+    }
+    //添加到最外
+    QJsonObject rootObject;
+    rootObject.insert("block", blockArray);
+    rootObject.insert("jsonversion", json_version);
+    rootObject.insert("mcversion", ui->vv_lineEdit->text());
+    rootObject.insert("author", ui->auth_lineEdit->text());
+    /*写入*/
+    QJsonDocument doc; //将object设置为本文档的主要对象
+    doc.setObject(rootObject);
+    /*文件对话框*/
+    QString Filename = qApp->applicationDirPath()+"temp.json";
+    QFile file(Filename);
+    if(!file.open(QIODevice::WriteOnly))
+    {
+        QMessageBox msgBox;
+        msgBox.setText("导出失败，请检查路径以及读写权限");
+        msgBox.exec();
+    }
+    QTextStream stream(&file);
+    stream << doc.toJson(); //写入文件
+    file.close();
+    miniwindows *miniwindow = new miniwindows();
+    miniwindow->show();
 }
 

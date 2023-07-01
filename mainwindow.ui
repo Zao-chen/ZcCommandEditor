@@ -51,7 +51,7 @@ QMenuBar::item:selected {
 }
 
 QMenuBar::item:pressed {
-    background-color: #c72e1d;
+    background-color: #DAA520;
 }
 
 
@@ -91,7 +91,7 @@ QPushButton:hover {
 }
 
 QPushButton:pressed {
-    background-color: #c72e1d;
+    background-color: 	#DAA520;
 }
 
 
@@ -305,7 +305,7 @@ QCheckBox::indicator::checked:hover {
    <widget class="QLabel" name="label_3">
     <property name="geometry">
      <rect>
-      <x>10</x>
+      <x>70</x>
       <y>40</y>
       <width>51</width>
       <height>31</height>
@@ -695,17 +695,18 @@ QCheckBox::indicator::checked:hover {
        <height>549</height>
       </rect>
      </property>
-     <widget class="QLabel" name="label_9">
+     <widget class="QPushButton" name="openminiwin_pushButton">
       <property name="geometry">
        <rect>
-        <x>20</x>
-        <y>80</y>
-        <width>54</width>
-        <height>251</height>
+        <x>10</x>
+        <y>470</y>
+        <width>71</width>
+        <height>71</height>
        </rect>
       </property>
       <property name="text">
-       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;工&lt;/p&gt;&lt;p&gt;具&lt;/p&gt;&lt;p&gt;栏&lt;/p&gt;&lt;p&gt;开&lt;/p&gt;&lt;p&gt;发&lt;/p&gt;&lt;p&gt;中&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+       <string>打开
+悬浮窗</string>
       </property>
      </widget>
     </widget>
@@ -722,11 +723,6 @@ QCheckBox::indicator::checked:hover {
     <item>
      <property name="text">
       <string>指令</string>
-     </property>
-    </item>
-    <item>
-     <property name="text">
-      <string>类型</string>
      </property>
     </item>
     <item>
@@ -903,7 +899,7 @@ QCheckBox::indicator::checked:hover {
      </font>
     </property>
     <property name="text">
-     <string>Untitle.json</string>
+     <string>Untitle</string>
     </property>
    </widget>
    <widget class="QWidget" name="widget" native="true">
@@ -1020,7 +1016,7 @@ li.checked::marker { content: &quot;\2612&quot;; }
      <x>0</x>
      <y>0</y>
      <width>1456</width>
-     <height>26</height>
+     <height>30</height>
     </rect>
    </property>
    <widget class="QMenu" name="menu">
@@ -1046,6 +1042,7 @@ li.checked::marker { content: &quot;\2612&quot;; }
     <property name="title">
      <string>关于</string>
     </property>
+    <addaction name="action_updata"/>
     <addaction name="action_open"/>
    </widget>
    <addaction name="menu"/>
@@ -1077,6 +1074,11 @@ li.checked::marker { content: &quot;\2612&quot;; }
   <action name="action1">
    <property name="text">
     <string>导入插件</string>
+   </property>
+  </action>
+  <action name="action_updata">
+   <property name="text">
+    <string>检查更新</string>
    </property>
   </action>
  </widget>

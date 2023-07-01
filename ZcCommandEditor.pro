@@ -23,16 +23,19 @@ SOURCES += \
     helps_ui.cpp \
     main.cpp \
     mainwindow.cpp \
+    miniwindows.cpp \
     update_ui.cpp
 
 HEADERS += \
     helps_ui.h \
     mainwindow.h \
+    miniwindows.h \
     update_ui.h
 
 FORMS += \
     helps_ui.ui \
     mainwindow.ui \
+    miniwindows.ui \
     update_ui.ui
 
 # Default rules for deployment.
