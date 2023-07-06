@@ -2,12 +2,14 @@
 #include "ui_miniwindows.h"
 
 #include <QMouseEvent>
+
 /*json相关*/
 #include <QJsonObject> // { }
 #include <QJsonArray> // [ ]
 #include <QJsonDocument> // 解析Json
 #include <QJsonValue> // int float double bool null { } [ ]
 #include <QJsonParseError> //Json错误
+
 #include <QNetworkAccessManager>
 
 #include <QMessageBox> //消息框
@@ -42,7 +44,7 @@ struct save_map //保存东西的结构体
      * 1=红石控制 2=保持开启
     */
     int delay = 0; //延迟
-    bool execute = false;
+    bool execute = false; //执行一个已知项
     QString note = ""; //备注
     QString content = ""; //内容
 }static save_map_class[101][101];
@@ -77,7 +79,7 @@ void show_reload(Ui::miniwindows *dis,int x,int y) //刷新当前格
         else if(save_map_class[x][y].toward == 3) matrix.rotate(90);
         else if(save_map_class[x][y].toward == 4) matrix.rotate(180);
 
-        label->setPixmap(QPixmap(image).scaled(20,20).transformed(matrix, Qt::SmoothTransformation));
+        label->setPixmap(QPixmap(image).scaled(23,23).transformed(matrix, Qt::SmoothTransformation));
         dis->tableWidget->setCellWidget(x,y,label);
 
     }
@@ -96,7 +98,7 @@ void show_reload(Ui::miniwindows *dis,int x,int y) //刷新当前格
     }
 }
 
-
+/*窗口打开*/
 miniwindows::miniwindows(QWidget *parent) :
     QWidget(parent,Qt::Widget | Qt::WindowStaysOnTopHint | Qt::FramelessWindowHint),
     ui(new Ui::miniwindows)
@@ -213,10 +215,11 @@ miniwindows::miniwindows(QWidget *parent) :
     }
 }
 
+/*关闭窗口*/
 miniwindows::~miniwindows()
 {
     delete ui;
-    hook.unInstallHook();
+    hook.unInstallHook(); //移除钩子
 }
 
 /*拖动窗口操作*/
@@ -228,6 +231,7 @@ void miniwindows::mousePressEvent(QMouseEvent *event)
     }
     else if(event->button() == Qt::RightButton){
         //如果是右键
+        hook.unInstallHook(); //移除钩子
         this->close();
     }
 }
@@ -242,31 +246,6 @@ void miniwindows::mouseReleaseEvent(QMouseEvent *event)
 {
     mouse_press = false;
 }
-/*键盘按下事件*/
-void miniwindows::keyPressEvent(QKeyEvent * event)
-{
-    // 普通键
-    switch (event->key())
-    {
-    case Qt::Key_T:
-        if(global_column>0) global_column--;
-        break;
-    case Qt::Key_G:
-        if(global_column<100) global_column++;
-        break;
-    case Qt::Key_F:
-        if(global_row>0) global_row--;
-        break;
-    case Qt::Key_H:
-        if(global_row<100) global_row++;
-        break;
-    }
-    QTableWidgetItem *item = new QTableWidgetItem();
-    ui->tableWidget->setItem(global_column, global_row, item);
-    ui->tableWidget->scrollToItem(item, QAbstractItemView::PositionAtCenter); //滚动视图到指定单元格
-    ui->label_location->setText("选中方块 ( " + QString::number(global_row-50) + " , " + QString::number(global_column-50)+" )");
-
-}
 
 /*点击单元格*/
 void miniwindows::on_tableWidget_cellClicked(int row, int column)
@@ -277,22 +256,53 @@ void miniwindows::on_tableWidget_cellClicked(int row, int column)
     show_reload(ui,global_row,global_column);
 }
 
+/*按键监听*/
 void miniwindows::checkType(Hook::Type type){
     switch (type) {
     case Hook::T:
-        qDebug()<<"按下按钮 t \n";
+        if(global_column>0) global_column-=1;
         break;
     case Hook::G:
-        qDebug()<<"按下按钮 g \n";
+        if(global_column<100) global_column+=1;
         break;
     case Hook::F:
-        qDebug()<<"按下按钮 f \n";
+        if(global_row>0) global_row-=1;
         break;
     case Hook::H:
-        qDebug()<<"按下按钮 h \n";
+        if(global_row<100) global_row+=1;
         break;
     default:
         break;
     }
+    /*移动单元格*/
+    QTableWidgetItem *item = new QTableWidgetItem();
+    ui->tableWidget->setItem(global_column, global_row, item);
+    ui->tableWidget->scrollToItem(item, QAbstractItemView::PositionAtCenter);
+    /*刷新单元格内容*/
+    ui->label_location->setText("选中方块 ( " + QString::number(global_column-50) + " , " + QString::number(global_row-50)+" )");
+    ui->label_block->setText("方块："+save_map_class[global_column][global_row].block);
+
+    if(save_map_class[global_column][global_row].condition==1) ui->label_condition->setText("条件：无条件");
+    else ui->label_condition->setText("条件：有条件");
+
+    ui->label_delay->setText("延迟："+QString::number(save_map_class[global_column][global_row].delay));
+
+    if(save_map_class[global_column][global_row].execute) ui->label_execute->setText("执行：√");
+    else ui->label_execute->setText("执行：×");
+
+    if(save_map_class[global_column][global_row].redstone==1) ui->label_redstone->setText("红石：红石控制");
+    else ui->label_redstone->setText("红石：保持开启");
+
+    if(save_map_class[global_column][global_row].toward==1) ui->label_toward->setText("方向：北↑");
+    else if(save_map_class[global_column][global_row].toward==2) ui->label_toward->setText("方向：东→");
+    else if(save_map_class[global_column][global_row].toward==3) ui->label_toward->setText("方向：南↓");
+    else if(save_map_class[global_column][global_row].toward==4) ui->label_toward->setText("方向：西←");
+
+    if(save_map_class[global_column][global_row].type==1) ui->label_toward->setText("类型：脉冲");
+    else if(save_map_class[global_column][global_row].type==2) ui->label_toward->setText("类型：连锁");
+    else if(save_map_class[global_column][global_row].type==3) ui->label_toward->setText("类型：循环");
+
+    ui->textEdit_notes->setText(save_map_class[global_column][global_row].note);
+    ui->textEdit_cmd->setText(save_map_class[global_column][global_row].content);
 }
 

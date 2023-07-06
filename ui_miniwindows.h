@@ -14,6 +14,7 @@
 #include <QtWidgets/QHeaderView>
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QTableWidget>
+#include <QtWidgets/QTextEdit>
 #include <QtWidgets/QWidget>
 
 QT_BEGIN_NAMESPACE
@@ -23,12 +24,23 @@ class Ui_miniwindows
 public:
     QTableWidget *tableWidget;
     QLabel *label_location;
+    QLabel *label_block;
+    QLabel *label_toward;
+    QLabel *label_type;
+    QLabel *label_redstone;
+    QLabel *label_condition;
+    QLabel *label_execute;
+    QLabel *label_delay;
+    QLabel *label_delay_2;
+    QLabel *label_delay_3;
+    QTextEdit *textEdit_notes;
+    QTextEdit *textEdit_cmd;
 
     void setupUi(QWidget *miniwindows)
     {
         if (miniwindows->objectName().isEmpty())
             miniwindows->setObjectName("miniwindows");
-        miniwindows->resize(571, 332);
+        miniwindows->resize(549, 303);
         miniwindows->setStyleSheet(QString::fromUtf8("* {\n"
 "    background-color: #FFFEF9;\n"
 "}\n"
@@ -83,7 +95,7 @@ public:
 "    border: 2px solid #f7931e;\n"
 "    border-radius: 3px;;\n"
 "    padding: 5px;\n"
-"    font-size: 16px;\n"
+"    font-size: 10px;\n"
 "   "
                         " background-color: #FFFCF3;\n"
 "}\n"
@@ -187,7 +199,7 @@ public:
         tableWidget->setItem(1, 1, __qtablewidgetitem7);
         tableWidget->setObjectName("tableWidget");
         tableWidget->setEnabled(true);
-        tableWidget->setGeometry(QRect(10, 10, 300, 300));
+        tableWidget->setGeometry(QRect(0, 0, 291, 291));
         tableWidget->setMinimumSize(QSize(0, 0));
         tableWidget->setStyleSheet(QString::fromUtf8("QTableWidget::item {\n"
 "	padding: 0px;\n"
@@ -196,10 +208,56 @@ public:
         tableWidget->setDragEnabled(false);
         label_location = new QLabel(miniwindows);
         label_location->setObjectName("label_location");
-        label_location->setGeometry(QRect(320, 10, 241, 31));
+        label_location->setGeometry(QRect(300, 0, 241, 31));
         QFont font;
         font.setPointSize(12);
         label_location->setFont(font);
+        label_block = new QLabel(miniwindows);
+        label_block->setObjectName("label_block");
+        label_block->setGeometry(QRect(300, 40, 241, 21));
+        QFont font1;
+        font1.setPointSize(10);
+        label_block->setFont(font1);
+        label_toward = new QLabel(miniwindows);
+        label_toward->setObjectName("label_toward");
+        label_toward->setGeometry(QRect(300, 60, 111, 21));
+        label_toward->setFont(font1);
+        label_type = new QLabel(miniwindows);
+        label_type->setObjectName("label_type");
+        label_type->setGeometry(QRect(410, 60, 131, 21));
+        label_type->setFont(font1);
+        label_redstone = new QLabel(miniwindows);
+        label_redstone->setObjectName("label_redstone");
+        label_redstone->setGeometry(QRect(410, 80, 131, 21));
+        label_redstone->setFont(font1);
+        label_condition = new QLabel(miniwindows);
+        label_condition->setObjectName("label_condition");
+        label_condition->setGeometry(QRect(300, 80, 111, 21));
+        label_condition->setFont(font1);
+        label_execute = new QLabel(miniwindows);
+        label_execute->setObjectName("label_execute");
+        label_execute->setGeometry(QRect(410, 100, 131, 21));
+        label_execute->setFont(font1);
+        label_delay = new QLabel(miniwindows);
+        label_delay->setObjectName("label_delay");
+        label_delay->setGeometry(QRect(300, 100, 111, 21));
+        label_delay->setFont(font1);
+        label_delay_2 = new QLabel(miniwindows);
+        label_delay_2->setObjectName("label_delay_2");
+        label_delay_2->setGeometry(QRect(300, 130, 41, 21));
+        label_delay_2->setFont(font1);
+        label_delay_3 = new QLabel(miniwindows);
+        label_delay_3->setObjectName("label_delay_3");
+        label_delay_3->setGeometry(QRect(300, 210, 41, 21));
+        label_delay_3->setFont(font1);
+        textEdit_notes = new QTextEdit(miniwindows);
+        textEdit_notes->setObjectName("textEdit_notes");
+        textEdit_notes->setGeometry(QRect(300, 150, 241, 51));
+        textEdit_notes->setReadOnly(true);
+        textEdit_cmd = new QTextEdit(miniwindows);
+        textEdit_cmd->setObjectName("textEdit_cmd");
+        textEdit_cmd->setGeometry(QRect(300, 230, 241, 61));
+        textEdit_cmd->setReadOnly(true);
 
         retranslateUi(miniwindows);
 
@@ -231,6 +289,15 @@ public:
         tableWidget->setSortingEnabled(__sortingEnabled);
 
         label_location->setText(QCoreApplication::translate("miniwindows", "\351\200\211\344\270\255\346\226\271\345\235\227\357\274\232", nullptr));
+        label_block->setText(QCoreApplication::translate("miniwindows", "\346\226\271\345\235\227\357\274\232", nullptr));
+        label_toward->setText(QCoreApplication::translate("miniwindows", "\346\234\235\345\220\221\357\274\232", nullptr));
+        label_type->setText(QCoreApplication::translate("miniwindows", "\347\261\273\345\236\213\357\274\232", nullptr));
+        label_redstone->setText(QCoreApplication::translate("miniwindows", "\347\272\242\347\237\263\357\274\232", nullptr));
+        label_condition->setText(QCoreApplication::translate("miniwindows", "\346\235\241\344\273\266\357\274\232", nullptr));
+        label_execute->setText(QCoreApplication::translate("miniwindows", "\346\211\247\350\241\214\357\274\232", nullptr));
+        label_delay->setText(QCoreApplication::translate("miniwindows", "\345\273\266\350\277\237\357\274\232", nullptr));
+        label_delay_2->setText(QCoreApplication::translate("miniwindows", "\345\244\207\346\263\250", nullptr));
+        label_delay_3->setText(QCoreApplication::translate("miniwindows", "\345\221\275\344\273\244", nullptr));
     } // retranslateUi
 
 };

@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>571</width>
-    <height>332</height>
+    <width>549</width>
+    <height>303</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -68,7 +68,7 @@ QTextEdit {
     border: 2px solid #f7931e;
     border-radius: 3px;;
     padding: 5px;
-    font-size: 16px;
+    font-size: 10px;
     background-color: #FFFCF3;
 }
 
@@ -154,10 +154,10 @@ QCheckBox::indicator::checked:hover {
    </property>
    <property name="geometry">
     <rect>
-     <x>10</x>
-     <y>10</y>
-     <width>300</width>
-     <height>300</height>
+     <x>0</x>
+     <y>0</y>
+     <width>291</width>
+     <height>291</height>
     </rect>
    </property>
    <property name="minimumSize">
@@ -219,8 +219,8 @@ QCheckBox::indicator::checked:hover {
   <widget class="QLabel" name="label_location">
    <property name="geometry">
     <rect>
-     <x>320</x>
-     <y>10</y>
+     <x>300</x>
+     <y>0</y>
      <width>241</width>
      <height>31</height>
     </rect>
@@ -232,6 +232,194 @@ QCheckBox::indicator::checked:hover {
    </property>
    <property name="text">
     <string>选中方块：</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_block">
+   <property name="geometry">
+    <rect>
+     <x>300</x>
+     <y>40</y>
+     <width>241</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>10</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>方块：</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_toward">
+   <property name="geometry">
+    <rect>
+     <x>300</x>
+     <y>60</y>
+     <width>111</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>10</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>朝向：</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_type">
+   <property name="geometry">
+    <rect>
+     <x>410</x>
+     <y>60</y>
+     <width>131</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>10</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>类型：</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_redstone">
+   <property name="geometry">
+    <rect>
+     <x>410</x>
+     <y>80</y>
+     <width>131</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>10</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>红石：</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_condition">
+   <property name="geometry">
+    <rect>
+     <x>300</x>
+     <y>80</y>
+     <width>111</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>10</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>条件：</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_execute">
+   <property name="geometry">
+    <rect>
+     <x>410</x>
+     <y>100</y>
+     <width>131</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>10</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>执行：</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_delay">
+   <property name="geometry">
+    <rect>
+     <x>300</x>
+     <y>100</y>
+     <width>111</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>10</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>延迟：</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_delay_2">
+   <property name="geometry">
+    <rect>
+     <x>300</x>
+     <y>130</y>
+     <width>41</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>10</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>备注</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_delay_3">
+   <property name="geometry">
+    <rect>
+     <x>300</x>
+     <y>210</y>
+     <width>41</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>10</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>命令</string>
+   </property>
+  </widget>
+  <widget class="QTextEdit" name="textEdit_notes">
+   <property name="geometry">
+    <rect>
+     <x>300</x>
+     <y>150</y>
+     <width>241</width>
+     <height>51</height>
+    </rect>
+   </property>
+   <property name="readOnly">
+    <bool>true</bool>
+   </property>
+  </widget>
+  <widget class="QTextEdit" name="textEdit_cmd">
+   <property name="geometry">
+    <rect>
+     <x>300</x>
+     <y>230</y>
+     <width>241</width>
+     <height>61</height>
+    </rect>
+   </property>
+   <property name="readOnly">
+    <bool>true</bool>
    </property>
   </widget>
  </widget>
