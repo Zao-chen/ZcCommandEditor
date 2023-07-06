@@ -1,6 +1,10 @@
 #include "helps_ui.h"
 #include "ui_helps_ui.h"
 
+/*
+ * 快捷方式窗口
+*/
+
 helps_ui::helps_ui(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::helps_ui)

@@ -30,11 +30,15 @@
 #include <QUrl> //网页
 #include <QList> //列表
 
+/*
+ * 主窗口
+*/
+
 /*全局变量*/
 int static global_row; //当前格
 int static global_column;
 QString json_version = "1.3"; //json版本
-QString editor_version = "0.5-Alpha"; //编译器版本
+QString editor_version = "v0.6-beta";
 QString load_version; //加载版本
 int now_input = 0; //当前添加数量
 QString file_name = "Untitle"; //文件名
@@ -545,6 +549,7 @@ void MainWindow::on_openminiwin_pushButton_clicked()
     file.close();
     miniwindows *miniwindow = new miniwindows();
 
+    /*打开悬浮窗*/
     miniwindow->setWindowFlags(miniwindow->windowFlags() |Qt::Dialog);
     miniwindow->setWindowModality(Qt::ApplicationModal);
     miniwindow->show();

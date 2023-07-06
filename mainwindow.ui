@@ -1078,7 +1078,7 @@ li.checked::marker { content: &quot;\2612&quot;; }
   </action>
   <action name="action_updata">
    <property name="text">
-    <string>检查更新</string>
+    <string>版本</string>
    </property>
   </action>
  </widget>

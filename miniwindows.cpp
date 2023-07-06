@@ -18,6 +18,10 @@
 
 #include <QLabel>
 
+/*
+ * 悬浮窗窗口
+*/
+
 int static global_row=50; //当前格
 int static global_column=50;
 struct save_map //保存东西的结构体

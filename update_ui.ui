@@ -7,98 +7,208 @@
     <x>0</x>
     <y>0</y>
     <width>496</width>
-    <height>420</height>
+    <height>357</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Dialog</string>
   </property>
+  <property name="styleSheet">
+   <string notr="true">* {
+    background-color: #FFFEF9;
+}
+
+QMenuBar {
+    background-color: #FFFCF3;
+}
+
+QMenu {
+    background-color: #FFFCF3;
+}
+
+QMenu::item {
+    padding: 5px 20px;
+    background-color: transparent;
+}
+
+QMenu::item:selected {
+    background-color: #f8b156;
+}
+
+QMenu::separator {
+    height: 1px;
+    background-color: #f7931e;
+    margin: 5px 0px 5px 0px;
+}
+
+QMenuBar::item {
+    padding: 5px 20px;
+    background-color: transparent;
+}
+
+QMenuBar::item:selected {
+    background-color: #f8b156;
+}
+
+QMenuBar::item:pressed {
+    background-color: #DAA520;
+}
+
+
+QLineEdit {
+    border: 2px solid #f7931e;
+    border-radius: 3px;
+    background-color: #FFFCF3;
+    padding: 2px;
+    font-size: 16px;
+}
+
+
+QTextEdit {
+    border: 2px solid #f7931e;
+    border-radius: 3px;;
+    padding: 5px;
+    font-size: 10px;
+    background-color: #FFFCF3;
+}
+
+QTableView {
+    background-color: #FFFCF3;
+}
+
+QPushButton {
+    background-color: #FFBC33;
+    color: #ffffff;
+    border: none;
+    border-radius: 2px;
+    padding: 2px 2px;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+QPushButton:hover {
+    background-color: #f8b156;
+}
+
+QPushButton:pressed {
+    background-color: 	#DAA520;
+}
+
+
+QComboBox {
+    border: none;
+    border-radius: 20px;
+    background-color: #FFBC33;
+    color: #ffffff;
+    font-size: 16px;
+    font-weight: bold;
+    padding: 8px 20px;
+    padding-right: 4px; /* 右侧留出一定空间 */
+    selection-background-color: #f8b156; /* 选中项背景色 */
+    selection-color: #ffffff; /* 选中项前景色 */
+    outline: none;
+}
+
+QComboBox:hover {
+    background-color: #f8b156;
+}
+
+QComboBox::drop-down {
+    width: 0; /* 去掉下拉箭头 */
+}
+
+QCheckBox {
+    color: #FFBC33;
+    font-size: 16px;
+    font-weight: bold;
+    padding-left: 20px;
+}
+
+QCheckBox::indicator {
+    width: 18px;
+    height: 18px;
+}
+
+QCheckBox::indicator::unchecked {
+    border: 2px solid #FFBC33;
+    background-color: #FFFEF9;
+}
+
+QCheckBox::indicator::unchecked:hover {
+    border: 2px solid #f8b156;
+}
+
+QCheckBox::indicator::checked {
+    border: 2px solid #FFBC33;
+    background-color: #FFBC33;
+}
+
+QCheckBox::indicator::checked:hover {
+    background-color: #f8b156;
+}
+</string>
+  </property>
   <widget class="QLabel" name="label">
    <property name="geometry">
     <rect>
-     <x>30</x>
-     <y>20</y>
-     <width>221</width>
-     <height>41</height>
+     <x>20</x>
+     <y>110</y>
+     <width>71</width>
+     <height>16</height>
     </rect>
    </property>
-   <property name="text">
-    <string>发现新版本：</string>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="pushButton">
-   <property name="geometry">
-    <rect>
-     <x>60</x>
-     <y>350</y>
-     <width>93</width>
-     <height>28</height>
-    </rect>
+   <property name="font">
+    <font>
+     <bold>true</bold>
+    </font>
    </property>
    <property name="text">
-    <string>下载</string>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="pushButton_2">
-   <property name="geometry">
-    <rect>
-     <x>160</x>
-     <y>350</y>
-     <width>93</width>
-     <height>28</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>查看</string>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="pushButton_3">
-   <property name="geometry">
-    <rect>
-     <x>260</x>
-     <y>350</y>
-     <width>93</width>
-     <height>28</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>忽略</string>
+    <string>当前版本：</string>
    </property>
   </widget>
   <widget class="QLabel" name="label_ver">
    <property name="geometry">
     <rect>
-     <x>30</x>
-     <y>50</y>
+     <x>220</x>
+     <y>130</y>
      <width>72</width>
-     <height>15</height>
+     <height>16</height>
     </rect>
    </property>
    <property name="text">
-    <string>TextLabel</string>
+    <string>loading</string>
    </property>
   </widget>
   <widget class="QLabel" name="label_con">
    <property name="geometry">
     <rect>
-     <x>30</x>
-     <y>100</y>
-     <width>191</width>
-     <height>16</height>
+     <x>20</x>
+     <y>190</y>
+     <width>461</width>
+     <height>41</height>
     </rect>
    </property>
    <property name="text">
-    <string>TextLabel</string>
+    <string>loading</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
    </property>
   </widget>
   <widget class="QLabel" name="label_2">
    <property name="geometry">
     <rect>
-     <x>30</x>
-     <y>160</y>
+     <x>20</x>
+     <y>240</y>
      <width>72</width>
      <height>15</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <italic>false</italic>
+     <bold>true</bold>
+    </font>
    </property>
    <property name="text">
     <string>文件列表：</string>
@@ -107,27 +217,87 @@
   <widget class="QLabel" name="label_file">
    <property name="geometry">
     <rect>
-     <x>30</x>
-     <y>170</y>
-     <width>211</width>
-     <height>81</height>
+     <x>20</x>
+     <y>260</y>
+     <width>461</width>
+     <height>71</height>
     </rect>
    </property>
    <property name="text">
-    <string>TextLabel</string>
+    <string>loading</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
    </property>
   </widget>
   <widget class="QLabel" name="label_3">
    <property name="geometry">
     <rect>
-     <x>30</x>
-     <y>80</y>
+     <x>20</x>
+     <y>170</y>
      <width>72</width>
      <height>15</height>
     </rect>
    </property>
+   <property name="font">
+    <font>
+     <bold>true</bold>
+    </font>
+   </property>
    <property name="text">
     <string>更新内容</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_text">
+   <property name="geometry">
+    <rect>
+     <x>40</x>
+     <y>10</y>
+     <width>401</width>
+     <height>51</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>15</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>当前已是最新版</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_4">
+   <property name="geometry">
+    <rect>
+     <x>220</x>
+     <y>110</y>
+     <width>71</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <bold>true</bold>
+    </font>
+   </property>
+   <property name="text">
+    <string>最新版本：</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_ver_old">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>130</y>
+     <width>72</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>loading</string>
    </property>
   </widget>
  </widget>

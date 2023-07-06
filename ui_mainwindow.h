@@ -522,7 +522,7 @@ public:
         action_help->setText(QCoreApplication::translate("MainWindow", "\345\277\253\346\215\267\351\224\256", nullptr));
         action_open->setText(QCoreApplication::translate("MainWindow", "github", nullptr));
         action1->setText(QCoreApplication::translate("MainWindow", "\345\257\274\345\205\245\346\217\222\344\273\266", nullptr));
-        action_updata->setText(QCoreApplication::translate("MainWindow", "\346\243\200\346\237\245\346\233\264\346\226\260", nullptr));
+        action_updata->setText(QCoreApplication::translate("MainWindow", "\347\211\210\346\234\254", nullptr));
         label->setText(QCoreApplication::translate("MainWindow", "\345\205\267\344\275\223\350\257\246\346\203\205", nullptr));
         QTableWidgetItem *___qtablewidgetitem = tableWidget->horizontalHeaderItem(0);
         ___qtablewidgetitem->setText(QCoreApplication::translate("MainWindow", "\346\226\260\345\273\272\345\210\227", nullptr));
