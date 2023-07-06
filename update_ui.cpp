@@ -1,5 +1,6 @@
 #include "update_ui.h"
 #include "ui_update_ui.h"
+#include "hook.h"
 #include <QJsonObject> // { }
 #include <QJsonArray> // [ ]
 #include <QJsonDocument> // 解析Json
@@ -15,6 +16,8 @@ update_ui::update_ui(QWidget *parent) :
     ui(new Ui::update_ui)
 {
     ui->setupUi(this);
+
+
     // 创建QNetworkAccessManager对象
     QNetworkAccessManager* networkManager = new QNetworkAccessManager(this);
 

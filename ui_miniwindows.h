@@ -12,6 +12,7 @@
 #include <QtCore/QVariant>
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QHeaderView>
+#include <QtWidgets/QLabel>
 #include <QtWidgets/QTableWidget>
 #include <QtWidgets/QWidget>
 
@@ -21,6 +22,7 @@ class Ui_miniwindows
 {
 public:
     QTableWidget *tableWidget;
+    QLabel *label_location;
 
     void setupUi(QWidget *miniwindows)
     {
@@ -192,6 +194,12 @@ public:
 "	border: 0;\n"
 "}"));
         tableWidget->setDragEnabled(false);
+        label_location = new QLabel(miniwindows);
+        label_location->setObjectName("label_location");
+        label_location->setGeometry(QRect(320, 10, 241, 31));
+        QFont font;
+        font.setPointSize(12);
+        label_location->setFont(font);
 
         retranslateUi(miniwindows);
 
@@ -222,6 +230,7 @@ public:
         ___qtablewidgetitem7->setText(QCoreApplication::translate("miniwindows", "1", nullptr));
         tableWidget->setSortingEnabled(__sortingEnabled);
 
+        label_location->setText(QCoreApplication::translate("miniwindows", "\351\200\211\344\270\255\346\226\271\345\235\227\357\274\232", nullptr));
     } // retranslateUi
 
 };

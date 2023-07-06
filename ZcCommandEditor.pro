@@ -21,6 +21,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
     helps_ui.cpp \
+    hook.cpp \
     main.cpp \
     mainwindow.cpp \
     miniwindows.cpp \
@@ -28,6 +29,7 @@ SOURCES += \
 
 HEADERS += \
     helps_ui.h \
+    hook.h \
     mainwindow.h \
     miniwindows.h \
     update_ui.h

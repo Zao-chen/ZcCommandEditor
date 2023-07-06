@@ -16,8 +16,8 @@
 
 #include <QLabel>
 
-int static global_row; //当前格
-int static global_column;
+int static global_row=50; //当前格
+int static global_column=50;
 struct save_map //保存东西的结构体
 {
     QString block = "air"; //当前方块东西
@@ -103,6 +103,12 @@ miniwindows::miniwindows(QWidget *parent) :
 {
     ui->setupUi(this);
     setWindowTitle("游戏悬浮窗");
+
+    hook.installHook();
+    qRegisterMetaType<Hook::Type>("Type");//为了信号中能传递自定义枚举类型，如果传递常规参数，可省略该行
+    connect(&hook,SIGNAL(sendKeyType(Type)),this,SLOT(checkType(Type)));
+
+
     /*表格初始化*/
     ui->tableWidget->horizontalHeader()->setDefaultSectionSize(20); //设置默认大小
     ui->tableWidget->verticalHeader()->setDefaultSectionSize(20);
@@ -210,6 +216,7 @@ miniwindows::miniwindows(QWidget *parent) :
 miniwindows::~miniwindows()
 {
     delete ui;
+    hook.unInstallHook();
 }
 
 /*拖动窗口操作*/
@@ -235,3 +242,57 @@ void miniwindows::mouseReleaseEvent(QMouseEvent *event)
 {
     mouse_press = false;
 }
+/*键盘按下事件*/
+void miniwindows::keyPressEvent(QKeyEvent * event)
+{
+    // 普通键
+    switch (event->key())
+    {
+    case Qt::Key_T:
+        if(global_column>0) global_column--;
+        break;
+    case Qt::Key_G:
+        if(global_column<100) global_column++;
+        break;
+    case Qt::Key_F:
+        if(global_row>0) global_row--;
+        break;
+    case Qt::Key_H:
+        if(global_row<100) global_row++;
+        break;
+    }
+    QTableWidgetItem *item = new QTableWidgetItem();
+    ui->tableWidget->setItem(global_column, global_row, item);
+    ui->tableWidget->scrollToItem(item, QAbstractItemView::PositionAtCenter); //滚动视图到指定单元格
+    ui->label_location->setText("选中方块 ( " + QString::number(global_row-50) + " , " + QString::number(global_column-50)+" )");
+
+}
+
+/*点击单元格*/
+void miniwindows::on_tableWidget_cellClicked(int row, int column)
+{
+    global_row = row;
+    global_column = column;
+    ui->label_location->setText("选中方块 ( " + QString::number(global_row-50) + " , " + QString::number(global_column-50)+" )");
+    show_reload(ui,global_row,global_column);
+}
+
+void miniwindows::checkType(Hook::Type type){
+    switch (type) {
+    case Hook::T:
+        qDebug()<<"按下按钮 t \n";
+        break;
+    case Hook::G:
+        qDebug()<<"按下按钮 g \n";
+        break;
+    case Hook::F:
+        qDebug()<<"按下按钮 f \n";
+        break;
+    case Hook::H:
+        qDebug()<<"按下按钮 h \n";
+        break;
+    default:
+        break;
+    }
+}
+

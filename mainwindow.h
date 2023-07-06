@@ -32,6 +32,7 @@ private slots:
 
     void on_condition_comboBox_activated(int index);
 
+    /*菜单操作*/
     void on_menu_save_clicked();
     void on_menu_load_clicked();
     void on_menu_help_clicked();
@@ -51,7 +52,6 @@ private slots:
     void on_checkBox_clicked(bool checked);
 
     void on_name_lineEdit_textChanged(const QString &arg1);
-
 
     void on_pushButton_search_clicked();
 

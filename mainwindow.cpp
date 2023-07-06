@@ -11,33 +11,33 @@
 #include <QJsonValue> // int float double bool null { } [ ]
 #include <QJsonParseError> //Json错误
 #include <QNetworkAccessManager>
-/*其他*/
-#include <QFile> //文件
-#include <QString>
-#include <QDesktopServices>
-#include <QUrl>
-#include <QList>
 /*其他窗口*/
-#include <update_ui.h>
-#include <helps_ui.h>
-#include <miniwindows.h>
+#include <update_ui.h> //检查更新窗口
+#include <helps_ui.h> //帮助窗口
+#include <miniwindows.h> //悬浮窗
 #include <QFileDialog> //文件框
 #include <QMessageBox> //消息框
 #include <QWebEngineView> //网页框
-
+/*网络相关*/
 #include <QNetworkReply>
 #include <QNetworkRequest>
 #include <QNetworkAccessManager>
+/*功能性*/
 #include <QClipboard> //剪贴板
+#include <QFile> //文件
+#include <QString> //字符串
+#include <QDesktopServices>
+#include <QUrl> //网页
+#include <QList> //列表
 
-
+/*全局变量*/
 int static global_row; //当前格
 int static global_column;
 QString json_version = "1.3"; //json版本
 QString editor_version = "0.5-Alpha"; //编译器版本
 QString load_version; //加载版本
 int now_input = 0; //当前添加数量
-QString file_name = "Untitle";
+QString file_name = "Untitle"; //文件名
 
 struct save_map //保存东西的结构体
 {
@@ -70,13 +70,13 @@ struct save_map //保存东西的结构体
 
 void show_reload(Ui::MainWindow *dis,int x,int y) //刷新当前格
 {
-    if(save_map_class[x][y].block == "command_block") //设置图像
+    if(save_map_class[x][y].block == "command_block") //如果是命令方块
     {
         QTransform matrix;
         QLabel *label = new QLabel("");
         QString image;
         /*设置图像*/
-        if(save_map_class[x][y].type == 1) //类型
+        if(save_map_class[x][y].type == 1) //命令方块类型
         {
             /*条件*/
             if(save_map_class[x][y].condition == 1) image = ":/image/image/mc-wtj.png";
@@ -97,12 +97,12 @@ void show_reload(Ui::MainWindow *dis,int x,int y) //刷新当前格
         else if(save_map_class[x][y].toward == 2) matrix.rotate(0);
         else if(save_map_class[x][y].toward == 3) matrix.rotate(90);
         else if(save_map_class[x][y].toward == 4) matrix.rotate(180);
-
+        /*设置图像*/
         label->setPixmap(QPixmap(image).scaled(40,40).transformed(matrix, Qt::SmoothTransformation));
         dis->tableWidget->setCellWidget(x,y,label);
 
     }
-    else if(save_map_class[x][y].block == "block")
+    else if(save_map_class[x][y].block == "block") //如果是方块
     {
         QTransform matrix;
         QLabel *label = new QLabel("");
@@ -111,10 +111,11 @@ void show_reload(Ui::MainWindow *dis,int x,int y) //刷新当前格
         label->setPixmap(QPixmap(image).scaled(40,40).transformed(matrix, Qt::SmoothTransformation));
         dis->tableWidget->setCellWidget(x,y,label);
     }
-    else
+    else //什么也不是
     {
         dis->tableWidget->removeCellWidget(x,y);
     }
+    /*设置内容*/
     dis->content_textEdit->setPlainText(save_map_class[x][y].content);
     dis->notes_content_textEdit->setPlainText(save_map_class[x][y].note);
     dis->toward_comboBox->setCurrentIndex(save_map_class[x][y].toward-1);
@@ -133,18 +134,16 @@ MainWindow::MainWindow(QWidget *parent)
 {
     /*初始化*/
     ui->setupUi(this);
-
-
+    /*相关测试*/
     setWindowTitle("ZcCommandEditor");
     ui->label_now->setText("编辑器使用json版本："+json_version);
-
     /*表格初始化*/
     ui->tableWidget->horizontalHeader()->setDefaultSectionSize(40); //设置默认大小
     ui->tableWidget->verticalHeader()->setDefaultSectionSize(40);
     ui->tableWidget->setEditTriggers(QAbstractItemView::NoEditTriggers); //设置不可更改
     ui->tableWidget->setColumnCount(100); //设置表格大小
     ui->tableWidget->setRowCount(100);
-    QStringList headers;
+    QStringList headers; //表头设置
     for (int i = -50; i <= 50; i++) {
         headers << QString::number(i);
     }
@@ -156,19 +155,14 @@ MainWindow::MainWindow(QWidget *parent)
     ui->tableWidget->setItem(50, 50, item);
     ui->tableWidget->scrollToItem(item, QAbstractItemView::PositionAtCenter); //滚动视图到指定单元格
     ui->tableWidget->setFocusPolicy(Qt::NoFocus);
-
     /*信号初始化*/
     connect(ui->actionoutput,SIGNAL(triggered()),this,SLOT(on_menu_save_clicked())); //导出按钮信号绑定
     connect(ui->actioninput,SIGNAL(triggered()),this,SLOT(on_menu_load_clicked())); //导入按钮信号绑定
     connect(ui->action_help,SIGNAL(triggered()),this,SLOT(on_menu_help_clicked())); //导入按钮信号绑定
     connect(ui->action_open,SIGNAL(triggered()),this,SLOT(on_menu_github_clicked())); //github信号绑定
     connect(ui->action_updata,SIGNAL(triggered()),this,SLOT(on_menu_updata_clicked())); //检查更新信号绑定
-
     /*提示初始化*/
     ui->label_ver->setText("编译器版本："+editor_version+"   mady by Zao_chen with <3 and bug");
-
-
-
 }
 
 MainWindow::~MainWindow()
@@ -227,14 +221,14 @@ void MainWindow::on_redstone_comboBox_activated(int index)
 /*导出json*/
 void MainWindow::on_menu_save_clicked(void)
 {
-    /*遍历元素*/
+    /*遍历方块消息*/
     QJsonObject blockObject;
     QJsonArray blockArray;
     for (int x = 0;x != ui->tableWidget->columnCount(); x++)
     {
         for (int y = 0;y != ui->tableWidget->rowCount(); y++)
         {
-            if(save_map_class[x][y].block != "air")
+            if(save_map_class[x][y].block != "air") //插入元素
             {
                 blockObject.insert("x", x-50);
                 blockObject.insert("y", y-50);
@@ -255,6 +249,7 @@ void MainWindow::on_menu_save_clicked(void)
     }
     //添加到最外
     QJsonObject rootObject;
+    /*其他消息导入*/
     rootObject.insert("block", blockArray);
     rootObject.insert("jsonversion", json_version);
     rootObject.insert("mcversion", ui->vv_lineEdit->text());
@@ -265,7 +260,7 @@ void MainWindow::on_menu_save_clicked(void)
     /*文件对话框*/
     QString Filename = QFileDialog::getSaveFileName(this,"导出到",qApp->applicationDirPath()+"/"+file_name+".json","*.json");
     QFile file(Filename);
-    if(!file.open(QIODevice::WriteOnly))
+    if(!file.open(QIODevice::WriteOnly)) //打开失败
     {
         QMessageBox msgBox;
         msgBox.setText("导出失败，请检查路径以及读写权限");
@@ -549,6 +544,9 @@ void MainWindow::on_openminiwin_pushButton_clicked()
     stream << doc.toJson(); //写入文件
     file.close();
     miniwindows *miniwindow = new miniwindows();
+
+    miniwindow->setWindowFlags(miniwindow->windowFlags() |Qt::Dialog);
+    miniwindow->setWindowModality(Qt::ApplicationModal);
     miniwindow->show();
 }
 
