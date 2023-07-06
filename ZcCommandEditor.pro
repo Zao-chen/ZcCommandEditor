@@ -2,7 +2,7 @@ QT += core gui
 QT += network
 QT += webenginecore
 QT += webenginewidgets
-
+RC_ICONS = logo2.ico
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
