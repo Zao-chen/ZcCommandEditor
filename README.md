@@ -36,7 +36,17 @@
  - [ ] 模拟指令输出
  - [ ] 模拟计分板内容
 
-# 相关项目
+## 食用教程
+在[发行版](https://github.com/Zao-chen/ZcCommandEditor/releases)中下载最新版解压运行即可
+可以发布到[讨论版](https://github.com/Zao-chen/ZcCommandEditor/discussions/categories/%E8%A1%8D%E7%94%9F%E9%A1%B9%E7%9B%AE%E5%8F%91%E5%B8%83)
+## 开发教程
+### 衍生项目开发
+详见开发[wiki](https://github.com/Zao-chen/ZcCommandEditor/wiki/%E5%BC%80%E5%8F%91%E7%9B%B8%E5%85%B3)
+
+### 指令组开发
+直接使用编辑器导出功能，然后发布到[讨论版](https://github.com/Zao-chen/ZcCommandEditor/discussions/categories/%E6%8C%87%E4%BB%A4%E7%BB%84%E9%A1%B9%E7%9B%AE%E5%8F%91%E5%B8%83)即可
+
+## 相关项目
 |项目英文名|项目中文名|作者|介绍|平台|状态|
 |---|---|---|---|---|---|
 |[ZcCommandEditor](https://github.com/Zao-chen/ZcCommandEditor)|命令组编辑器|[Zao_chen](https://github.com/Zao-chen)|开源免费的命令组编辑器|Windows&linux|测试中
