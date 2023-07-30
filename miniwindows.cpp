@@ -93,7 +93,31 @@ void show_reload(Ui::miniwindows *dis,int x,int y) //刷新当前格
         QLabel *label = new QLabel("");
         QString image;
         image = ":/image/image/block.png";
-        label->setPixmap(QPixmap(image).scaled(20,20).transformed(matrix, Qt::SmoothTransformation));
+        label->setPixmap(QPixmap(image).scaled(23,23).transformed(matrix, Qt::SmoothTransformation));
+        dis->tableWidget->setCellWidget(x,y,label);
+    }
+    else if(save_map_class[x][y].block == "redstone_comparator") //如果是命令方块
+    {
+        QTransform matrix;
+        QLabel *label = new QLabel("");
+        QString image;
+        if(save_map_class[x][y].condition == 1) image = ":/image/image/bjq.png";
+        /*设置朝向*/
+        if(save_map_class[x][y].toward == 1) matrix.rotate(-90);
+        else if(save_map_class[x][y].toward == 2) matrix.rotate(0);
+        else if(save_map_class[x][y].toward == 3) matrix.rotate(90);
+        else if(save_map_class[x][y].toward == 4) matrix.rotate(180);
+        /*设置图像*/
+        label->setPixmap(QPixmap(image).scaled(23,23).transformed(matrix, Qt::SmoothTransformation));
+        dis->tableWidget->setCellWidget(x,y,label);
+    }
+    else if(save_map_class[x][y].block == "redstone_torch") //如果是方块
+    {
+        QTransform matrix;
+        QLabel *label = new QLabel("");
+        QString image;
+        image = ":/image/image/hshb.png";
+        label->setPixmap(QPixmap(image).scaled(23,23).transformed(matrix, Qt::SmoothTransformation));
         dis->tableWidget->setCellWidget(x,y,label);
     }
     else

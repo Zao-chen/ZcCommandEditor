@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>1456</width>
-    <height>688</height>
+    <height>690</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -472,7 +472,7 @@ QCheckBox::indicator::checked:hover {
      <rect>
       <x>670</x>
       <y>30</y>
-      <width>391</width>
+      <width>611</width>
       <height>41</height>
      </rect>
     </property>
@@ -637,17 +637,7 @@ QCheckBox::indicator::checked:hover {
     </item>
     <item>
      <property name="text">
-      <string>中续器</string>
-     </property>
-    </item>
-    <item>
-     <property name="text">
       <string>比较器</string>
-     </property>
-    </item>
-    <item>
-     <property name="text">
-      <string>红石块</string>
      </property>
     </item>
     <item>
@@ -738,11 +728,6 @@ QCheckBox::indicator::checked:hover {
     <item>
      <property name="text">
       <string>实体</string>
-     </property>
-    </item>
-    <item>
-     <property name="text">
-      <string>粒子</string>
      </property>
     </item>
    </widget>
@@ -975,7 +960,7 @@ QCheckBox::indicator::checked:hover {
       <x>670</x>
       <y>310</y>
       <width>771</width>
-      <height>311</height>
+      <height>321</height>
      </rect>
     </property>
     <property name="font">
@@ -1016,7 +1001,7 @@ li.checked::marker { content: &quot;\2612&quot;; }
      <x>0</x>
      <y>0</y>
      <width>1456</width>
-     <height>30</height>
+     <height>26</height>
     </rect>
    </property>
    <widget class="QMenu" name="menu">

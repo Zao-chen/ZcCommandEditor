@@ -7,5 +7,7 @@
         <file>image/xh-wtj.png</file>
         <file>image/xh-ytj.png</file>
         <file>image/block.png</file>
+        <file>image/bjq.png</file>
+        <file>image/hshb.png</file>
     </qresource>
 </RCC>

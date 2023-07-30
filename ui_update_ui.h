@@ -33,7 +33,7 @@ public:
     {
         if (update_ui->objectName().isEmpty())
             update_ui->setObjectName("update_ui");
-        update_ui->resize(496, 357);
+        update_ui->resize(496, 373);
         update_ui->setStyleSheet(QString::fromUtf8("* {\n"
 "    background-color: #FFFEF9;\n"
 "}\n"
@@ -177,21 +177,21 @@ public:
         label->setFont(font);
         label_ver = new QLabel(update_ui);
         label_ver->setObjectName("label_ver");
-        label_ver->setGeometry(QRect(220, 130, 72, 16));
+        label_ver->setGeometry(QRect(220, 130, 72, 21));
         label_con = new QLabel(update_ui);
         label_con->setObjectName("label_con");
-        label_con->setGeometry(QRect(20, 190, 461, 41));
+        label_con->setGeometry(QRect(20, 190, 461, 111));
         label_con->setAlignment(Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop);
         label_2 = new QLabel(update_ui);
         label_2->setObjectName("label_2");
-        label_2->setGeometry(QRect(20, 240, 72, 15));
+        label_2->setGeometry(QRect(20, 310, 72, 15));
         QFont font1;
         font1.setBold(true);
         font1.setItalic(false);
         label_2->setFont(font1);
         label_file = new QLabel(update_ui);
         label_file->setObjectName("label_file");
-        label_file->setGeometry(QRect(20, 260, 461, 71));
+        label_file->setGeometry(QRect(20, 330, 461, 21));
         label_file->setAlignment(Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop);
         label_3 = new QLabel(update_ui);
         label_3->setObjectName("label_3");

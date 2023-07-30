@@ -115,6 +115,30 @@ void show_reload(Ui::MainWindow *dis,int x,int y) //刷新当前格
         label->setPixmap(QPixmap(image).scaled(40,40).transformed(matrix, Qt::SmoothTransformation));
         dis->tableWidget->setCellWidget(x,y,label);
     }
+    else if(save_map_class[x][y].block == "redstone_comparator") //如果是命令方块
+    {
+        QTransform matrix;
+        QLabel *label = new QLabel("");
+        QString image;
+        if(save_map_class[x][y].condition == 1) image = ":/image/image/bjq.png";
+        /*设置朝向*/
+        if(save_map_class[x][y].toward == 1) matrix.rotate(-90);
+        else if(save_map_class[x][y].toward == 2) matrix.rotate(0);
+        else if(save_map_class[x][y].toward == 3) matrix.rotate(90);
+        else if(save_map_class[x][y].toward == 4) matrix.rotate(180);
+        /*设置图像*/
+        label->setPixmap(QPixmap(image).scaled(40,40).transformed(matrix, Qt::SmoothTransformation));
+        dis->tableWidget->setCellWidget(x,y,label);
+    }
+    else if(save_map_class[x][y].block == "redstone_torch") //如果是方块
+    {
+        QTransform matrix;
+        QLabel *label = new QLabel("");
+        QString image;
+        image = ":/image/image/hshb.png";
+        label->setPixmap(QPixmap(image).scaled(40,40).transformed(matrix, Qt::SmoothTransformation));
+        dis->tableWidget->setCellWidget(x,y,label);
+    }
     else //什么也不是
     {
         dis->tableWidget->removeCellWidget(x,y);
@@ -130,6 +154,9 @@ void show_reload(Ui::MainWindow *dis,int x,int y) //刷新当前格
     dis->checkBox->setChecked(save_map_class[x][y].execute);
     if(save_map_class[x][y].block == "air"){ dis->block_comboBox->setCurrentIndex(0); }
     else if(save_map_class[x][y].block == "command_block"){ dis->block_comboBox->setCurrentIndex(1); }
+    else if(save_map_class[x][y].block == "block"){ dis->block_comboBox->setCurrentIndex(2); }
+    else if(save_map_class[x][y].block == "redstone_comparator"){ dis->block_comboBox->setCurrentIndex(3); }
+    else if(save_map_class[x][y].block == "redstone_torch"){ dis->block_comboBox->setCurrentIndex(4); }
 }
 
 MainWindow::MainWindow(QWidget *parent)
@@ -378,6 +405,8 @@ void MainWindow::on_block_comboBox_activated(int index)
     if(index==0) save_map_class[global_row][global_column].block = "air";
     else if(index==1) save_map_class[global_row][global_column].block = "command_block";
     else if(index==2) save_map_class[global_row][global_column].block = "block";
+    else if(index==3) save_map_class[global_row][global_column].block = "redstone_comparator";
+    else if(index==4) save_map_class[global_row][global_column].block = "redstone_torch";
     show_reload(ui,global_row,global_column);
 }
 /*修改延迟*/
@@ -455,16 +484,16 @@ void MainWindow::on_pushButton_search_clicked()
         QRegularExpression re1("<meta name=\"description\" content=\"(.)*/>");
         QRegularExpressionMatch match=re1.match(code);
         QString matched = match.captured(0).replace("<meta name=\"description\" content=\"","").replace("/>","");
-        ui->label_command->setText(ui->cmd_lineEdit->text());
+        ui->label_command->setText(ui->cmd_lineEdit->text()); //指令显示
         QList<QString> matched_list = matched.split(" ");
-        ui->label_des->setText(matched_list[0]);
+        ui->label_des->setText(matched_list[0]); //描述显示
         QRegularExpression re2("<h2><span id=\".E8.AF.AD.E6.B3.95\">([\\s\\S]*)</dd></dl>");
-        match=re2.match(code);
+        match=re2.match(code); //详细显示
         ui->textBrowser_des->setText("<style type=\"text/css\">body {zoom:0.5;}</style>"+match.captured());
     }
-    else if(ui->cmd_comboBox->currentIndex()==1) //issue#待修复
+    else if(ui->cmd_comboBox->currentIndex()==1||2||3)
     {
-        URLSTR = "https://minecraft.fandom.com/zh/wiki/%E5%91%BD%E4%BB%A4/"+ui->cmd_lineEdit->text();
+        URLSTR = "https://minecraft.fandom.com/zh/wiki/"+ui->cmd_lineEdit->text();
         //储存网页代码的文件
         const QString FILE_NAME = "test.text";
         QUrl url(URLSTR);
@@ -483,6 +512,7 @@ void MainWindow::on_pushButton_search_clicked()
         QString matched = match.captured(0).replace("<meta name=\"description\" content=\"","").replace("/>","");
         ui->label_command->setText(ui->cmd_lineEdit->text());
         ui->label_des->setText(matched);
+
     }
 }
 
