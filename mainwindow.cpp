@@ -37,8 +37,8 @@
 /*全局变量*/
 int static global_row; //当前格
 int static global_column;
-QString json_version = "1.3"; //json版本
-QString editor_version = "v0.7-beta";
+QString json_version = "1.4"; //json版本
+QString editor_version = "v0.7.1-beta";
 QString load_version; //加载版本
 int now_input = 0; //当前添加数量
 QString file_name = "Untitle"; //文件名
