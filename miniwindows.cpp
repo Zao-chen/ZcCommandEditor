@@ -185,7 +185,7 @@ miniwindows::miniwindows(QWidget *parent) :
     }
     QJsonObject rootObj = doc.object();
     // 根键获取值
-    QJsonValue blockValue = rootObj.value("block");
+    QJsonValue blockValue = rootObj.value("content");
     // 判断类型是否是数组类型
     if (blockValue.type() == QJsonValue::Array) {
         // 转换成数组类型
@@ -216,24 +216,23 @@ miniwindows::miniwindows(QWidget *parent) :
                 QJsonValue y = blockObj.value("y");
                 int int_x = x.toInt()+50;
                 int int_y = y.toInt()+50;
-                QJsonValue condition = blockObj.value("condition");
-                QJsonValue content = blockObj.value("content");
+                QJsonValue content = blockObj.value("command");
                 save_map_class[int_x][int_y].content = content.toString();
                 QJsonValue note = blockObj.value("note");
                 save_map_class[int_x][int_y].note = note.toString();
-                QJsonValue redstone = blockObj.value("redstone");
+                QJsonValue redstone = blockObj.value("auto");
                 save_map_class[int_x][int_y].redstone = redstone.toInt();
                 QJsonValue toward = blockObj.value("toward");
                 save_map_class[int_x][int_y].toward = toward.toInt();
                 QJsonValue type = blockObj.value("type");
                 save_map_class[int_x][int_y].type = type.toInt();
-                QJsonValue block = blockObj.value("block");
+                QJsonValue block = blockObj.value("id");
                 save_map_class[int_x][int_y].block = block.toString();
-                QJsonValue delay = blockObj.value("delay");
+                QJsonValue delay = blockObj.value("tick_delay");
                 save_map_class[int_x][int_y].delay = delay.toInt();
-                QJsonValue execute = blockObj.value("execute");
+                QJsonValue execute = blockObj.value("execute_on_first_tick");
                 save_map_class[int_x][int_y].execute = execute.toBool();
-                QJsonValue con = blockObj.value("condition");
+                QJsonValue con = blockObj.value("conditionMet");
                 save_map_class[int_x][int_y].condition = con.toInt();
                 global_row = int_x;
                 global_column = int_y;

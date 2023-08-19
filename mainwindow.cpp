@@ -38,7 +38,7 @@
 int static global_row; //当前格
 int static global_column;
 QString json_version = "1.3"; //json版本
-QString editor_version = "v0.6-beta";
+QString editor_version = "v0.7-beta";
 QString load_version; //加载版本
 int now_input = 0; //当前添加数量
 QString file_name = "Untitle"; //文件名
@@ -264,15 +264,15 @@ void MainWindow::on_menu_save_clicked(void)
                 blockObject.insert("x", x-50);
                 blockObject.insert("y", y-50);
                 blockObject.insert("z", 0);
-                blockObject.insert("block",save_map_class[x][y].block);
+                blockObject.insert("id",save_map_class[x][y].block);
                 blockObject.insert("toward",save_map_class[x][y].toward);
                 blockObject.insert("type",save_map_class[x][y].type);
-                blockObject.insert("condition",save_map_class[x][y].condition);
-                blockObject.insert("redstone",save_map_class[x][y].redstone);
-                blockObject.insert("content",save_map_class[x][y].content);
+                blockObject.insert("conditionMet",save_map_class[x][y].condition);
+                blockObject.insert("auto",save_map_class[x][y].redstone);
+                blockObject.insert("command",save_map_class[x][y].content);
                 blockObject.insert("note",save_map_class[x][y].note);
-                blockObject.insert("delay",save_map_class[x][y].delay);
-                blockObject.insert("execute",save_map_class[x][y].execute);
+                blockObject.insert("tick_delay",save_map_class[x][y].delay);
+                blockObject.insert("execute_on_first_tick",save_map_class[x][y].execute);
                 blockArray.append(blockObject);
             }
         }
@@ -281,7 +281,7 @@ void MainWindow::on_menu_save_clicked(void)
     //添加到最外
     QJsonObject rootObject;
     /*其他消息导入*/
-    rootObject.insert("block", blockArray);
+    rootObject.insert("content", blockArray);
     rootObject.insert("jsonversion", json_version);
     rootObject.insert("mcversion", ui->vv_lineEdit->text());
     rootObject.insert("author", ui->auth_lineEdit->text());
@@ -332,7 +332,7 @@ void MainWindow::on_menu_load_clicked(void)
     }
     QJsonObject rootObj = doc.object();
     // 根键获取值
-    QJsonValue blockValue = rootObj.value("block");
+    QJsonValue blockValue = rootObj.value("content");
     // 判断类型是否是数组类型
     if (blockValue.type() == QJsonValue::Array) {
         // 转换成数组类型
@@ -363,24 +363,23 @@ void MainWindow::on_menu_load_clicked(void)
                 QJsonValue y = blockObj.value("y");
                 int int_x = x.toInt()+50;
                 int int_y = y.toInt()+50;
-                QJsonValue condition = blockObj.value("condition");
-                QJsonValue content = blockObj.value("content");
+                QJsonValue content = blockObj.value("command");
                 save_map_class[int_x][int_y].content = content.toString();
                 QJsonValue note = blockObj.value("note");
                 save_map_class[int_x][int_y].note = note.toString();
-                QJsonValue redstone = blockObj.value("redstone");
+                QJsonValue redstone = blockObj.value("auto");
                 save_map_class[int_x][int_y].redstone = redstone.toInt();
                 QJsonValue toward = blockObj.value("toward");
                 save_map_class[int_x][int_y].toward = toward.toInt();
                 QJsonValue type = blockObj.value("type");
                 save_map_class[int_x][int_y].type = type.toInt();
-                QJsonValue block = blockObj.value("block");
+                QJsonValue block = blockObj.value("id");
                 save_map_class[int_x][int_y].block = block.toString();
-                QJsonValue delay = blockObj.value("delay");
+                QJsonValue delay = blockObj.value("tick_delay");
                 save_map_class[int_x][int_y].delay = delay.toInt();
-                QJsonValue execute = blockObj.value("execute");
+                QJsonValue execute = blockObj.value("execute_on_first_tick");
                 save_map_class[int_x][int_y].execute = execute.toBool();
-                QJsonValue con = blockObj.value("condition");
+                QJsonValue con = blockObj.value("conditionMet");
                 save_map_class[int_x][int_y].condition = con.toInt();
                 global_row = int_x;
                 global_column = int_y;
@@ -542,15 +541,15 @@ void MainWindow::on_openminiwin_pushButton_clicked()
                 blockObject.insert("x", x-50);
                 blockObject.insert("y", y-50);
                 blockObject.insert("z", 0);
-                blockObject.insert("block",save_map_class[x][y].block);
+                blockObject.insert("id",save_map_class[x][y].block);
                 blockObject.insert("toward",save_map_class[x][y].toward);
                 blockObject.insert("type",save_map_class[x][y].type);
-                blockObject.insert("condition",save_map_class[x][y].condition);
-                blockObject.insert("redstone",save_map_class[x][y].redstone);
+                blockObject.insert("conditionMet",save_map_class[x][y].condition);
+                blockObject.insert("auto",save_map_class[x][y].redstone);
                 blockObject.insert("content",save_map_class[x][y].content);
                 blockObject.insert("note",save_map_class[x][y].note);
-                blockObject.insert("delay",save_map_class[x][y].delay);
-                blockObject.insert("execute",save_map_class[x][y].execute);
+                blockObject.insert("tick_delay",save_map_class[x][y].delay);
+                blockObject.insert("execute_on_first_tick",save_map_class[x][y].execute);
                 blockArray.append(blockObject);
             }
         }
