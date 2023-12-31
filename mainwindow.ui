@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1456</width>
-    <height>690</height>
+    <width>1483</width>
+    <height>735</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -97,16 +97,12 @@ QPushButton:pressed {
 
 QComboBox {
     border: none;
-    border-radius: 20px;
     background-color: #FFBC33;
     color: #ffffff;
     font-size: 16px;
     font-weight: bold;
-    padding: 8px 20px;
-    padding-right: 4px; /* 右侧留出一定空间 */
     selection-background-color: #f8b156; /* 选中项背景色 */
     selection-color: #ffffff; /* 选中项前景色 */
-    outline: none;
 }
 
 QComboBox:hover {
@@ -149,416 +145,11 @@ QCheckBox::indicator::checked:hover {
 </string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QLabel" name="label">
-    <property name="geometry">
-     <rect>
-      <x>670</x>
-      <y>80</y>
-      <width>171</width>
-      <height>31</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <family>黑体</family>
-      <pointsize>20</pointsize>
-     </font>
-    </property>
-    <property name="text">
-     <string>具体详情</string>
-    </property>
-   </widget>
-   <widget class="QTableWidget" name="tableWidget">
-    <property name="enabled">
-     <bool>true</bool>
-    </property>
-    <property name="geometry">
-     <rect>
-      <x>100</x>
-      <y>80</y>
-      <width>550</width>
-      <height>550</height>
-     </rect>
-    </property>
-    <property name="minimumSize">
-     <size>
-      <width>550</width>
-      <height>0</height>
-     </size>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">QTableWidget::item {
-	padding: 0px;
-	border: 0;
-}</string>
-    </property>
-    <property name="dragEnabled">
-     <bool>false</bool>
-    </property>
-    <row>
-     <property name="text">
-      <string>新建行</string>
-     </property>
-    </row>
-    <row>
-     <property name="text">
-      <string>新建行</string>
-     </property>
-    </row>
-    <column>
-     <property name="text">
-      <string>新建列</string>
-     </property>
-    </column>
-    <column>
-     <property name="text">
-      <string>新建列</string>
-     </property>
-    </column>
-    <item row="0" column="0">
-     <property name="text">
-      <string>1</string>
-     </property>
-    </item>
-    <item row="0" column="1">
-     <property name="text">
-      <string>2</string>
-     </property>
-    </item>
-    <item row="1" column="0">
-     <property name="text">
-      <string>1</string>
-     </property>
-    </item>
-    <item row="1" column="1">
-     <property name="text">
-      <string>1</string>
-     </property>
-    </item>
-   </widget>
-   <widget class="QLabel" name="label_location">
-    <property name="geometry">
-     <rect>
-      <x>10</x>
-      <y>0</y>
-      <width>221</width>
-      <height>31</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <pointsize>14</pointsize>
-     </font>
-    </property>
-    <property name="text">
-     <string>选中方块 （未选中）</string>
-    </property>
-   </widget>
-   <widget class="QComboBox" name="toward_comboBox">
-    <property name="geometry">
-     <rect>
-      <x>290</x>
-      <y>0</y>
-      <width>91</width>
-      <height>31</height>
-     </rect>
-    </property>
-    <item>
-     <property name="text">
-      <string>北（↑）</string>
-     </property>
-    </item>
-    <item>
-     <property name="text">
-      <string>东（→）</string>
-     </property>
-    </item>
-    <item>
-     <property name="text">
-      <string>南（↓）</string>
-     </property>
-    </item>
-    <item>
-     <property name="text">
-      <string>西（←）</string>
-     </property>
-    </item>
-   </widget>
-   <widget class="QLabel" name="label_2">
-    <property name="geometry">
-     <rect>
-      <x>240</x>
-      <y>0</y>
-      <width>51</width>
-      <height>31</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <pointsize>14</pointsize>
-     </font>
-    </property>
-    <property name="text">
-     <string>朝向</string>
-    </property>
-   </widget>
-   <widget class="QLabel" name="label_3">
-    <property name="geometry">
-     <rect>
-      <x>70</x>
-      <y>40</y>
-      <width>51</width>
-      <height>31</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <pointsize>14</pointsize>
-     </font>
-    </property>
-    <property name="text">
-     <string>方块</string>
-    </property>
-   </widget>
-   <widget class="QLabel" name="label_4">
-    <property name="geometry">
-     <rect>
-      <x>240</x>
-      <y>40</y>
-      <width>71</width>
-      <height>31</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <pointsize>14</pointsize>
-     </font>
-    </property>
-    <property name="text">
-     <string>类型</string>
-    </property>
-   </widget>
-   <widget class="QComboBox" name="type_comboBox">
-    <property name="geometry">
-     <rect>
-      <x>290</x>
-      <y>40</y>
-      <width>91</width>
-      <height>31</height>
-     </rect>
-    </property>
-    <item>
-     <property name="text">
-      <string>脉冲</string>
-     </property>
-    </item>
-    <item>
-     <property name="text">
-      <string>连锁</string>
-     </property>
-    </item>
-    <item>
-     <property name="text">
-      <string>循环</string>
-     </property>
-    </item>
-   </widget>
-   <widget class="QLabel" name="label_5">
-    <property name="geometry">
-     <rect>
-      <x>390</x>
-      <y>0</y>
-      <width>51</width>
-      <height>31</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <pointsize>14</pointsize>
-     </font>
-    </property>
-    <property name="text">
-     <string>条件</string>
-    </property>
-   </widget>
-   <widget class="QComboBox" name="condition_comboBox">
-    <property name="geometry">
-     <rect>
-      <x>440</x>
-      <y>0</y>
-      <width>101</width>
-      <height>31</height>
-     </rect>
-    </property>
-    <item>
-     <property name="text">
-      <string>无条件</string>
-     </property>
-    </item>
-    <item>
-     <property name="text">
-      <string>有条件</string>
-     </property>
-    </item>
-   </widget>
-   <widget class="QLabel" name="label_6">
-    <property name="geometry">
-     <rect>
-      <x>670</x>
-      <y>120</y>
-      <width>51</width>
-      <height>31</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <pointsize>14</pointsize>
-     </font>
-    </property>
-    <property name="text">
-     <string>指令</string>
-    </property>
-   </widget>
-   <widget class="QTextEdit" name="content_textEdit">
-    <property name="geometry">
-     <rect>
-      <x>670</x>
-      <y>160</y>
-      <width>361</width>
-      <height>91</height>
-     </rect>
-    </property>
-   </widget>
-   <widget class="QComboBox" name="redstone_comboBox">
-    <property name="geometry">
-     <rect>
-      <x>440</x>
-      <y>40</y>
-      <width>101</width>
-      <height>31</height>
-     </rect>
-    </property>
-    <item>
-     <property name="text">
-      <string>红石控制</string>
-     </property>
-    </item>
-    <item>
-     <property name="text">
-      <string>保持开启</string>
-     </property>
-    </item>
-   </widget>
-   <widget class="QLabel" name="label_7">
-    <property name="geometry">
-     <rect>
-      <x>390</x>
-      <y>40</y>
-      <width>51</width>
-      <height>31</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <pointsize>14</pointsize>
-     </font>
-    </property>
-    <property name="text">
-     <string>红石</string>
-    </property>
-   </widget>
-   <widget class="QTextEdit" name="notes_content_textEdit">
-    <property name="geometry">
-     <rect>
-      <x>670</x>
-      <y>30</y>
-      <width>611</width>
-      <height>41</height>
-     </rect>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="copy_pushButton">
-    <property name="geometry">
-     <rect>
-      <x>930</x>
-      <y>120</y>
-      <width>101</width>
-      <height>34</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>一键复制</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="delet_pushButton">
-    <property name="geometry">
-     <rect>
-      <x>830</x>
-      <y>120</y>
-      <width>101</width>
-      <height>34</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>一键清空</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="check_delet_pushButton">
-    <property name="geometry">
-     <rect>
-      <x>730</x>
-      <y>120</y>
-      <width>101</width>
-      <height>34</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>语法检查</string>
-    </property>
-   </widget>
-   <widget class="QLabel" name="label_10">
-    <property name="geometry">
-     <rect>
-      <x>1290</x>
-      <y>30</y>
-      <width>41</width>
-      <height>31</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <family>微软雅黑</family>
-      <pointsize>12</pointsize>
-      <bold>true</bold>
-     </font>
-    </property>
-    <property name="text">
-     <string>作者</string>
-    </property>
-   </widget>
-   <widget class="QLineEdit" name="auth_lineEdit">
-    <property name="geometry">
-     <rect>
-      <x>1340</x>
-      <y>30</y>
-      <width>111</width>
-      <height>31</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <pointsize>-1</pointsize>
-     </font>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
-   </widget>
    <widget class="QLabel" name="label_in">
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>630</y>
+      <y>670</y>
       <width>131</width>
       <height>16</height>
      </rect>
@@ -578,8 +169,8 @@ QCheckBox::indicator::checked:hover {
    <widget class="QLabel" name="label_now">
     <property name="geometry">
      <rect>
-      <x>150</x>
-      <y>630</y>
+      <x>320</x>
+      <y>670</y>
       <width>131</width>
       <height>16</height>
      </rect>
@@ -596,9 +187,9 @@ QCheckBox::indicator::checked:hover {
    <widget class="QLabel" name="label_ver">
     <property name="geometry">
      <rect>
-      <x>1210</x>
-      <y>630</y>
-      <width>211</width>
+      <x>1180</x>
+      <y>670</y>
+      <width>291</width>
       <height>16</height>
      </rect>
     </property>
@@ -611,367 +202,377 @@ QCheckBox::indicator::checked:hover {
      <string>编译器版本：0.1   mady by Zao_chen with &lt;3 and bug</string>
     </property>
    </widget>
-   <widget class="QComboBox" name="block_comboBox">
+   <widget class="QGroupBox" name="groupBox_2">
     <property name="geometry">
      <rect>
-      <x>130</x>
-      <y>40</y>
-      <width>101</width>
-      <height>31</height>
-     </rect>
-    </property>
-    <item>
-     <property name="text">
-      <string>无</string>
-     </property>
-    </item>
-    <item>
-     <property name="text">
-      <string>命令方块</string>
-     </property>
-    </item>
-    <item>
-     <property name="text">
-      <string>普通方块</string>
-     </property>
-    </item>
-    <item>
-     <property name="text">
-      <string>比较器</string>
-     </property>
-    </item>
-    <item>
-     <property name="text">
-      <string>红石火把</string>
-     </property>
-    </item>
-   </widget>
-   <widget class="QLabel" name="label_8">
-    <property name="geometry">
-     <rect>
-      <x>670</x>
+      <x>690</x>
       <y>0</y>
-      <width>51</width>
-      <height>21</height>
+      <width>781</width>
+      <height>671</height>
      </rect>
     </property>
-    <property name="font">
-     <font>
-      <pointsize>14</pointsize>
-     </font>
+    <property name="title">
+     <string>指令设置</string>
     </property>
-    <property name="text">
-     <string>备注</string>
-    </property>
-   </widget>
-   <widget class="QScrollArea" name="scrollArea">
-    <property name="geometry">
-     <rect>
-      <x>10</x>
-      <y>80</y>
-      <width>91</width>
-      <height>551</height>
-     </rect>
-    </property>
-    <property name="widgetResizable">
-     <bool>true</bool>
-    </property>
-    <widget class="QWidget" name="scrollAreaWidgetContents">
-     <property name="geometry">
-      <rect>
-       <x>0</x>
-       <y>0</y>
-       <width>89</width>
-       <height>549</height>
-      </rect>
-     </property>
-     <widget class="QPushButton" name="openminiwin_pushButton">
-      <property name="geometry">
-       <rect>
-        <x>10</x>
-        <y>470</y>
-        <width>71</width>
-        <height>71</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>打开
-悬浮窗</string>
-      </property>
-     </widget>
-    </widget>
-   </widget>
-   <widget class="QComboBox" name="cmd_comboBox">
-    <property name="geometry">
-     <rect>
-      <x>670</x>
-      <y>270</y>
-      <width>81</width>
-      <height>31</height>
-     </rect>
-    </property>
-    <item>
-     <property name="text">
-      <string>指令</string>
-     </property>
-    </item>
-    <item>
-     <property name="text">
-      <string>方块</string>
-     </property>
-    </item>
-    <item>
-     <property name="text">
-      <string>物品</string>
-     </property>
-    </item>
-    <item>
-     <property name="text">
-      <string>实体</string>
-     </property>
-    </item>
-   </widget>
-   <widget class="QLineEdit" name="cmd_lineEdit">
-    <property name="geometry">
-     <rect>
-      <x>760</x>
-      <y>270</y>
-      <width>211</width>
-      <height>31</height>
-     </rect>
-    </property>
-    <property name="placeholderText">
-     <string>搜索……</string>
-    </property>
-   </widget>
-   <widget class="QLabel" name="label_11">
-    <property name="geometry">
-     <rect>
-      <x>550</x>
-      <y>0</y>
-      <width>51</width>
-      <height>31</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <pointsize>14</pointsize>
-     </font>
-    </property>
-    <property name="text">
-     <string>延迟</string>
-    </property>
-   </widget>
-   <widget class="QLineEdit" name="delay_lineEdit_3">
-    <property name="geometry">
-     <rect>
-      <x>600</x>
-      <y>0</y>
-      <width>51</width>
-      <height>31</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <pointsize>-1</pointsize>
-     </font>
-    </property>
-    <property name="text">
-     <string>0</string>
-    </property>
-   </widget>
-   <widget class="QLabel" name="label_12">
-    <property name="geometry">
-     <rect>
-      <x>550</x>
-      <y>40</y>
-      <width>51</width>
-      <height>31</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <pointsize>14</pointsize>
-     </font>
-    </property>
-    <property name="text">
-     <string>执行</string>
-    </property>
-   </widget>
-   <widget class="QCheckBox" name="checkBox">
-    <property name="geometry">
-     <rect>
-      <x>600</x>
-      <y>40</y>
-      <width>51</width>
-      <height>31</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
-   </widget>
-   <widget class="QLabel" name="label_14">
-    <property name="geometry">
-     <rect>
-      <x>1290</x>
-      <y>60</y>
-      <width>41</width>
-      <height>31</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <family>微软雅黑</family>
-      <pointsize>12</pointsize>
-      <bold>true</bold>
-     </font>
-    </property>
-    <property name="text">
-     <string>版本</string>
-    </property>
-   </widget>
-   <widget class="QLineEdit" name="vv_lineEdit">
-    <property name="geometry">
-     <rect>
-      <x>1340</x>
-      <y>60</y>
-      <width>111</width>
-      <height>31</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <pointsize>-1</pointsize>
-     </font>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
-   </widget>
-   <widget class="QLabel" name="label_15">
-    <property name="geometry">
-     <rect>
-      <x>1290</x>
-      <y>0</y>
-      <width>41</width>
-      <height>31</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <family>微软雅黑</family>
-      <pointsize>12</pointsize>
-      <bold>true</bold>
-     </font>
-    </property>
-    <property name="text">
-     <string>名称</string>
-    </property>
-   </widget>
-   <widget class="QLineEdit" name="name_lineEdit">
-    <property name="geometry">
-     <rect>
-      <x>1340</x>
-      <y>0</y>
-      <width>111</width>
-      <height>31</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <pointsize>-1</pointsize>
-     </font>
-    </property>
-    <property name="text">
-     <string>Untitle</string>
-    </property>
-   </widget>
-   <widget class="QWidget" name="widget" native="true">
-    <property name="geometry">
-     <rect>
-      <x>1040</x>
-      <y>110</y>
-      <width>401</width>
-      <height>191</height>
-     </rect>
-    </property>
-    <widget class="QLabel" name="label_13">
+    <widget class="QWidget" name="verticalLayoutWidget_3">
      <property name="geometry">
       <rect>
        <x>10</x>
-       <y>10</y>
-       <width>191</width>
-       <height>21</height>
+       <y>30</y>
+       <width>761</width>
+       <height>631</height>
       </rect>
      </property>
-     <property name="font">
-      <font>
-       <pointsize>15</pointsize>
-      </font>
-     </property>
-     <property name="text">
-      <string>详细信息（爬自wiki）</string>
-     </property>
-    </widget>
-    <widget class="QLabel" name="label_command">
-     <property name="geometry">
-      <rect>
-       <x>10</x>
-       <y>40</y>
-       <width>191</width>
-       <height>21</height>
-      </rect>
-     </property>
-     <property name="font">
-      <font>
-       <pointsize>12</pointsize>
-      </font>
-     </property>
-     <property name="text">
-      <string>……</string>
-     </property>
-    </widget>
-    <widget class="QLabel" name="label_des">
-     <property name="geometry">
-      <rect>
-       <x>10</x>
-       <y>70</y>
-       <width>381</width>
-       <height>61</height>
-      </rect>
-     </property>
-     <property name="font">
-      <font>
-       <pointsize>10</pointsize>
-      </font>
-     </property>
-     <property name="text">
-      <string>……</string>
-     </property>
-     <property name="wordWrap">
-      <bool>true</bool>
-     </property>
-    </widget>
-   </widget>
-   <widget class="QTextBrowser" name="textBrowser_des">
-    <property name="geometry">
-     <rect>
-      <x>670</x>
-      <y>310</y>
-      <width>771</width>
-      <height>321</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <pointsize>-1</pointsize>
-      <bold>false</bold>
-      <strikeout>false</strikeout>
-     </font>
-    </property>
-    <property name="html">
-     <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+     <layout class="QVBoxLayout" name="verticalLayout_5">
+      <item>
+       <layout class="QHBoxLayout" name="horizontalLayout_5">
+        <item>
+         <layout class="QVBoxLayout" name="verticalLayout">
+          <item>
+           <widget class="QLabel" name="label_8">
+            <property name="minimumSize">
+             <size>
+              <width>600</width>
+              <height>0</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>16777215</width>
+              <height>20</height>
+             </size>
+            </property>
+            <property name="font">
+             <font>
+              <pointsize>14</pointsize>
+             </font>
+            </property>
+            <property name="text">
+             <string>备注(&amp;B)</string>
+            </property>
+            <property name="buddy">
+             <cstring>notes_content_textEdit</cstring>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QTextEdit" name="notes_content_textEdit">
+            <property name="maximumSize">
+             <size>
+              <width>16777215</width>
+              <height>50</height>
+             </size>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <layout class="QFormLayout" name="formLayout">
+          <item row="0" column="0">
+           <widget class="QLabel" name="label_15">
+            <property name="font">
+             <font>
+              <family>微软雅黑</family>
+              <pointsize>12</pointsize>
+              <bold>true</bold>
+             </font>
+            </property>
+            <property name="text">
+             <string>名称</string>
+            </property>
+            <property name="buddy">
+             <cstring>name_lineEdit</cstring>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="0">
+           <widget class="QLabel" name="label_10">
+            <property name="font">
+             <font>
+              <family>微软雅黑</family>
+              <pointsize>12</pointsize>
+              <bold>true</bold>
+             </font>
+            </property>
+            <property name="text">
+             <string>作者</string>
+            </property>
+            <property name="buddy">
+             <cstring>auth_lineEdit</cstring>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="0">
+           <widget class="QLabel" name="label_14">
+            <property name="font">
+             <font>
+              <family>微软雅黑</family>
+              <pointsize>12</pointsize>
+              <bold>true</bold>
+             </font>
+            </property>
+            <property name="text">
+             <string>版本</string>
+            </property>
+            <property name="buddy">
+             <cstring>vv_lineEdit</cstring>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="1">
+           <widget class="QLineEdit" name="name_lineEdit">
+            <property name="maximumSize">
+             <size>
+              <width>16777215</width>
+              <height>23</height>
+             </size>
+            </property>
+            <property name="font">
+             <font>
+              <pointsize>-1</pointsize>
+             </font>
+            </property>
+            <property name="text">
+             <string>Untitle</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="1">
+           <widget class="QLineEdit" name="auth_lineEdit">
+            <property name="maximumSize">
+             <size>
+              <width>16777215</width>
+              <height>23</height>
+             </size>
+            </property>
+            <property name="font">
+             <font>
+              <pointsize>-1</pointsize>
+             </font>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="1">
+           <widget class="QLineEdit" name="vv_lineEdit">
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>10</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>16777215</width>
+              <height>23</height>
+             </size>
+            </property>
+            <property name="font">
+             <font>
+              <pointsize>-1</pointsize>
+             </font>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <layout class="QHBoxLayout" name="horizontalLayout_4">
+        <item>
+         <layout class="QVBoxLayout" name="verticalLayout_4">
+          <item>
+           <layout class="QHBoxLayout" name="horizontalLayout">
+            <item>
+             <widget class="QLabel" name="label_6">
+              <property name="font">
+               <font>
+                <pointsize>14</pointsize>
+               </font>
+              </property>
+              <property name="text">
+               <string>指令(&amp;Z)</string>
+              </property>
+              <property name="buddy">
+               <cstring>content_textEdit</cstring>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QPushButton" name="check_delet_pushButton">
+              <property name="text">
+               <string>语法检查</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QPushButton" name="delet_pushButton">
+              <property name="text">
+               <string>一键清空</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QPushButton" name="copy_pushButton">
+              <property name="text">
+               <string>一键复制</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <widget class="QTextEdit" name="content_textEdit"/>
+          </item>
+          <item>
+           <layout class="QHBoxLayout" name="horizontalLayout_2">
+            <item>
+             <widget class="QComboBox" name="cmd_comboBox">
+              <property name="minimumSize">
+               <size>
+                <width>60</width>
+                <height>28</height>
+               </size>
+              </property>
+              <item>
+               <property name="text">
+                <string>指令</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>方块</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>物品</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>实体</string>
+               </property>
+              </item>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLineEdit" name="cmd_lineEdit">
+              <property name="placeholderText">
+               <string>搜索……</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QPushButton" name="pushButton_search">
+              <property name="minimumSize">
+               <size>
+                <width>50</width>
+                <height>28</height>
+               </size>
+              </property>
+              <property name="text">
+               <string>搜索</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <widget class="QWidget" name="widget" native="true">
+          <property name="minimumSize">
+           <size>
+            <width>350</width>
+            <height>0</height>
+           </size>
+          </property>
+          <widget class="QLabel" name="label_13">
+           <property name="geometry">
+            <rect>
+             <x>10</x>
+             <y>10</y>
+             <width>191</width>
+             <height>21</height>
+            </rect>
+           </property>
+           <property name="font">
+            <font>
+             <pointsize>15</pointsize>
+            </font>
+           </property>
+           <property name="text">
+            <string>详细信息（爬自wiki）</string>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_command">
+           <property name="geometry">
+            <rect>
+             <x>10</x>
+             <y>40</y>
+             <width>191</width>
+             <height>21</height>
+            </rect>
+           </property>
+           <property name="font">
+            <font>
+             <pointsize>12</pointsize>
+            </font>
+           </property>
+           <property name="text">
+            <string>……</string>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_des">
+           <property name="geometry">
+            <rect>
+             <x>10</x>
+             <y>70</y>
+             <width>381</width>
+             <height>61</height>
+            </rect>
+           </property>
+           <property name="font">
+            <font>
+             <pointsize>10</pointsize>
+            </font>
+           </property>
+           <property name="text">
+            <string>……</string>
+           </property>
+           <property name="wordWrap">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <widget class="QTextBrowser" name="textBrowser_des">
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>300</height>
+         </size>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>-1</pointsize>
+          <bold>false</bold>
+          <strikeout>false</strikeout>
+         </font>
+        </property>
+        <property name="html">
+         <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta charset=&quot;utf-8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 hr { height: 1px; border-width: 0; }
@@ -979,20 +580,444 @@ li.unchecked::marker { content: &quot;\2610&quot;; }
 li.checked::marker { content: &quot;\2612&quot;; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Microsoft YaHei UI'; font-size:16px; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-    </property>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
    </widget>
-   <widget class="QPushButton" name="pushButton_search">
+   <widget class="QWidget" name="verticalLayoutWidget_4">
     <property name="geometry">
      <rect>
-      <x>980</x>
-      <y>270</y>
-      <width>51</width>
-      <height>31</height>
+      <x>10</x>
+      <y>0</y>
+      <width>671</width>
+      <height>671</height>
      </rect>
     </property>
-    <property name="text">
-     <string>搜索</string>
-    </property>
+    <layout class="QVBoxLayout" name="verticalLayout_6">
+     <item>
+      <widget class="QGroupBox" name="groupBox">
+       <property name="maximumSize">
+        <size>
+         <width>16777215</width>
+         <height>120</height>
+        </size>
+       </property>
+       <property name="title">
+        <string>方块设置</string>
+       </property>
+       <widget class="QWidget" name="gridLayoutWidget">
+        <property name="geometry">
+         <rect>
+          <x>10</x>
+          <y>30</y>
+          <width>641</width>
+          <height>78</height>
+         </rect>
+        </property>
+        <layout class="QGridLayout" name="gridLayout">
+         <item row="0" column="1">
+          <widget class="QLabel" name="label_location_2">
+           <property name="font">
+            <font>
+             <pointsize>14</pointsize>
+            </font>
+           </property>
+           <property name="text">
+            <string>(x,y,z)</string>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="4">
+          <widget class="QLabel" name="label_7">
+           <property name="font">
+            <font>
+             <pointsize>14</pointsize>
+            </font>
+           </property>
+           <property name="text">
+            <string>红石(&amp;H)</string>
+           </property>
+           <property name="buddy">
+            <cstring>redstone_comboBox</cstring>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="7">
+          <widget class="QLineEdit" name="delay_lineEdit_3">
+           <property name="font">
+            <font>
+             <pointsize>-1</pointsize>
+            </font>
+           </property>
+           <property name="text">
+            <string>0</string>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="6">
+          <widget class="QLabel" name="label_11">
+           <property name="font">
+            <font>
+             <pointsize>14</pointsize>
+            </font>
+           </property>
+           <property name="text">
+            <string>延迟(&amp;Y)</string>
+           </property>
+           <property name="buddy">
+            <cstring>delay_lineEdit_3</cstring>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="0">
+          <widget class="QLabel" name="label_location">
+           <property name="font">
+            <font>
+             <pointsize>14</pointsize>
+            </font>
+           </property>
+           <property name="text">
+            <string>选中方块 </string>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="3">
+          <widget class="QComboBox" name="type_comboBox">
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>28</height>
+            </size>
+           </property>
+           <item>
+            <property name="text">
+             <string>脉冲</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>连锁</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>循环</string>
+            </property>
+           </item>
+          </widget>
+         </item>
+         <item row="1" column="7">
+          <widget class="QCheckBox" name="checkBox">
+           <property name="text">
+            <string/>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="6">
+          <widget class="QLabel" name="label_12">
+           <property name="font">
+            <font>
+             <pointsize>14</pointsize>
+            </font>
+           </property>
+           <property name="text">
+            <string>执行(&amp;X)</string>
+           </property>
+           <property name="buddy">
+            <cstring>checkBox</cstring>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="2">
+          <widget class="QLabel" name="label_2">
+           <property name="font">
+            <font>
+             <pointsize>14</pointsize>
+            </font>
+           </property>
+           <property name="text">
+            <string>朝向(&amp;C)</string>
+           </property>
+           <property name="buddy">
+            <cstring>toward_comboBox</cstring>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="5">
+          <widget class="QComboBox" name="condition_comboBox">
+           <property name="minimumSize">
+            <size>
+             <width>90</width>
+             <height>28</height>
+            </size>
+           </property>
+           <item>
+            <property name="text">
+             <string>无条件</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>有条件</string>
+            </property>
+           </item>
+          </widget>
+         </item>
+         <item row="1" column="0">
+          <widget class="QLabel" name="label_3">
+           <property name="font">
+            <font>
+             <pointsize>14</pointsize>
+            </font>
+           </property>
+           <property name="text">
+            <string>方块(&amp;F)</string>
+           </property>
+           <property name="buddy">
+            <cstring>block_comboBox</cstring>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="5">
+          <widget class="QComboBox" name="redstone_comboBox">
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>28</height>
+            </size>
+           </property>
+           <item>
+            <property name="text">
+             <string>红石控制</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>保持开启</string>
+            </property>
+           </item>
+          </widget>
+         </item>
+         <item row="0" column="4">
+          <widget class="QLabel" name="label_5">
+           <property name="font">
+            <font>
+             <pointsize>14</pointsize>
+            </font>
+           </property>
+           <property name="text">
+            <string>条件(&amp;T)</string>
+           </property>
+           <property name="buddy">
+            <cstring>condition_comboBox</cstring>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="2">
+          <widget class="QLabel" name="label_4">
+           <property name="font">
+            <font>
+             <pointsize>14</pointsize>
+            </font>
+           </property>
+           <property name="text">
+            <string>类型(&amp;L)</string>
+           </property>
+           <property name="buddy">
+            <cstring>type_comboBox</cstring>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="1">
+          <widget class="QComboBox" name="block_comboBox">
+           <property name="minimumSize">
+            <size>
+             <width>80</width>
+             <height>28</height>
+            </size>
+           </property>
+           <item>
+            <property name="text">
+             <string>无</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>命令方块</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>普通方块</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>比较器</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>红石火把</string>
+            </property>
+           </item>
+          </widget>
+         </item>
+         <item row="0" column="3">
+          <widget class="QComboBox" name="toward_comboBox">
+           <property name="minimumSize">
+            <size>
+             <width>80</width>
+             <height>28</height>
+            </size>
+           </property>
+           <item>
+            <property name="text">
+             <string>北（↑）</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>东（→）</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>南（↓）</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>西（←）</string>
+            </property>
+           </item>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+      </widget>
+     </item>
+     <item>
+      <widget class="QGroupBox" name="groupBox_3">
+       <property name="title">
+        <string>地图编辑</string>
+       </property>
+       <widget class="QWidget" name="horizontalLayoutWidget_5">
+        <property name="geometry">
+         <rect>
+          <x>10</x>
+          <y>20</y>
+          <width>651</width>
+          <height>511</height>
+         </rect>
+        </property>
+        <layout class="QHBoxLayout" name="horizontalLayout_6">
+         <item>
+          <widget class="QScrollArea" name="scrollArea">
+           <property name="maximumSize">
+            <size>
+             <width>90</width>
+             <height>16777215</height>
+            </size>
+           </property>
+           <property name="widgetResizable">
+            <bool>true</bool>
+           </property>
+           <widget class="QWidget" name="scrollAreaWidgetContents">
+            <property name="geometry">
+             <rect>
+              <x>0</x>
+              <y>0</y>
+              <width>88</width>
+              <height>507</height>
+             </rect>
+            </property>
+            <widget class="QPushButton" name="openminiwin_pushButton">
+             <property name="geometry">
+              <rect>
+               <x>10</x>
+               <y>430</y>
+               <width>71</width>
+               <height>71</height>
+              </rect>
+             </property>
+             <property name="text">
+              <string>打开
+悬浮窗</string>
+             </property>
+            </widget>
+           </widget>
+          </widget>
+         </item>
+         <item>
+          <widget class="QTableWidget" name="tableWidget">
+           <property name="enabled">
+            <bool>true</bool>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>550</width>
+             <height>0</height>
+            </size>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">QTableWidget::item {
+	padding: 0px;
+	border: 0;
+}</string>
+           </property>
+           <property name="dragEnabled">
+            <bool>false</bool>
+           </property>
+           <row>
+            <property name="text">
+             <string>新建行</string>
+            </property>
+           </row>
+           <row>
+            <property name="text">
+             <string>新建行</string>
+            </property>
+           </row>
+           <column>
+            <property name="text">
+             <string>新建列</string>
+            </property>
+           </column>
+           <column>
+            <property name="text">
+             <string>新建列</string>
+            </property>
+           </column>
+           <item row="0" column="0">
+            <property name="text">
+             <string>1</string>
+            </property>
+           </item>
+           <item row="0" column="1">
+            <property name="text">
+             <string>2</string>
+            </property>
+           </item>
+           <item row="1" column="0">
+            <property name="text">
+             <string>1</string>
+            </property>
+           </item>
+           <item row="1" column="1">
+            <property name="text">
+             <string>1</string>
+            </property>
+           </item>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+      </widget>
+     </item>
+    </layout>
    </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
@@ -1000,7 +1025,7 @@ li.checked::marker { content: &quot;\2612&quot;; }
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1456</width>
+     <width>1483</width>
      <height>26</height>
     </rect>
    </property>
@@ -1067,6 +1092,30 @@ li.checked::marker { content: &quot;\2612&quot;; }
    </property>
   </action>
  </widget>
+ <tabstops>
+  <tabstop>toward_comboBox</tabstop>
+  <tabstop>condition_comboBox</tabstop>
+  <tabstop>delay_lineEdit_3</tabstop>
+  <tabstop>block_comboBox</tabstop>
+  <tabstop>type_comboBox</tabstop>
+  <tabstop>redstone_comboBox</tabstop>
+  <tabstop>checkBox</tabstop>
+  <tabstop>notes_content_textEdit</tabstop>
+  <tabstop>name_lineEdit</tabstop>
+  <tabstop>auth_lineEdit</tabstop>
+  <tabstop>vv_lineEdit</tabstop>
+  <tabstop>check_delet_pushButton</tabstop>
+  <tabstop>delet_pushButton</tabstop>
+  <tabstop>copy_pushButton</tabstop>
+  <tabstop>content_textEdit</tabstop>
+  <tabstop>cmd_comboBox</tabstop>
+  <tabstop>cmd_lineEdit</tabstop>
+  <tabstop>pushButton_search</tabstop>
+  <tabstop>textBrowser_des</tabstop>
+  <tabstop>scrollArea</tabstop>
+  <tabstop>tableWidget</tabstop>
+  <tabstop>openminiwin_pushButton</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>

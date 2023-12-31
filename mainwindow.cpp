@@ -38,7 +38,7 @@
 int static global_row; //当前格
 int static global_column;
 QString json_version = "1.4"; //json版本
-QString editor_version = "v0.7.1-beta";
+QString editor_version = "v0.7.2-alpha";
 QString load_version; //加载版本
 int now_input = 0; //当前添加数量
 QString file_name = "Untitle"; //文件名
@@ -206,7 +206,7 @@ void MainWindow::on_tableWidget_cellClicked(int row, int column)
 {
     global_row = row;
     global_column = column;
-    ui->label_location->setText("选中方块 ( " + QString::number(global_row-50) + " , " + QString::number(global_column-50)+" )");
+    ui->label_location_2->setText(" ( " + QString::number(global_row-50) + " , " + QString::number(global_column-50)+" )");
     show_reload(ui,global_row,global_column);
 }
 /*修改方块类型*/
