@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>549</width>
-    <height>303</height>
+    <width>562</width>
+    <height>353</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -375,7 +375,7 @@ QCheckBox::indicator::checked:hover {
     </font>
    </property>
    <property name="text">
-    <string>备注</string>
+    <string>备注：</string>
    </property>
   </widget>
   <widget class="QLabel" name="label_delay_3">
@@ -420,6 +420,32 @@ QCheckBox::indicator::checked:hover {
    </property>
    <property name="readOnly">
     <bool>true</bool>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="pushButton_start">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>300</y>
+     <width>75</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>开始导入</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="pushButton">
+   <property name="geometry">
+    <rect>
+     <x>100</x>
+     <y>300</y>
+     <width>75</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>位置</string>
    </property>
   </widget>
  </widget>

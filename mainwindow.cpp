@@ -529,14 +529,15 @@ void MainWindow::on_copy_pushButton_clicked()
 /*打开迷你窗口*/
 void MainWindow::on_openminiwin_pushButton_clicked()
 {
-    /*遍历元素*/
+    qDebug()<<"小窗";
+    /*遍历方块消息*/
     QJsonObject blockObject;
     QJsonArray blockArray;
     for (int x = 0;x != ui->tableWidget->columnCount(); x++)
     {
         for (int y = 0;y != ui->tableWidget->rowCount(); y++)
         {
-            if(save_map_class[x][y].block != "air")
+            if(save_map_class[x][y].block != "air") //插入元素
             {
                 blockObject.insert("x", x-50);
                 blockObject.insert("y", y-50);
@@ -546,7 +547,7 @@ void MainWindow::on_openminiwin_pushButton_clicked()
                 blockObject.insert("type",save_map_class[x][y].type);
                 blockObject.insert("conditionMet",save_map_class[x][y].condition);
                 blockObject.insert("auto",save_map_class[x][y].redstone);
-                blockObject.insert("content",save_map_class[x][y].content);
+                blockObject.insert("command",save_map_class[x][y].content);
                 blockObject.insert("note",save_map_class[x][y].note);
                 blockObject.insert("tick_delay",save_map_class[x][y].delay);
                 blockObject.insert("execute_on_first_tick",save_map_class[x][y].execute);
@@ -557,7 +558,8 @@ void MainWindow::on_openminiwin_pushButton_clicked()
     }
     //添加到最外
     QJsonObject rootObject;
-    rootObject.insert("block", blockArray);
+    /*其他消息导入*/
+    rootObject.insert("content", blockArray);
     rootObject.insert("jsonversion", json_version);
     rootObject.insert("mcversion", ui->vv_lineEdit->text());
     rootObject.insert("author", ui->auth_lineEdit->text());
@@ -565,7 +567,7 @@ void MainWindow::on_openminiwin_pushButton_clicked()
     QJsonDocument doc; //将object设置为本文档的主要对象
     doc.setObject(rootObject);
     /*文件对话框*/
-    QString Filename = qApp->applicationDirPath()+"temp.json";
+    QString Filename = qApp->applicationDirPath()+"/temp.json";
     QFile file(Filename);
     if(!file.open(QIODevice::WriteOnly))
     {
@@ -582,5 +584,6 @@ void MainWindow::on_openminiwin_pushButton_clicked()
     miniwindow->setWindowFlags(miniwindow->windowFlags() |Qt::Dialog);
     miniwindow->setWindowModality(Qt::ApplicationModal);
     miniwindow->show();
+    qDebug()<<qApp->applicationDirPath()+"/temp.json";
 }
 

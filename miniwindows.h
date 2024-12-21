@@ -26,6 +26,11 @@ private slots:
     void on_tableWidget_cellClicked(int row, int column);
     void checkType(Hook::Type); //按键信号
 
+    void on_pushButton_start_clicked();
+
+
+    void on_pushButton_clicked();
+
 private:
     /*鼠标相关参数*/
     QPoint mousePoint;

@@ -103,6 +103,8 @@ QComboBox {
     font-weight: bold;
     selection-background-color: #f8b156; /* 选中项背景色 */
     selection-color: #ffffff; /* 选中项前景色 */
+    -webkit-transition-duration: 0.4s; /* Safari */
+    transition-duration: 0.4s;
 }
 
 QComboBox:hover {

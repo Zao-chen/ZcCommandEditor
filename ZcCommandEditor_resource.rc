@@ -1,6 +1,6 @@
 #include <windows.h>
 
-IDI_ICON1	ICON	"P:\\Qt\\Project\\ZcCommandEditor-main\\logo2.ico"
+IDI_ICON1	ICON	"D:\\great\\Downloads\\ZcCommandEditor-main (1)\\ZcCommandEditor-main\\logo2.ico"
 
 VS_VERSION_INFO VERSIONINFO
 	FILEVERSION 0,0,0,0
